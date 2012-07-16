@@ -1,12 +1,19 @@
 import os
+import re
+import sys
 from twilio.rest import TwilioRestClient
 from flask import Flask
 from flask import request
-from urllib import urlencode
 from flask import render_template
+from urllib import urlencode
+from mongokit import Document, Connection
 
 app = Flask(__name__)
 client = TwilioRestClient()
+
+mongoHost = re.match('.*@(.*):', os.environ.get('MONGOLAB_URI')).group(1)
+mongoPort = int(re.match('.*@.*:(.*)/', os.environ.get('MONGOLAB_URI')).group(1))
+connection = Connection(mongoHost, mongoPort)
 
 @app.route('/', methods=['GET', 'POST'])
 def hello():
