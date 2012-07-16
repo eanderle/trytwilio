@@ -3,3 +3,5 @@ Jinja2==2.6
 Werkzeug==0.8.3
 distribute==0.6.24
 wsgiref==0.1.2
+twilio==3.3.6
+mock==0.8.0
