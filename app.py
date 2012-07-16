@@ -28,8 +28,10 @@ def sayTest():
 
 	client = TwilioRestClient(account, token)
 	#call = client.calls.create(to="7033891424",
-				   from_="7862458451",
-				   url="http://trytwilio.herokuapp.com/calls/saytwiml")
+	#			  from_="7862458451",
+	#	url="http://trytwilio.herokuapp.com/calls/saytwiml")
+	call = client.calls.create(to="7033891424",from_="7862458451", url="http://trytwilio.herokuapp.com/calls/saytwiml")
+
 	return 'test'
 
 @app.route('/calls/saytwiml')
