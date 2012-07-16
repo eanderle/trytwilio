@@ -6,3 +6,4 @@ lib
 include
 .project
 .pydevproject
+.swp
