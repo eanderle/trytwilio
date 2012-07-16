@@ -1,4 +1,8 @@
 venv
 *.pyc
 .DS_Store
-
+bin
+lib
+include
+.project
+.pydevproject
