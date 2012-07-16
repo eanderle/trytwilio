@@ -4,6 +4,7 @@ from flask import render_template
 from flask import url_for
 from flask import request
 from twilio import twiml
+from twilio.rest import TwilioRestClient
 from twilio.util import TwilioCapability
 
 os.environ["TWILIO_ACCOUNT_SID"] = "ACefb267919ab7c793e889ce40b8db2506"
@@ -22,7 +23,10 @@ def sayTest():
 	#call = client.calls.create(to="7033891424",
 	#			   from_="7862458451",
 	#			   url= "http://trytwilio.herokuapp.com/calls/saytwiml")
-	client = TwilioRestClient()
+	account = "ACefb267919ab7c793e889ce40b8db2506"
+	token = "6cb0a97591eaf94ca237572fe4472458"
+
+	client = TwilioRestClient(account, token)
 	call = client.calls.create(to="7033891424",
 				   from_="7862458451",
 				   url="http://trytwilio.herokuapp.com/calls/saytwiml")
