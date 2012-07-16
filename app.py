@@ -1,18 +1,20 @@
 import os
 from flask import Flask
-from twilio.rest import TwilioRestClient
+from flask import render_template
+from flask import url_for
+from flask import request
 from twilio import twiml
+from twilio.util import TwilioCapability
 
-os.environ['TWILIO_ACCOUNT_SID'] = "ACefb267919ab7c793e889ce40b8db2506"
+os.environ["TWILIO_ACCOUNT_SID"] = "ACefb267919ab7c793e889ce40b8db2506"
 os.environ["TWILIO_AUTH_TOKEN"] = "6cb0a97591eaf94ca237572fe4472458"
-
-#client = TwilioRestClient()
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def hello():
-	return 'Test'
+  params=[]
+  return render_template('index.html', params=params)
 
 
 @app.route('/calls/say')
@@ -34,6 +36,6 @@ def sayTwiml():
 
 
 if __name__ == '__main__':
-	port = int(os.environ.get('PORT', 5000))
-	app.run(host='0.0.0.0', port=port)
+  port = int(os.environ.get('PORT', 5000))
+  app.run(host='0.0.0.0', port=port)
 
