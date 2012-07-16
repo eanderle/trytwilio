@@ -9,22 +9,22 @@ app = Flask(__name__)
 def hello():
 	return 'Test'
 
-@app.route('/requestCall', methods=['POST'])
+@app.route('/requestCall', methods=['GET', 'POST'])
 def requestCall():
-	toNumber = request.values['To']
-	fromNumber = request.values['From']
-	twimlBody = request.values['twimlBody']
+	if request.method == 'GET':
+		return request.values['twimlBody']
 	
-	params = {'To': toNumber, 'From': fromNumber,
-			'url':'http://trytwilio.herokuapp.com/makeCall',
-			'twimlBody': twimlBody}
-	
-	restRequests.post('http://api.twilio.com/2010-04-01/Accounts/ \
-	ACefb267919ab7c793e889ce40b8db2506/Calls', params=params)
-
-@app.route('/makeCall', methods=['GET'])
-def makeCall():
-	return request.values['twimlBody']
+	if request.method == 'POST':
+		toNumber = request.values['To']
+		fromNumber = request.values['From']
+		twimlBody = request.values['twimlBody']
+		
+		params = {'To': toNumber, 'From': fromNumber,
+				'url':'http://trytwilio.herokuapp.com/requestCall',
+				'twimlBody': twimlBody}
+		
+		restRequests.post('http://api.twilio.com/2010-04-01/Accounts/ \
+		ACefb267919ab7c793e889ce40b8db2506/Calls', params=params)
 
 if __name__ == '__main__':
 	port = int(os.environ.get('PORT', 5000))
