@@ -1,9 +1,11 @@
 import os
-import requests as restRequests
+from twilio.rest import TwilioRestClient
 from flask import Flask
 from flask import request
+from urllib import urlencode
 
 app = Flask(__name__)
+client = TwilioRestClient()
 
 @app.route('/')
 def hello():
@@ -19,14 +21,14 @@ def requestCall():
 		fromNumber = request.values['From']
 		twimlBody = request.values['twimlBody']
 		
-		params = {'To': toNumber, 'From': fromNumber,
-				'url':'http://trytwilio.herokuapp.com/requestCall',
-				'twimlBody': twimlBody}
+		client.calls.create(to=toNumber, from_=fromNumber, 
+			url='http://trytwilio.herokuapp.com/requestCall?' + urlencode({'twimlBody':twimlBody}),
+			method='GET')
+		return 'success'
 		
-		restRequests.post('http://api.twilio.com/2010-04-01/Accounts/ \
-		ACefb267919ab7c793e889ce40b8db2506/Calls', params=params)
 
 if __name__ == '__main__':
 	port = int(os.environ.get('PORT', 5000))
+	app.debug = True
 	app.run(host='0.0.0.0', port=port)
 
