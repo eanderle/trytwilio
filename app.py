@@ -27,7 +27,7 @@ def sayTest():
 	token = "6cb0a97591eaf94ca237572fe4472458"
 
 	client = TwilioRestClient(account, token)
-	call = client.calls.create(to="7033891424",
+	#call = client.calls.create(to="7033891424",
 				   from_="7862458451",
 				   url="http://trytwilio.herokuapp.com/calls/saytwiml")
 	return 'test'
