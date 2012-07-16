@@ -28,9 +28,10 @@ def sayTest():
 
 	client = TwilioRestClient(account, token)
 
-	call = client.calls.create(to="7033891424", 
-                           from_="7862458451", 
-                           url="http://twimlets.com/holdmusic?Bucket=com.twilio.music.ambient")
+
+
+	call = client.calls.create(to="7033891424", from_="7862458451", url="http://trytwilio.com/calls/saytwiml")
+	
 	return call.sid
 
 @app.route('/calls/saytwiml')
@@ -42,5 +43,6 @@ def sayTwiml():
 
 if __name__ == '__main__':
   port = int(os.environ.get('PORT', 5000))
+  app.debug = True
   app.run(host='0.0.0.0', port=port)
 
