@@ -3,13 +3,15 @@ from twilio.rest import TwilioRestClient
 from flask import Flask
 from flask import request
 from urllib import urlencode
+from flask import render_template
 
 app = Flask(__name__)
 client = TwilioRestClient()
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def hello():
-	return 'Test'
+	params=[]
+	return render_template('index.html', params=params)
 
 @app.route('/requestCall', methods=['GET', 'POST'])
 def requestCall():
@@ -34,4 +36,3 @@ if __name__ == '__main__':
 	port = int(os.environ.get('PORT', 5000))
 	app.debug = True
 	app.run(host='0.0.0.0', port=port)
-
