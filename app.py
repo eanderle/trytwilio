@@ -13,18 +13,21 @@ def hello():
 
 @app.route('/requestCall', methods=['GET', 'POST'])
 def requestCall():
-	if request.method == 'GET':
-		return request.values['twimlBody']
-	
-	if request.method == 'POST':
-		toNumber = request.values['To']
-		fromNumber = request.values['From']
-		twimlBody = request.values['twimlBody']
+	try:
+		if request.method == 'GET':
+			return request.values['twimlBody']
 		
-		client.calls.create(to=toNumber, from_=fromNumber, 
-			url='http://trytwilio.herokuapp.com/requestCall?' + urlencode({'twimlBody':twimlBody}),
-			method='GET')
-		return 'success'
+		if request.method == 'POST':
+			toNumber = request.values['To']
+			fromNumber = request.values['From']
+			twimlBody = request.values['twimlBody']
+
+			client.calls.create(to=toNumber, from_=fromNumber, 
+				url='http://trytwilio.herokuapp.com/requestCall?' + urlencode({'twimlBody':twimlBody}),
+				method='GET')
+			return 'success'
+	except:
+		return 'failure'
 		
 
 if __name__ == '__main__':
