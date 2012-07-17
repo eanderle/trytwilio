@@ -16,6 +16,7 @@ class OutboundCall(Document):
   required_fields = ['number', 'timestamp']
   default_values = { 'timestamp': datetime.datetime.utcnow()}
 
+MAX_CALLS_PER_DAY = 10
 app = Flask(__name__)
 
 client = TwilioRestClient()
@@ -30,7 +31,7 @@ def hello():
   return render_template('index.html', params=params)
 
 @app.route('/test', methods=['GET', 'POST'])
-def xmlcheck():
+def test():
   return render_template('test.html')
 
 @app.route('/testXml', methods=['GET', 'POST'])
@@ -63,9 +64,16 @@ def requestCall():
       fromNumber = request.values['From']
       twimlBody = request.values['twimlBody']
 
+      # Clean up old entries and make sure this number hasn't been called too much
+      d = datetime.datetime.utcnow() - datetime.timedelta(days = 1)
+      connection.OutboundCall.collection.remove({'timestamp': {'$lt': d}})
+      if connection.OutboundCall.find({'timestamp': {'$gt': d}}).count() >= MAX_CALLS_PER_DAY:
+        raise Exception()
+
       client.calls.create(to=toNumber, from_=fromNumber, 
         url='http://trytwilio.herokuapp.com/requestCall?' + urlencode({'twimlBody':twimlBody}),
         method='GET')
+      
       call = connection.OutboundCall()
       call['number'] = toNumber
       call.validate()

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+	<!DOCTYPE html>
 <html>
 <head>
 	<title>Validate XML Test</title>
@@ -6,7 +6,7 @@
 
 <body>
 	<textarea id="twiml-box"> Type your TwiML HERE: </textarea>
-	<button id="submit" onclick="validate()">SUBMIT</button>
+	<button id="submitTwiml">SUBMIT</button>
 
 
 
@@ -17,23 +17,9 @@
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 	<script>window.jQuery || document.write('<script src="http://syssgx.github.com/xml.js/js/libs/jquery-1.7.1.min.js"><\/script>')</script>
 	<script src="http://syssgx.github.com/xml.js/js/libs/bootstrap.min.js"></script>
-	<script src="http://syssgx.github.com/xml.js/js/libs/codemirror.js"></script>
-	<script src="http://syssgx.github.com/xml.js/js/libs/searchcursor.js"></script>
-	<script src="http://syssgx.github.com/xml.js/js/libs/match-highlighter.js"></script>
-	<script src="http://syssgx.github.com/xml.js/js/libs/xml.js"></script>
 	<script src="http://syssgx.github.com/xml.js/js/libs/prettify.js"></script>
 	<script src="http://syssgx.github.com/xml.js/js/xmllint.js"></script>
-	<script src="http://syssgx.github.com/xml.js/js/script.js"></script>
-	<script>
-	function validate() {
-		var submittedTwiml = $("#twiml-box").val();
-		var twiml = "";
-		$.get("/static/twiml.xsd", function(data) {
-			twiml = data;
-		});
-		alert(twiml);
-
-	</script>	
+	<script src="/static/js/script.js"></script>
 </body>
 
 </html>
