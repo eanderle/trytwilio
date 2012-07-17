@@ -24,6 +24,10 @@ def hello():
 def xmlcheck():
   return render_template('test.html')
 
+@app.route('/testXml', methods=['GET', 'POST'])
+def xmlcheck():
+  return render_template('testValidation.html')
+
 @app.route('/requestCall', methods=['GET', 'POST'])
 def requestCall():
   try:
