@@ -80,10 +80,8 @@ def requestCall():
       d = datetime.datetime.utcnow() - datetime.timedelta(days = 1)
       connection.OutboundCall.collection.remove({'$and': [{'$or': [{'number': toNumber}, {'ip': ip}]},
                                                           {'timestamp': {'$lt': d}}]})
-      if connection.OutboundCall.find({'$and': [{'number': toNumber}, 
-                                                {'timestamp': {'$gt': d}}]}).count() >= MAX_CALLS_PER_DAY \
-      or connection.OutboundCall.find({'$and': [{'ip': ip}, 
-                                                {'timestamp': {'$gt': d}}]}).count() >= MAX_CALLS_PER_DAY:
+      if connection.OutboundCall.find({'$and': [{'$or': [{'number': toNumber}, {'ip': ip}]},
+                                                         {'timestamp': {'$lt': d}}]}) >= MAX_CALLS_PER_DAY:
         raise Exception()
 
       client.calls.create(to=toNumber, from_=fromNumber, 
