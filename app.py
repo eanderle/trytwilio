@@ -49,7 +49,7 @@ def testClient():
   token = capability.generate()
 
   return render_template("client.html", token=token)
-  
+
 
 @app.route('/client/getTwiml')
 def requestTwiml():
@@ -68,7 +68,7 @@ def requestCall():
       toNumber = re.sub(ex, '', request.values['To'])
       fromNumber = re.sub(ex, '', request.values['From'])
       ip = request.remote_addr
-      
+
       # If the number is 10 digits, it's US/Canada, so do a +1
       # Else it's some other country (we assume) so just add a plus
       toNumber = ('+1' if len(toNumber) == 10 else '+') + toNumber
@@ -84,7 +84,7 @@ def requestCall():
                                                          {'timestamp': {'$lt': d}}]}) >= MAX_CALLS_PER_DAY:
         raise Exception()
 
-      client.calls.create(to=toNumber, from_=fromNumber, 
+      client.calls.create(to=toNumber, from_=fromNumber,
         url='http://trytwilio.herokuapp.com/requestCall?' + urlencode({'twimlBody':twimlBody}),
         method='GET')
 
@@ -93,11 +93,11 @@ def requestCall():
       call['ip'] = ip
       call.validate()
       call.save()
-      
+
       return 'success'
   except:
     return 'failure'
-    
+
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
     if port == 5000:
