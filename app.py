@@ -7,26 +7,22 @@ from twilio.rest import TwilioRestClient
 from twilio.util import TwilioCapability
 from mongokit import Document, Connection
 
+class OutboundCall(Document):
+  __collection__ = 'outboundCalls'
+  __database__ = 'heroku_app5944498'
+  structure = { 'number': basestring,
+                'timestamp': datetime.datetime
+  }
+  required_fields = ['number', 'timestamp']
+  default_values = { 'timestamp': datetime.datetime.utcnow()}
+
 app = Flask(__name__)
-#
-#class OutboundCall(Document):
-#  __collection__ = 'outboundCalls'
-#  __database__ = 'heroku_app5944498'
-#  structure = { 'number': basestring,
-#                'timestamp': datetime.datetime
-#  }
-#  required_fields = ['number', 'timestamp']
-#  default_values = { 'timestamp': datetime.datetime.utcnow()}
-#
-#app = Flask(__name__)
-#
-#client = TwilioRestClient("ACefb267919ab7c793e889ce40b8db2506","6cb0a97591eaf94ca237572fe4472458")
 
-#client = TwilioRestClient("ACefb267919ab7c793e889ce40b8db2506","6cb0a97591eaf94ca237572fe4472458")
+client = TwilioRestClient()
 
-#connection = Connection(os.environ.get('MONGOLAB_URI'))
-#connection.register([OutboundCall])
-#db = connection['heroku_app5944498']
+connection = Connection(os.environ.get('MONGOLAB_URI'))
+connection.register([OutboundCall])
+db = connection['heroku_app5944498']
 
 @app.route('/', methods=['GET', 'POST'])
 def hello():
@@ -45,12 +41,11 @@ def xmlcheck():
 def testClient():
 	application_sid = "AP256035c642dcf6ad2f82119f86e4ea35"
 
-	capability = TwilioCapability("ACefb267919ab7c793e889ce40b8db2506","6cb0a97591eaf94ca237572fe4472458")
+	capability = TwilioCapability()
 	capability.allow_client_outgoing(application_sid)
 	token = capability.generate()
 
 	return render_template("client.html", token=token)
-	#return render_template('client.html', token=token)
 	
 
 @app.route('/client/getTwiml')
