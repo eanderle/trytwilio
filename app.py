@@ -19,6 +19,7 @@ class OutboundCall(Document):
   default_values = { 'timestamp': datetime.datetime.utcnow()}
 
 MAX_CALLS_PER_DAY = 10
+FROM_NUMBER = os.environ.get('FROM_NUMBER')
 app = Flask(__name__)
 
 client = TwilioRestClient()
@@ -64,16 +65,13 @@ def requestCall():
     if request.method == 'POST':
       # Clean up numbers
       # Delete any non-numeric character
-      ex = re.compile('[^0-9]')
-      toNumber = re.sub(ex, '', request.values['To'])
-      fromNumber = re.sub(ex, '', request.values['From'])
-      ip = request.remote_addr
-      
+      toNumber = re.sub('[^0-9]', '', request.values['To'])
+
       # If the number is 10 digits, it's US/Canada, so do a +1
       # Else it's some other country (we assume) so just add a plus
       toNumber = ('+1' if len(toNumber) == 10 else '+') + toNumber
-      fromNumber = ('+1' if len(fromNumber) == 10 else '+') + fromNumber
 
+      ip = request.remote_addr
       twimlBody = request.values['twimlBody']
 
       # Clean up old entries and make sure this number hasn't been called too much
@@ -81,10 +79,10 @@ def requestCall():
       connection.OutboundCall.collection.remove({'$and': [{'$or': [{'number': toNumber}, {'ip': ip}]},
                                                           {'timestamp': {'$lt': d}}]})
       if connection.OutboundCall.find({'$and': [{'$or': [{'number': toNumber}, {'ip': ip}]},
-                                                         {'timestamp': {'$lt': d}}]}) >= MAX_CALLS_PER_DAY:
+                                                         {'timestamp': {'$lt': d}}]}).count() >= MAX_CALLS_PER_DAY:
         raise Exception()
 
-      client.calls.create(to=toNumber, from_=fromNumber, 
+      client.calls.create(to=toNumber, from_=FROM_NUMBER, 
         url='http://trytwilio.herokuapp.com/requestCall?' + urlencode({'twimlBody':twimlBody}),
         method='GET')
 
