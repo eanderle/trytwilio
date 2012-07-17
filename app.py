@@ -5,6 +5,7 @@ import datetime
 from flask import Flask, request, render_template
 from urllib import urlencode
 from twilio.rest import TwilioRestClient
+from twilio.util import TwilioCapability
 from mongokit import Document, Connection
 
 class OutboundCall(Document):
@@ -37,6 +38,21 @@ def test():
 @app.route('/testXml', methods=['GET', 'POST'])
 def xmlcheck():
   return render_template('testValidation.html')
+
+@app.route('/testClient', methods=['GET','POST'])
+def testClient():
+	application_sid = "AP256035c642dcf6ad2f82119f86e4ea35"
+
+	capability = TwilioCapability()
+	capability.allow_client_outgoing(application_sid)
+	token = capability.generate()
+
+	return render_template("client.html", token=token)
+	
+
+@app.route('/client/getTwiml')
+def requestTwiml():
+	return "<Response><Say>This is a test</Say></Response>"
 
 @app.route('/requestCall', methods=['GET', 'POST'])
 def requestCall():
