@@ -16,7 +16,10 @@ class OutboundCall(Document):
   default_values = { 'timestamp': datetime.datetime.utcnow()}
 
 app = Flask(__name__)
-client = TwilioRestClient()
+
+account = "ACefb267919ab7c793e889ce40b8db2506"
+auth_token = "6cb0a97591eaf94ca237572fe4472458"
+client = TwilioRestClient(account, auth_token)
 
 connection = Connection(os.environ.get('MONGOLAB_URI'))
 connection.register([OutboundCall])
