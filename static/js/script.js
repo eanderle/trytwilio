@@ -15,8 +15,16 @@ $(function(){
 
 		if (result == "file.xml validates"){
 			alert("Sucess");
-			var call 
-  			//
+			var makeCall = $.post('/requestCall', 
+				{To: "+12067993325",
+				From: "+17862458451",
+				twimlBoday: submittedTwiml},
+				function(data) {
+					alert(data);
+					alert("Successfully placed call");
+				}
+			);
+			alert("made call" + makeCall);
   		}
   		else {
   			alert("We're sorry. You can't make a call until your TwiML is valid. We have this error: \n" + result);
@@ -29,4 +37,4 @@ $(function(){
 	
 });
 
-//<Response></Response>
+//<Response><Say>Hello! You work. </Say></Response>
