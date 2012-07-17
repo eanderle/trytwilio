@@ -1,5 +1,6 @@
 import os
 import sys
+import re
 import datetime
 from flask import Flask, request, render_template
 from urllib import urlencode
@@ -44,14 +45,25 @@ def requestCall():
       return request.values['twimlBody']
     
     if request.method == 'POST':
-      toNumber = request.values['To']
-      fromNumber = request.values['From']
+      # Clean up numbers
+      # Delete any non-numeric character
+      ex = re.compile('[^0-9]')
+      toNumber = re.sub(ex, '', request.values['To'])
+      fromNumber = re.sub(ex, '', request.values['From'])
+      
+      # If the number is 10 digits, it's US/Canada, so do a +1
+      # Else it's some other country (we assume) so just add a plus
+      toNumber = ('+1' if len(toNumber) == 10 else '+') + toNumber
+      fromNumber = ('+1' if len(fromNumber) == 10 else '+') + fromNumber
+        
       twimlBody = request.values['twimlBody']
 
       # Clean up old entries and make sure this number hasn't been called too much
       d = datetime.datetime.utcnow() - datetime.timedelta(days = 1)
-      connection.OutboundCall.collection.remove({'timestamp': {'$lt': d}})
-      if connection.OutboundCall.find({'timestamp': {'$gt': d}}).count() >= MAX_CALLS_PER_DAY:
+      connection.OutboundCall.collection.remove({'$and': [{'number': toNumber}, 
+                                                          {'timestamp': {'$lt': d}}]})
+      if connection.OutboundCall.find({'$and': [{'number': toNumber}, 
+                                                {'timestamp': {'$gt': d}}]}).count() >= MAX_CALLS_PER_DAY:
         raise Exception()
 
       client.calls.create(to=toNumber, from_=fromNumber, 
