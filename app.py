@@ -50,7 +50,7 @@ def testClient():
   token = capability.generate()
 
   return render_template("client.html", token=token)
-  
+
 
 @app.route('/client/getTwiml')
 def requestTwiml():
@@ -91,11 +91,11 @@ def requestCall():
       call['ip'] = ip
       call.validate()
       call.save()
-      
+
       return 'success'
   except:
     return 'failure'
-    
+
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
     if port == 5000:
