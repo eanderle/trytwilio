@@ -30,8 +30,12 @@ def hello():
   return render_template('index.html', params=params)
 
 @app.route('/test', methods=['GET', 'POST'])
-def xmlcheck():
+def test():
   return render_template('test.html')
+
+@app.route('/testXml', methods=['GET', 'POST'])
+def xmlcheck():
+  return render_template('testValidation.html')
 
 @app.route('/requestCall', methods=['GET', 'POST'])
 def requestCall():
