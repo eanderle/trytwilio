@@ -1,16 +1,26 @@
 import os
-import re
+import sys
+import datetime
 from flask import Flask, request, render_template
 from urllib import urlencode
 from twilio.rest import TwilioRestClient
-from mongokit import Connection
+from mongokit import Document, Connection
+
+class OutboundCall(Document):
+  __collection__ = 'outboundCalls'
+  __database__ = 'heroku_app5944498'
+  structure = { 'number': basestring,
+                'timestamp': datetime.datetime
+  }
+  required_fields = ['number', 'timestamp']
+  default_values = { 'timestamp': datetime.datetime.utcnow()}
 
 app = Flask(__name__)
 client = TwilioRestClient()
 
-mongoHost = re.match('.*@(.*):', os.environ.get('MONGOLAB_URI')).group(1)
-mongoPort = int(re.match('.*@.*:(.*)/', os.environ.get('MONGOLAB_URI')).group(1))
-connection = Connection(mongoHost, mongoPort)
+connection = Connection(os.environ.get('MONGOLAB_URI'))
+connection.register([OutboundCall])
+db = connection['heroku_app5944498']
 
 @app.route('/', methods=['GET', 'POST'])
 def hello():
@@ -35,6 +45,11 @@ def requestCall():
       client.calls.create(to=toNumber, from_=fromNumber, 
         url='http://trytwilio.herokuapp.com/requestCall?' + urlencode({'twimlBody':twimlBody}),
         method='GET')
+      call = connection.OutboundCall()
+      call['number'] = toNumber
+      call.validate()
+      call.save()
+      
       return 'success'
   except:
     return 'failure'
