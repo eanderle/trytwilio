@@ -41,18 +41,18 @@ def xmlcheck():
 
 @app.route('/testClient', methods=['GET','POST'])
 def testClient():
-	application_sid = "AP256035c642dcf6ad2f82119f86e4ea35"
+  application_sid = "AP256035c642dcf6ad2f82119f86e4ea35"
 
-	capability = TwilioCapability()
-	capability.allow_client_outgoing(application_sid)
-	token = capability.generate()
+  capability = TwilioCapability()
+  capability.allow_client_outgoing(application_sid)
+  token = capability.generate()
 
-	return render_template("client.html", token=token)
-	
+  return render_template("client.html", token=token)
+  
 
 @app.route('/client/getTwiml')
 def requestTwiml():
-	return "<Response><Say>This is a test</Say></Response>"
+  return "<Response><Say>This is a test</Say></Response>"
 
 @app.route('/requestCall', methods=['GET', 'POST'])
 def requestCall():
