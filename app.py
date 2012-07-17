@@ -12,9 +12,10 @@ class OutboundCall(Document):
   __collection__ = 'outboundCalls'
   __database__ = 'heroku_app5944498'
   structure = { 'number': basestring,
+                'ip': basestring,
                 'timestamp': datetime.datetime
   }
-  required_fields = ['number', 'timestamp']
+  required_fields = ['number', 'ip', 'timestamp']
   default_values = { 'timestamp': datetime.datetime.utcnow()}
 
 MAX_CALLS_PER_DAY = 10
@@ -59,35 +60,39 @@ def requestCall():
   try:
     if request.method == 'GET':
       return request.values['twimlBody']
-    
+
     if request.method == 'POST':
       # Clean up numbers
       # Delete any non-numeric character
       ex = re.compile('[^0-9]')
       toNumber = re.sub(ex, '', request.values['To'])
       fromNumber = re.sub(ex, '', request.values['From'])
+      ip = request.remote_addr
       
       # If the number is 10 digits, it's US/Canada, so do a +1
       # Else it's some other country (we assume) so just add a plus
       toNumber = ('+1' if len(toNumber) == 10 else '+') + toNumber
       fromNumber = ('+1' if len(fromNumber) == 10 else '+') + fromNumber
-        
+
       twimlBody = request.values['twimlBody']
 
       # Clean up old entries and make sure this number hasn't been called too much
       d = datetime.datetime.utcnow() - datetime.timedelta(days = 1)
-      connection.OutboundCall.collection.remove({'$and': [{'number': toNumber}, 
+      connection.OutboundCall.collection.remove({'$and': [{'$or': [{'number': toNumber}, {'ip': ip}]},
                                                           {'timestamp': {'$lt': d}}]})
       if connection.OutboundCall.find({'$and': [{'number': toNumber}, 
+                                                {'timestamp': {'$gt': d}}]}).count() >= MAX_CALLS_PER_DAY \
+      or connection.OutboundCall.find({'$and': [{'ip': ip}, 
                                                 {'timestamp': {'$gt': d}}]}).count() >= MAX_CALLS_PER_DAY:
         raise Exception()
 
       client.calls.create(to=toNumber, from_=fromNumber, 
         url='http://trytwilio.herokuapp.com/requestCall?' + urlencode({'twimlBody':twimlBody}),
         method='GET')
-      
+
       call = connection.OutboundCall()
       call['number'] = toNumber
+      call['ip'] = ip
       call.validate()
       call.save()
       
