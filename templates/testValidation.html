@@ -27,9 +27,13 @@
 	<script>
 	function validate() {
 		var submittedTwiml = $("#twiml-box").val();
-		alert(submittedTwiml);
-	}
-	</script>
+		var twiml = "";
+		$.get("/static/twiml.xsd", function(data) {
+			twiml = data;
+		});
+		alert(twiml);
+
+	</script>	
 </body>
 
 </html>
