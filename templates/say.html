@@ -56,3 +56,10 @@
   <button class="btn btn-primary" id="callButton">Call</button>
   <button class="btn btn-error" id="hangupButton">Hangup</button>
 {% endblock %}
+
+{% block progressbar %}
+  {{ super() }}
+  <style type="text/css">
+    .progress .bar { width: 20%; }
+  </style>
+{% endblock %}
