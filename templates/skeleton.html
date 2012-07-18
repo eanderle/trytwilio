@@ -29,14 +29,18 @@
         </div>
         <div class="span6" style="height:100%;">
           <div class="row" style="height:100%;">
-            <div class="span6 well border-box" style="height:48%;">
+            <div class="span6 well border-box" style="height:38%;">
               {% block staticdemo %}{% endblock %}
             </div>
-            <div class="span6 well border-box" style="height:49%;">
+            <div class="span6 well border-box" style="height:59%;">
               {% block twimlbox %}
-              <h2>Your Turn</h2>
+              <h2>Your Mission</h2>
               <br />
-              <textarea id="twiml-box" placeholder="Type your TwiML here..." rows="7"></textarea>
+              <div class="well mission">
+              {% block mission %}
+              {% endblock %}
+              </div>
+              <textarea id="twiml-box" placeholder="Type your TwiML here..." rows="5"></textarea>
               <br />
               <button class="btn-large btn-success" id="submitTwiml">Submit TwiML</button>
               {% endblock %}
