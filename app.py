@@ -93,7 +93,7 @@ def requestTwiml():
       r.play(url="http://tw.spurint.org/thx/banana-phone.mp3")
       return str(r)
     elif request.values["DemoType"] == "Gather":
-      with r.gather(action="http://trytwilio.herokuapp.com/demo/callback", method='GET') as g
+      with r.gather(action="http://trytwilio.herokuapp.com/demo/callback", method='GET') as g:
         g.say("Press 1 to hear the previous say message, press 2 to hear banana phone again")
       return str(r)
     else:
