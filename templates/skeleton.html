@@ -34,9 +34,14 @@
             </div>
             <div class="span6 well border-box" style="height:49%;">
               {% block twimlbox %}
-              <h2>Your Turn</h2>
+              <h2>Your Mission</h2>
               <br />
-              <textarea id="twiml-box" placeholder="Type your TwiML here..." rows="7"></textarea>
+              <p>
+              {% block mission %}
+              {% endblock %}
+              </p>
+              <br />
+              <textarea id="twiml-box" placeholder="Type your TwiML here..." rows="4"></textarea>
               <br />
               <button class="btn-large btn-success" id="submitTwiml">Submit TwiML</button>
               {% endblock %}

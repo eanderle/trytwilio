@@ -12,7 +12,7 @@
 {% endblock %}
 
 {% block lesson %}
-  <h2>&lt;Say&gt;</h2><br/>
+  <h2>Lesson 2: &lt;Say&gt;</h2><br/>
   <p>The &lt;Say&gt; verb converts text into speech that will be played in your call. Try it out!</p>
   <table class="table table-condensed table-striped">
     <thead>
@@ -55,6 +55,10 @@
   <input type="hidden" id="token" value="{{params['token']}}">
   <button class="btn btn-primary" id="callButton">Call</button>
   <button class="btn btn-error" id="hangupButton">Hangup</button>
+{% endblock %}
+
+{% block mission %}
+Write TwiML so that a woman voice says "Howdy partner!" three times.
 {% endblock %}
 
 {% block progressbar %}
