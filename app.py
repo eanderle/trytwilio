@@ -41,19 +41,15 @@ def hello():
   }
   return render_template('index.html', params=params)
 
-@app.route('/test', methods=['GET', 'POST'])
-def test():
-  return render_template('test.html')
-
-@app.route('/testXml', methods=['GET', 'POST'])
-def xmlcheck():
+@app.route('/say', methods=['GET', 'POST'])
+def say():
   capability = TwilioCapability(ACCOUNT_SID, AUTH_TOKEN)
   capability.allow_client_outgoing(APP_SID)
   token = capability.generate()
   params = {
     'token':token
   }
-  return render_template('firstpage.html', params=params)
+  return render_template('say.html', params=params)
 
 @app.route('/testClient', methods=['GET','POST'])
 def testClient():
