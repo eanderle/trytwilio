@@ -61,7 +61,7 @@ def testClient():
 
   return render_template("client.html", token=token)
 
-@app.route('/demo/playCallback', methods['GET','POST'])
+@app.route('/demo/playCallback', methods=['GET','POST'])
 def playCallback():
   return "<Response><Play>http://tw.spurint.org/thx/banana-phone.mp3</Play></Response>"
 
