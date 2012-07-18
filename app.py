@@ -135,10 +135,13 @@ def requestCall():
 
       if request.values['verb'].lower() == 'gather':
         url = 'http://trytwilio.herokuapp.com/handleInput?'
+        twimlBodies = {}
         for c in '0123456789#*':
           s = 'twimlBody' + c
           if s in request.values:
-            url += urlencode({s:request.values[s]}) + '&'
+            twimlBodies.update({s:request.values[s]})
+
+        url += urlencode(twimlBodies)
 
       # Clean up old entries and make sure this number hasn't been called too much
       d = datetime.datetime.utcnow() - datetime.timedelta(days = 1)
