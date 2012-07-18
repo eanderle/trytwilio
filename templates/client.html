@@ -30,8 +30,9 @@
  
     /* Connect to Twilio when we call this function. */
     function call() {
-    	params = {"PhoneNumber": 7862458451 , "DemoType": "Say"};
-        Twilio.Device.connect(params);
+        Twilio.Device.connect({
+		"DemoType": 7033891424
+	});
     }
     </script>
   </head>
