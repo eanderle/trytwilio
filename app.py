@@ -70,11 +70,10 @@ def playCallback():
       r.say("Welcome to Twilio, this is an example of the say verb")
       return str(r)
     elif request.values["Digits"] == "2":
-      r.play("http://tw.spurint.org/thx/banana-phone.mp3")
+      r.play(url="http://tw.spurint.org/thx/banana-phone.mp3")
       return str(r)
     else:
-      r.say("Let's try again, you have to press either 1 or 2")
-      r.gather(action='/callback')
+      r.say("You suck so bad")
       return str(r)
   except Exception as e:
       r.say("Something went wrong")
@@ -94,9 +93,8 @@ def requestTwiml():
       r.play(url="http://tw.spurint.org/thx/banana-phone.mp3")
       return str(r)
     elif request.values["DemoType"] == "Gather":
-      r.say("Enter 1 to hear the previous say message, press 2 to hear banana phone again")
-      r.gather(action='http://trytwilio.herokuapp.com/demo/callback')
-      return str(r)
+      r = "<Response><Gather action='http://trytwilio.herokuapp.com/demo/callback method='GET'><Say>Enter 1 or 2</Say></Gather><Say>Didnt hear anything</Say></Response>"
+      return r
     else:
       #sys.stderr.write("Nothing reached\n")
       return request.values['twimlBody']
@@ -114,7 +112,7 @@ def requestTwimlForGather():
 @app.route('/demo/requestDemoCall', methods=['GET', 'POST'])
 def requestDemoCall():
   try:
-    url = 'http://trytwilio.herokuapp.com/client/getTwiml?' + urlencode({'DemoType':"Gather"})
+    url = 'http://trytwilio.herokuapp.com/client/getTwiml?' + urlencode({'DemoType':"Play"})
     call = client.calls.create(to="+17033891424", from_="+17862458451", url=url, method='GET')
     return call.sid
   except:
