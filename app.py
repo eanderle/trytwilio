@@ -39,7 +39,7 @@ def test():
 
 @app.route('/testXml', methods=['GET', 'POST'])
 def xmlcheck():
-  return render_template('testValidation.html')
+  return render_template('firstpage.html')
 
 @app.route('/testClient', methods=['GET','POST'])
 def testClient():
