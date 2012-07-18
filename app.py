@@ -80,7 +80,7 @@ def requestTwiml():
       return "<Response><Say>Welcome to Twilio this is a test</Say></Response>"
   except Exception as e:
     #sys.stderr.write(e)
-    return "<Response><Say>Welcome to Twilio </Say></Response>"
+    return "<Response><Say>Welcome to Twilio this is an error </Say></Response>"
 
 @app.route('/requestCall', methods=['GET', 'POST'])
 def requestCall():
