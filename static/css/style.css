@@ -2,7 +2,7 @@
   box-sizing: border-box;
 }
 
-#twiml-textarea {
+#twiml-box {
   /* Maybe better to use input-xlarge? */
   width: 410px;
   margin-bottom: 20px;

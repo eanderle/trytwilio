@@ -13,7 +13,7 @@
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
   </head>
 
@@ -40,55 +40,56 @@
           <h2>&lt;Say&gt;</h2>
           <br />
           <table class="table table-condensed table-striped">
-			<thead>
-				<tr>
-					<th>Attribute Name</th>
-					<th>Allowed Values</th>
-					<th>Default Values</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>voice</td>
-					<td>man, woman</td>
-					<td>man</td>
-				</tr>
-				<tr>
-					<td>language</td>
-					<td>en, en-gb, es, fr, de</td>
-					<td>en</td>
-				</tr>
-				<tr>
-					<td>loop</td>
-					<td>integer &gt;=0</td>
-					<td>1</td>
-				</tr>
-			</tbody>
-		  </table>
-		<h3>Voice:</h3>
-		<p>The voice attribute controls whether the text is read with a male voice or a female voice.</p>
-		<br>
-		<h3>Language:</h3>
-		<p>The language attribute controls what language’s accent and pronunciations will be used to read the text.</p>
-		<br>
-		<h3>Loop:</h3>
-		<p>The loop attribute controls how many times the text is repeated. A value of 0 will cause the text to loop until the call is hung up.</p>
+            <thead>
+              <tr>
+                <th>Attribute Name</th>
+                <th>Allowed Values</th>
+                <th>Default Values</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>voice</td>
+                <td>man, woman</td>
+                <td>man</td>
+              </tr>
+              <tr>
+                <td>language</td>
+                <td>en, en-gb, es, fr, de</td>
+                <td>en</td>
+              </tr>
+              <tr>
+                <td>loop</td>
+                <td>integer &gt;=0</td>
+                <td>1</td>
+              </tr>
+            </tbody>
+          </table>
+          <h3>Voice:</h3>
+          <p>The voice attribute controls whether the text is read with a male voice or a female voice.</p>
+          <br>
+          <h3>Language:</h3>
+          <p>The language attribute controls what language’s accent and pronunciations will be used to read the text.</p>
+          <br>
+          <h3>Loop:</h3>
+          <p>The loop attribute controls how many times the text is repeated. A value of 0 will cause the text to loop until the call is hung up.</p>
         </div>
         <div class="span6">
           <div class="row">
             <div class="span6 well border-box">
               <h2>Demo Time</h2>
-			  <input type="hidden" id="token" value="{{params['token']}}">
+              <input type="hidden" id="token" value="{{params['token']}}">
               <br />
               The &lt;Say&gt; verb converts text into speech that will be played in your call. Try it out!<br/>
-			  <button class="btn btn-primary" id="callButton">Call</button>
-			  <button class="btn btn-error" id="hangupButton">Hangup</button>
+              <button class="btn btn-primary" id="callButton">Call</button>
+              <button class="btn btn-error" id="hangupButton">Hangup</button>
             </div>
             <div class="span6 well border-box">
               <h2>Your Turn</h2>
               <br />
-			  <textarea id="twiml-box"> Type your TwiML HERE: </textarea><br>
-			  <button id="submitTwiml">SUBMIT</button>
+              <textarea id="twiml-box" rows="5" placeholder="Type your TwiML here..."></textarea>
+              <span class="label label-success">Valid TwiML</span>
+              <a id="submitTwiml" href="#" class="btn btn-primary btn-large pull-right">Submit TwiML</a>
             </div>
           </div>
         </div>
@@ -103,12 +104,12 @@
         </div>
       </div>
     </div>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-	<script>window.jQuery || document.write('<script src="http://syssgx.github.com/xml.js/js/libs/jquery-1.7.1.min.js"><\/script>')</script>
-	<script src="http://syssgx.github.com/xml.js/js/libs/bootstrap.min.js"></script>
-	<script src="http://syssgx.github.com/xml.js/js/libs/prettify.js"></script>
-	<script type="text/javascript" src="//static.twilio.com/libs/twiliojs/1.0/twilio.min.js"></script>
-	<script src="/static/js/xmllint.js"></script>
-	<script src="/static/js/script.js"></script>
-  </body>
-</html>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="http://syssgx.github.com/xml.js/js/libs/jquery-1.7.1.min.js"><\/script>')</script>
+      <script src="http://syssgx.github.com/xml.js/js/libs/bootstrap.min.js"></script>
+      <script src="http://syssgx.github.com/xml.js/js/libs/prettify.js"></script>
+      <script type="text/javascript" src="//static.twilio.com/libs/twiliojs/1.0/twilio.min.js"></script>
+      <script src="/static/js/xmllint.js"></script>
+      <script src="/static/js/script.js"></script>
+    </body>
+  </html>
