@@ -31,3 +31,8 @@ body {
 #submitTwiml {
   width: 100%;
 }
+
+.mission {
+  background-color: #222;
+  color: #eee;
+}
