@@ -9,13 +9,14 @@
         padding-bottom: 40px;
       }
     </style>
-    <link href="../static/css/style.css" rel="stylesheet">
+    <link href="/static/css/style.css" rel="stylesheet">
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
   </head>
+
   <body>
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
@@ -36,31 +37,58 @@
     <div class="container">
       <div class="row">
         <div class="span6 well border-box">
-          <h2>Lesson 1: &lt;Response&gt;</h2>
+          <h2>&lt;Say&gt;</h2>
           <br />
-          Good, it looks like our Git repository is working properly. 
-          <br />
-          Notice how Git says octocat.txt is "untracked"? 
-          <br />
-          <br />
-          That means Git sees that octocat.txt is a new file.
-          <br />
-          <br />
-          To tell Git to start tracking changes made to octocat.txt, we first need to add it to the staging area by using git add.
+          <table class="table table-condensed table-striped">
+			<thead>
+				<tr>
+					<th>Attribute Name</th>
+					<th>Allowed Values</th>
+					<th>Default Values</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>voice</td>
+					<td>man, woman</td>
+					<td>man</td>
+				</tr>
+				<tr>
+					<td>language</td>
+					<td>en, en-gb, es, fr, de</td>
+					<td>en</td>
+				</tr>
+				<tr>
+					<td>loop</td>
+					<td>integer &gt;=0</td>
+					<td>1</td>
+				</tr>
+			</tbody>
+		  </table>
+		<h3>Voice:</h3>
+		<p>The voice attribute controls whether the text is read with a male voice or a female voice.</p>
+		<br>
+		<h3>Language:</h3>
+		<p>The language attribute controls what language’s accent and pronunciations will be used to read the text.</p>
+		<br>
+		<h3>Loop:</h3>
+		<p>The loop attribute controls how many times the text is repeated. A value of 0 will cause the text to loop until the call is hung up.</p>
         </div>
         <div class="span6">
           <div class="row">
             <div class="span6 well border-box">
               <h2>Demo Time</h2>
+			  <input type="hidden" id="token" value="{{params['token']}}">
               <br />
-              cool demo goes here
+              The &lt;Say&gt; verb converts text into speech that will be played in your call. Try it out!<br/>
+			  <button class="btn btn-primary" id="callButton">Call</button>
+			  <button class="btn btn-error" id="hangupButton">Hangup</button>
             </div>
             <div class="span6 well border-box">
               <h2>Your Turn</h2>
               <br />
-              <textarea id="twiml-textarea" rows="5"></textarea>
-              <span class="label label-success">Valid TwiML</span>
-              <a href="#" class="btn btn-primary btn-large pull-right">Run TwiML</a>
+			  <textarea id="twiml-box"> Type your TwiML HERE: </textarea><br>
+			  <button id="submitTwiml">SUBMIT</button>
             </div>
           </div>
         </div>
@@ -75,5 +103,12 @@
         </div>
       </div>
     </div>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="http://syssgx.github.com/xml.js/js/libs/jquery-1.7.1.min.js"><\/script>')</script>
+	<script src="http://syssgx.github.com/xml.js/js/libs/bootstrap.min.js"></script>
+	<script src="http://syssgx.github.com/xml.js/js/libs/prettify.js"></script>
+	<script type="text/javascript" src="//static.twilio.com/libs/twiliojs/1.0/twilio.min.js"></script>
+	<script src="/static/js/xmllint.js"></script>
+	<script src="/static/js/script.js"></script>
   </body>
 </html>

@@ -18,7 +18,7 @@ class OutboundCall(Document):
   required_fields = ['number', 'ip', 'timestamp']
   default_values = { 'timestamp': datetime.datetime.utcnow()}
 
-MAX_CALLS_PER_DAY = 10
+MAX_CALLS_PER_DAY = 100
 FROM_NUMBER = os.environ.get('FROM_NUMBER')
 APP_SID = os.environ.get('APP_SID')
 AUTH_TOKEN = os.environ.get('TWILIO_AUTH_TOKEN')
@@ -33,7 +33,12 @@ db = connection['heroku_app5944498']
 
 @app.route('/', methods=['GET', 'POST'])
 def hello():
-  params=[]
+  capability = TwilioCapability(ACCOUNT_SID, AUTH_TOKEN)
+  capability.allow_client_outgoing(APP_SID)
+  token = capability.generate()
+  params = {
+    'token':token
+  }
   return render_template('index.html', params=params)
 
 @app.route('/test', methods=['GET', 'POST'])
