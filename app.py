@@ -73,7 +73,8 @@ def playCallback():
       r.play(url="http://tw.spurint.org/thx/banana-phone.mp3")
       return str(r)
     else:
-      r.say("You suck so bad")
+      with r.gather(action="http://trytwilio.herokuapp.com/demo/callback", method='GET') as g:
+        g.say("You suck, lets try this again. Press 1 to hear the previous say message, press 2 to hear banana phone again")
       return str(r)
   except Exception as e:
       r.say("Something went wrong")
