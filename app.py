@@ -52,7 +52,7 @@ def testClient():
   return render_template("client.html", token=token)
 
 
-@app.route('/client/getTwiml/', methods=['GET','POST'])
+@app.route('/client/getTwiml', methods=['GET','POST'])
 def requestTwiml():
   try:
     if request.values["DemoType"] == "Say":
@@ -64,8 +64,8 @@ def requestTwiml():
     else:
       sys.stderr.write("Nothing reached\n")
       return "<Response><Say>Welcome to Twilio </Say></Response>"
-  except:
-    sys.stderr.write("Execption\n")
+  except Exception as e:
+    sys.stderr.write(e)
     return "<Response><Say>Welcome to Twilio </Say></Response>"
 
 @app.route('/requestCall', methods=['GET', 'POST'])
