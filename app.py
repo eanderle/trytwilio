@@ -74,7 +74,8 @@ def requestTwiml():
       return "<Response><Say>Welcome to Twilio, this is an example of the Say verb</Say></Response>"
     elif request.values["DemoType"] == "Play":
       sys.stderr.write("Play type reached\n")
-      return "<Response><Play></Play><Response>"
+      return "<Response><Play>http://tw.spurint.org/thx/banana-phone.mp3</Play></Response>"
+      #return "<Response><Play>http://tw.spurint.org/thx/banana-phone.mp3</Play><Response>"
     else:
       sys.stderr.write("Nothing reached\n")
       return "<Response><Say>Welcome to Twilio </Say></Response>"
