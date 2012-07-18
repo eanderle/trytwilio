@@ -168,7 +168,8 @@ def requestCall():
       call.save()
 
       return 'success'
-  except:
+  except Exception as e:
+    sys.stderr.write('Got exception: ' + e)
     return 'failure'
 
 if __name__ == '__main__':
