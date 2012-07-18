@@ -61,7 +61,7 @@ def testClient():
 
   return render_template("client.html", token=token)
 
-@app.route('/demo/playCallback', methods=['GET','POST'])
+@app.route('/demo/callback', methods=['GET','POST'])
 def playCallback():
   try:
     if request.values["Digits"] == "1":
@@ -83,7 +83,7 @@ def requestTwiml():
       #sys.stderr.write("Play type reached\n")
       return "<Response><Play>http://tw.spurint.org/thx/banana-phone.mp3</Play></Response>"
     elif request.values["DemoType"] == "Gather":
-      return "<Response><Gather action='/playCallback' method='GET'><Say>Enter 1 to hear banana phone</Say></Gather></Response>"
+      return "<Response><Gather action='/callback' method='GET'><Say>Enter 1 to hear banana phone</Say></Gather></Response>"
     else:
       #sys.stderr.write("Nothing reached\n")
       return "<Response><Say>Welcome to Twilio this is a test</Say></Response>"
