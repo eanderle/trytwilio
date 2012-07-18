@@ -133,9 +133,12 @@ def requestCall():
 
       url = 'http://trytwilio.herokuapp.com/requestCall?' + urlencode({'twimlBody':twimlBody})
 
+      # If this is a gather, re-write the url to contain all of the twiml
+      # of each digit provided and give it to handleInput
       if request.values['verb'].lower() == 'gather':
         url = 'http://trytwilio.herokuapp.com/handleInput?'
         twimlBodies = {}
+        # Go through each digit, and if it was provided, add it to the url
         for c in '0123456789#*':
           s = 'twimlBody' + c
           if s in request.values:
@@ -166,6 +169,7 @@ def requestCall():
 
       return 'success'
   except Exception as e:
+    sys.stderr.write('Got exception: ' + e)
     return 'failure'
 
 if __name__ == '__main__':
