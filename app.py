@@ -61,9 +61,21 @@ def testClient():
   return render_template("client.html", token=token)
 
 
-@app.route('/client/getTwiml')
+@app.route('/client/getTwiml', methods=['GET','POST'])
 def requestTwiml():
-  return "<Response><Say>This is a test</Say></Response>"
+  try:
+    if request.values["DemoType"] == "Say":
+      sys.stderr.write("Say demo type reached\n")
+      return "<Response><Say>Welcome to Twilio, this is an example of the Say verb</Say></Response>"
+    elif request.values["DemoType"] == "Play":
+      sys.stderr.write("Play type reached\n")
+      return "<Response><Play></Play><Response>"
+    else:
+      sys.stderr.write("Nothing reached\n")
+      return "<Response><Say>Welcome to Twilio </Say></Response>"
+  except Exception as e:
+    sys.stderr.write(e)
+    return "<Response><Say>Welcome to Twilio </Say></Response>"
 
 @app.route('/requestCall', methods=['GET', 'POST'])
 def requestCall():
