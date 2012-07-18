@@ -35,6 +35,10 @@
             <div class="span6 well border-box" style="height:59%;">
               {% block twimlbox %}
               <h2>Your Mission</h2>
+              <div class="btn-group twiml-target" data-toggle="buttons-radio">
+                <button id="target-phone" class="btn active">Phone</button>
+                <button id="target-browser" class="btn">Browser</button>
+              </div>
               <br />
               <div class="well mission">
               {% block mission %}
