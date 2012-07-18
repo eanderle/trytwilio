@@ -57,8 +57,9 @@
   <button class="btn btn-error" id="hangupButton">Hangup</button>
 {% endblock %}
 
-{% block twimlbox %}
-  <h2>Your Turn</h2>
-  <textarea id="twiml-box"> Type your TwiML HERE: </textarea><br>
-  <button id="submitTwiml">SUBMIT</button>
+{% block progressbar %}
+  {{ super() }}
+  <style type="text/css">
+    .progress .bar { width: 20%; }
+  </style>
 {% endblock %}
