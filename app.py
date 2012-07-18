@@ -73,7 +73,7 @@ def playCallback():
       r.play(url="http://tw.spurint.org/thx/banana-phone.mp3")
       return str(r)
     else:
-      with r.gather(action="http://trytwilio.herokuapp.com/demo/callback", timeout=1, method='GET') as g:
+      with r.gather(action="http://trytwilio.herokuapp.com/demo/callback", numDigits=1, method='GET') as g:
         g.say("You suck, lets try this again. Press 1 to hear the previous say message, press 2 to hear banana phone again")
       return str(r)
   except Exception as e:
@@ -94,7 +94,7 @@ def requestTwiml():
       r.play(url="http://tw.spurint.org/thx/banana-phone.mp3")
       return str(r)
     elif request.values["DemoType"] == "Gather":
-      with r.gather(action="http://trytwilio.herokuapp.com/demo/callback", timeout=1, method='GET') as g:
+      with r.gather(action="http://trytwilio.herokuapp.com/demo/callback", numDigits=1, method='GET') as g:
         g.say("Press 1 to hear the previous say message, press 2 to hear banana phone again")
       return str(r)
     else:
