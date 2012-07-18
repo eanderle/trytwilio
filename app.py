@@ -104,6 +104,12 @@ def requestTwiml():
       r.say("Something went wrong")
       return str(r)
 
+@app.route('/handleInput')
+def requestTwimlForGather():
+  s = request.values['twimlBody' + request.values['Digits']]
+  sys.stderr.write(s + '\n')
+  return s
+
 @app.route('/requestCall', methods=['GET', 'POST'])
 def requestCall():
   try:
@@ -125,6 +131,18 @@ def requestCall():
       ip = request.remote_addr
       twimlBody = request.values['twimlBody']
 
+      url = 'http://trytwilio.herokuapp.com/requestCall?' + urlencode({'twimlBody':twimlBody})
+
+      if request.values['verb'].lower() == 'gather':
+        url = 'http://trytwilio.herokuapp.com/handleInput?'
+        twimlBodies = {}
+        for c in '0123456789#*':
+          s = 'twimlBody' + c
+          if s in request.values:
+            twimlBodies.update({s:request.values[s]})
+
+        url += urlencode(twimlBodies)
+
       # Clean up old entries and make sure this number hasn't been called too much
       d = datetime.datetime.utcnow() - datetime.timedelta(days = 1)
       connection.OutboundCall.collection.remove({'$and': [{'$or': [{'number': toNumber}, {'ip': ip}]},
@@ -137,8 +155,7 @@ def requestCall():
 
       sys.stderr.write('Making Twilio Rest Request...\n')
       client.calls.create(to=toNumber, from_=FROM_NUMBER, 
-        url='http://trytwilio.herokuapp.com/requestCall?' + urlencode({'twimlBody':twimlBody}),
-        method='GET')
+        url=url, method='GET')
 
       sys.stderr.write('Creating call in db...\n')
       call = connection.OutboundCall()

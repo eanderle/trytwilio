@@ -19,3 +19,20 @@ body {
   width: 410px;
   margin-bottom: 20px;
 }
+
+.footer .progress {
+  margin-bottom: 0px;
+}
+
+.footer .poweredby {
+  text-align: right;
+}
+
+#submitTwiml {
+  width: 100%;
+}
+
+.mission {
+  background-color: #222;
+  color: #eee;
+}
