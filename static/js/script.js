@@ -57,7 +57,7 @@ $(function(){
 			var makeCall = $.post('/requestCall', 
 				{To: "+17033891424",
 				twimlBody: submittedTwiml,
-				DemoType: "Say"},
+				verb: "Say"},
 				function(data) {
 					alert("Made call:" + data);
 				}
