@@ -1,58 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <title>{% block title %}{% endblock %} - Try Twilio</title>
-  <meta name="description" content="trytwilio make learning twiml easy and fun">
-  <meta name="keywords" content="twilio,twiml,programming,languages,voip,voice,sms,gather,play,say">
-  <link href="/static/css/bootstrap.css" rel="stylesheet">
-  <link href="/static/css/style.css" rel="stylesheet">
-  <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-  <!--[if lt IE 9]>
+  <head>
+    <title>{% block title %}{% endblock %} - Try Twilio</title>
+    <meta name="description" content="TryTwilio make learning TwiML easy and fun">
+    <meta name="keywords" content="twilio,twiml,programming,languages,voip,voice,sms,gather,play,say">
+    <link href="/static/css/bootstrap.css" rel="stylesheet">
+    <link href="/static/css/style.css" rel="stylesheet">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-  <![endif]-->
-</head>
-<body>
-  <div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-      <div class="container">
-        <a class="brand" href="#">TryTwilio</a>
-        <ul class="nav">
-          {% block topmenu %}{% endblock %}
-        </ul>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="#">TryTwilio</a>
+          <ul class="nav">
+            {% block topmenu %}{% endblock %}
+          </ul>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="container" style="height:100%;">
-    <div class="row" style="height:100%;">
-      <div class="span6 well border-box" style="height:100%;">
-        {% block lesson %}{% endblock %} 
-      </div>
-      <div class="span6" style="height:100%;">
-        <div class="row" style="height:100%;">
-          <div class="span6 well border-box" style="height:48%;">
-            {% block staticdemo %}{% endblock %} 
-          </div>
-          <div class="span6 well border-box" style="height:49%;">
-            {% block twimlbox %}{% endblock %} 
+    <div class="container" style="height:100%;">
+      <div class="row" style="height:100%;">
+        <div class="span6 well border-box" style="height:100%;">
+          {% block lesson %}{% endblock %}
+        </div>
+        <div class="span6" style="height:100%;">
+          <div class="row" style="height:100%;">
+            <div class="span6 well border-box" style="height:48%;">
+              {% block staticdemo %}{% endblock %}
+            </div>
+            <div class="span6 well border-box" style="height:49%;">
+              {% block twimlbox %}{% endblock %}
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="navbar navbar-fixed-bottom">
-    <div class="navbar-inner">
-      <div class="container" style="padding-top:10px;">
-        <div style="float:left;">Made with &lt;3 for Tweek</div>
-        <div style="float:right;">Powered by <a href="http://twilio.com">Twilio</a></div>
+    <div class="navbar navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container" style="padding-top:10px;">
+          <div class="pull-left">Made with &lt;3 for Tweek</div>
+          <div class="pull-right">Powered by <a href="http://twilio.com">Twilio</a></div>
+        </div>
       </div>
     </div>
-  </div>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-	<script>window.jQuery || document.write('<script src="http://syssgx.github.com/xml.js/js/libs/jquery-1.7.1.min.js"><\/script>')</script>
-	<script src="http://syssgx.github.com/xml.js/js/libs/bootstrap.min.js"></script>
-	<script src="http://syssgx.github.com/xml.js/js/libs/prettify.js"></script>
-	<script type="text/javascript" src="//static.twilio.com/libs/twiliojs/1.0/twilio.min.js"></script>
-	<script src="/static/js/xmllint.js"></script>
-	<script src="/static/js/script.js"></script>
-</body>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="http://syssgx.github.com/xml.js/js/libs/jquery-1.7.1.min.js"><\/script>')</script>
+    <script src="http://syssgx.github.com/xml.js/js/libs/bootstrap.min.js"></script>
+    <script src="http://syssgx.github.com/xml.js/js/libs/prettify.js"></script>
+    <script type="text/javascript" src="//static.twilio.com/libs/twiliojs/1.0/twilio.min.js"></script>
+    <script src="/static/js/xmllint.js"></script>
+    <script src="/static/js/script.js"></script>
+  </body>
 </html>

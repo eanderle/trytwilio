@@ -6,6 +6,7 @@ from flask import Flask, request, render_template
 from urllib import urlencode
 from twilio.rest import TwilioRestClient
 from twilio.util import TwilioCapability
+from twilio import twiml
 from mongokit import Document, Connection
 
 class OutboundCall(Document):
@@ -61,22 +62,48 @@ def testClient():
 
   return render_template("client.html", token=token)
 
+@app.route('/demo/callback', methods=['GET','POST'])
+def playCallback():
+  try:
+    r = twiml.Response()
+    if request.values["Digits"] == "1":
+      r.say("Welcome to Twilio, this is an example of the say verb")
+      return str(r)
+    elif request.values["Digits"] == "2":
+      r.play("http://tw.spurint.org/thx/banana-phone.mp3")
+      return str(r)
+    else:
+      r.say("Let's try again, you have to press either 1 or 2")
+      r.gather(action='/callback')
+      return str(r)
+  except Exception as e:
+      r.say("Something went wrong")
+      return str(r)
 
 @app.route('/client/getTwiml', methods=['GET','POST'])
 def requestTwiml():
   try:
+    r = twiml.Response()
     if request.values["DemoType"] == "Say":
       #sys.stderr.write("Say demo type reached\n")
-      return "<Response><Say>Welcome to Twilio, this is an example of the Say verb</Say></Response>"
+      r.say("Welcome to Twilio, this is an example of the say verb")
+      return str(r)
     elif request.values["DemoType"] == "Play":
       #sys.stderr.write("Play type reached\n")
-      return "<Response><Play>http://tw.spurint.org/thx/banana-phone.mp3</Play></Response>"
+      r.play("http://tw.spurint.org/thx/banana-phone.mp3")
+      return str(r)
+    elif request.values["DemoType"] == "Gather":
+      r.say("Enter 1 to hear the previous say message, press 2 to hear banana phone again")
+      r.gather(action='/callback')
+      return str(r)
     else:
       #sys.stderr.write("Nothing reached\n")
-      return "<Response><Say>Welcome to Twilio this is a test</Say></Response>"
+      r.say("Something went wrong")
+      return str(r)
   except Exception as e:
     #sys.stderr.write(e)
-    return "<Response><Say>Welcome to Twilio this is an error </Say></Response>"
+      r.say("Something went wrong")
+      return str(r)
 
 @app.route('/handleInput')
 def requestTwimlForGather():
