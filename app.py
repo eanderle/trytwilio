@@ -129,22 +129,7 @@ def requestCall():
 
       sys.stderr.write('TwimlBody: ' + request.values['twimlBody'] + '\n')
       ip = request.remote_addr
-      r = twiml.Response()
-
-      try:
-        demoType = request.values['DemoType']
-	if demoType == "Say":
-    	  twimlBody = r.say("This is an example of the say verb on your phone")
-	elif demoType == "Play":
-	  twimlBody = r.say("Here is an example of the play verb playing a MP3 file")
-	  twimlBody += r.play("http://tw.spurint.org/thx/banana-phone.mp3")
-	elif demoType == "Gather":
-	  twimlBody = r.say("Enter 1 to hear the previous message, press 2 to hear banana phone again")
-	  twimlBody += r.gather(action='/callback')
-	else:
-	  twimlBody = request.values['twimlBody']
-      except NameError:
-        twimlBody = request.values['twimlBody']
+      twimlBody = request.values['twimlBody']
 
       url = 'http://trytwilio.herokuapp.com/requestCall?' + urlencode({'twimlBody':twimlBody})
 
