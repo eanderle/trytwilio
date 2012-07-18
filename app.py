@@ -98,8 +98,7 @@ def requestTwiml():
       return str(r)
     else:
       #sys.stderr.write("Nothing reached\n")
-      r.say("Something went wrong")
-      return str(r)
+      return request.values['twimlBody']
   except Exception as e:
     #sys.stderr.write(e)
       r.say("Something went wrong")
@@ -124,7 +123,22 @@ def requestCall():
 
       sys.stderr.write('TwimlBody: ' + request.values['twimlBody'] + '\n')
       ip = request.remote_addr
-      twimlBody = request.values['twimlBody']
+      r = twiml.Response()
+
+      try:
+        demoType = request.values['DemoType']
+	if demoType == "Say":
+    	  twimlBody = r.say("This is an example of the say verb on your phone")
+	elif demoType == "Play":
+	  twimlBody = r.say("Here is an example of the play verb playing a MP3 file")
+	  twimlBody += r.play("http://tw.spurint.org/thx/banana-phone.mp3")
+	elif demoType == "Gather":
+	  twimlBody = r.say("Enter 1 to hear the previous message, press 2 to hear banana phone again")
+	  twimlBody += r.gather(action='/callback')
+	else:
+	  twimlBody = request.values['twimlBody']
+      except NameError:
+        twimlBody = request.values['twimlBody']
 
       # Clean up old entries and make sure this number hasn't been called too much
       d = datetime.datetime.utcnow() - datetime.timedelta(days = 1)

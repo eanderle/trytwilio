@@ -55,8 +55,9 @@ $(function(){
 
 		if (result == "file.xml validates"){
 			var makeCall = $.post('/requestCall', 
-				{To: "+12067993325",
-				twimlBody: submittedTwiml},
+				{To: "+17033891424",
+				twimlBody: submittedTwiml,
+				DemoType: "Say"},
 				function(data) {
 					alert("Made call:" + data);
 				}
