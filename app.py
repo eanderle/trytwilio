@@ -93,11 +93,12 @@ def requestTwiml():
       r.play(url="http://tw.spurint.org/thx/banana-phone.mp3")
       return str(r)
     elif request.values["DemoType"] == "Gather":
-      r = "<Response><Gather action='http://trytwilio.herokuapp.com/demo/callback method='GET'><Say>Enter 1 or 2</Say></Gather><Say>Didnt hear anything</Say></Response>"
-      return r
+      #r = "<Response><Gather action='http://trytwilio.herokuapp.com/demo/callback method='GET'><Say>Enter 1 or 2</Say></Gather><Say>Didnt hear anything</Say></Response>"
+      r.gather(action="http://trytwilio.herokuapp.com/demo/callback", method='GET')
+      return str(r)
     else:
       #sys.stderr.write("Nothing reached\n")
-      return request.values['twimlBody']
+      return "Nope"
   except Exception as e:
     #sys.stderr.write(e)
       r.say("Something went wrong")
