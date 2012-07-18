@@ -65,16 +65,20 @@ def testClient():
 @app.route('/demo/callback', methods=['GET','POST'])
 def playCallback():
   try:
+    r = twiml.Response()
     if request.values["Digits"] == "1":
-      r = twiml.Response()
       r.say("Welcome to Twilio, this is an example of the say verb")
       return str(r)
     elif request.values["Digits"] == "2":
-      return "<Response><Play>http://tw.spurint.org/thx/banana-phone.mp3</Play></Response>"
+      r.play("http://tw.spurint.org/thx/banana-phone.mp3")
+      return str(r)
     else:
-      return "<Response><Say>You have to either press 1 or 2</Say></Response>"
+      r.say("Let's try again, you have to press either 1 or 2")
+      r.gather(action='/callback')
+      return str(r)
   except Exception as e:
-    return "<Response><Say>Something went wrong</Say></Response>"
+      r.say("Something went wrong")
+      return str(r)
 
 @app.route('/client/getTwiml', methods=['GET','POST'])
 def requestTwiml():
