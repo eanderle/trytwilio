@@ -52,9 +52,14 @@ def testClient():
   return render_template("client.html", token=token)
 
 
-@app.route('/client/getTwiml', methods=['GET','POST'])
-def requestTwiml():
-  return "<Response><Say>This is a test</Say></Response>"
+@app.route('/client/getTwiml/', methods=['GET','POST'])
+def requestTwiml(demoType):
+  if request.params["DemoType"] == "Say":
+    return "<Response><Say>Welcome to Twilio, this is an example of the Say verb</Say></Response>"
+  elif request.params["DemoType"] == "Play":
+    return "<Response><Play></Play><Response>"
+  else:
+    return "<Response><Say>Welcome to Twilio </Say></Response>"
 
 @app.route('/requestCall', methods=['GET', 'POST'])
 def requestCall():
