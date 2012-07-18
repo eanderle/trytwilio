@@ -54,9 +54,9 @@ def testClient():
 
 @app.route('/client/getTwiml/', methods=['GET','POST'])
 def requestTwiml():
-  if request.params["DemoType"] == "Say":
+  if request.args.get("DemoType") == "Say":
     return "<Response><Say>Welcome to Twilio, this is an example of the Say verb</Say></Response>"
-  elif request.params["DemoType"] == "Play":
+  elif request.args.get("DemoType") == "Play":
     return "<Response><Play></Play><Response>"
   else:
     return "<Response><Say>Welcome to Twilio </Say></Response>"
