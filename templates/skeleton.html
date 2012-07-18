@@ -39,21 +39,22 @@
         </div>
       </div>
     </div>
-    <div class="navbar navbar-fixed-bottom">
-      <div class="navbar-inner">
-        <div class="container" style="padding-top:10px;">
-          <div class="row">
-            <div class="span3 pull-left">Made with &lt;3 for Tweek</div>
-            {% block progressbar %}
-            <div class="span6">
-              <div class="progress progress-striped active">
-                <div class="bar"
-                  style="width: 40%;">
+    <div class="footer">
+      <div class="navbar navbar-fixed-bottom">
+        <div class="navbar-inner">
+          <div class="container" style="padding-top:10px;">
+            <div class="row">
+              <div class="span3 pull-left">Made with &lt;3 for Tweek</div>
+              {% block progressbar %}
+              <div class="span6">
+                <div class="progress progress-striped active">
+                  <div class="bar" style="width: 40%;">
+                  </div>
                 </div>
               </div>
+              {% endblock %}
+              <div class="span3 pull-right poweredby">Powered by <a href="http://twilio.com">Twilio</a></div>
             </div>
-            {% endblock %}
-            <div class="span3 pull-right" style="text-align: right">Powered by <a href="http://twilio.com">Twilio</a></div>
           </div>
         </div>
       </div>
