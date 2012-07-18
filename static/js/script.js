@@ -28,7 +28,7 @@ $(function(){
 	    var toNum = '+17863029603';
 	    Twilio.Device.connect({
             To: toNum,
-       		DemoType: "Play"
+       		DemoType: "Say"
         });
 	}
 
