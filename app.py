@@ -54,16 +54,19 @@ def testClient():
 
 @app.route('/client/getTwiml/', methods=['GET','POST'])
 def requestTwiml():
-  if request.values["DemoType"] == "Say":
-    sys.stderr.write("Say demo type reached\n")
-    return "<Response><Say>Welcome to Twilio, this is an example of the Say verb</Say></Response>"
-  elif request.values["DemoType"] == "Play":
-    sys.stderr.write("Play type reached\n")
-    return "<Response><Play></Play><Response>"
-  else:
-    sys.stderr.write("Nothing reached\n")
-    return "<Response><Say>Welcome to Twilio </Say></Response>"
-
+  try:
+		if request.values["DemoType"] == "Say":
+			sys.stderr.write("Say demo type reached\n")
+			return "<Response><Say>Welcome to Twilio, this is an example of the Say verb</Say></Response>"
+		elif request.values["DemoType"] == "Play":
+			sys.stderr.write("Play type reached\n")
+			return "<Response><Play></Play><Response>"
+		else:
+			sys.stderr.write("Nothing reached\n")
+			return "<Response><Say>Welcome to Twilio </Say></Response>"
+  except:
+    sys.stderr.write("Execption\n")
+	  return "<Response><Say>Welcome to Twilio </Say></Response>"
 @app.route('/requestCall', methods=['GET', 'POST'])
 def requestCall():
   try:
