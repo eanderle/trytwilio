@@ -52,7 +52,7 @@ def testClient():
   return render_template("client.html", token=token)
 
 
-@app.route('/client/getTwiml')
+@app.route('/client/getTwiml', methods=['GET','POST'])
 def requestTwiml():
   return "<Response><Say>This is a test</Say></Response>"
 
