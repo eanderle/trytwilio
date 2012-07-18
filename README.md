@@ -13,3 +13,4 @@ defined. You can get the appropiate values by
 - TWILIO_ACCOUNT_SID
 - TWILIO_AUTH_TOKEN
 - FROM_NUMBER
+- APP_SID
