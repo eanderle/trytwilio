@@ -27,3 +27,7 @@ body {
 .footer .poweredby {
   text-align: right;
 }
+
+#submitTwiml {
+  width: 100%;
+}
