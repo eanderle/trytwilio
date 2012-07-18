@@ -33,17 +33,35 @@
               {% block staticdemo %}{% endblock %}
             </div>
             <div class="span6 well border-box" style="height:49%;">
-              {% block twimlbox %}{% endblock %}
+              {% block twimlbox %}
+              <h2>Your Turn</h2>
+              <br />
+              <textarea id="twiml-box" placeholder="Type your TwiML here..." rows="7"></textarea>
+              <br />
+              <button class="btn-large btn-success" id="submitTwiml">Submit TwiML</button>
+              {% endblock %}
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="navbar navbar-fixed-bottom">
-      <div class="navbar-inner">
-        <div class="container" style="padding-top:10px;">
-          <div class="pull-left">Made with &lt;3 for Tweek</div>
-          <div class="pull-right">Powered by <a href="http://twilio.com">Twilio</a></div>
+    <div class="footer">
+      <div class="navbar navbar-fixed-bottom">
+        <div class="navbar-inner">
+          <div class="container" style="padding-top:10px;">
+            <div class="row">
+              <div class="span3 pull-left">Made with &lt;3 for Tweek</div>
+              {% block progressbar %}
+              <div class="span6">
+                <div class="progress progress-striped active">
+                  <div class="bar">
+                  </div>
+                </div>
+              </div>
+              {% endblock %}
+              <div class="span3 pull-right poweredby">Powered by <a href="http://twilio.com">Twilio</a></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
