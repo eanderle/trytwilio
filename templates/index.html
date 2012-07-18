@@ -3,6 +3,13 @@
   <head>
     <title>Try Twilio</title>
     <link href="../static/css/bootstrap.css" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+    </style>
+    <link href="../static/css/style.css" rel="stylesheet">
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -10,6 +17,63 @@
     <![endif]-->
   </head>
   <body>
-    testing
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="#">TryTwilio</a>
+          <ul class="nav">
+            <li class="active"><a href="#">&lt;Response&gt;</a></li>
+            <li><a href="#">&lt;Dial&gt;</a></li>
+            <li><a href="#">&lt;Say&gt;</a></li>
+            <li><a href="#">&lt;Play&gt;</a></li>
+            <li><a href="#">&lt;Record&gt;</a></li>
+            <li><a href="#">&lt;Gather&gt;</a></li>
+            <li><a href="#">&lt;Sms&gt;</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="span6 well border-box">
+          <h2>Lesson 1: &lt;Response&gt;</h2>
+          <br />
+          Good, it looks like our Git repository is working properly. 
+          <br />
+          Notice how Git says octocat.txt is "untracked"? 
+          <br />
+          <br />
+          That means Git sees that octocat.txt is a new file.
+          <br />
+          <br />
+          To tell Git to start tracking changes made to octocat.txt, we first need to add it to the staging area by using git add.
+        </div>
+        <div class="span6">
+          <div class="row">
+            <div class="span6 well border-box">
+              <h2>Demo Time</h2>
+              <br />
+              cool demo goes here
+            </div>
+            <div class="span6 well border-box">
+              <h2>Your Turn</h2>
+              <br />
+              <textarea id="twiml-textarea" rows="5"></textarea>
+              <span class="label label-success">Valid TwiML</span>
+              <a href="#" class="btn btn-primary btn-large pull-right">Run TwiML</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="navbar navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container">
+          <ul class="nav">
+            <li><a href="#">Powered by Twilio</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
