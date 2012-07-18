@@ -45,7 +45,7 @@ def xmlcheck():
 def testClient():
   application_sid = "AP256035c642dcf6ad2f82119f86e4ea35"
 
-  capability = TwilioCapability(os.environ["TWILIO_ACCOUNT_SID"], os.environ["TWILIO_AUTH_TOKEN"])
+  capability = TwilioCapability("ACefb267919ab7c793e889ce40b8db2506", "6cb0a97591eaf94ca237572fe4472458")
   capability.allow_client_outgoing(application_sid)
   token = capability.generate()
 
