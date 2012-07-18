@@ -13,7 +13,10 @@
 			<div class="span5" style="height:100%;"> This is the span 5</div>
 			<div class="span7" style="height:100%;">
 				<div class="row" style="height:50%;">
+					<input type="hidden" id="token" value="{{params['token']}}">
 					Are you there
+					<button class="btn btn-primary" id="callButton">Call</button>
+					<button class="btn btn-error" id="HangupButton">Hangup</button>
 				</div>
 				<div class="row" style="height:50%;">
 					<textarea id="twiml-box"> Type your TwiML HERE: </textarea>
@@ -33,6 +36,7 @@
 	<script>window.jQuery || document.write('<script src="http://syssgx.github.com/xml.js/js/libs/jquery-1.7.1.min.js"><\/script>')</script>
 	<script src="http://syssgx.github.com/xml.js/js/libs/bootstrap.min.js"></script>
 	<script src="http://syssgx.github.com/xml.js/js/libs/prettify.js"></script>
+	<script type="text/javascript" src="//static.twilio.com/libs/twiliojs/1.0/twilio.min.js"></script>
 	<script src="/static/js/xmllint.js"></script>
 	<script src="/static/js/script.js"></script>
 </body>

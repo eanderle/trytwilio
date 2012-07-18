@@ -20,6 +20,9 @@ class OutboundCall(Document):
 
 MAX_CALLS_PER_DAY = 10
 FROM_NUMBER = os.environ.get('FROM_NUMBER')
+APP_SID = os.environ.get('APP_SID')
+AUTH_TOKEN = os.environ.get('TWILIO_AUTH_TOKEN')
+ACCOUNT_SID = os.environ.get('TWILIO_ACCOUNT_SID')
 app = Flask(__name__)
 
 client = TwilioRestClient()
@@ -39,13 +42,19 @@ def test():
 
 @app.route('/testXml', methods=['GET', 'POST'])
 def xmlcheck():
-  return render_template('firstpage.html')
+  capability = TwilioCapability(ACCOUNT_SID, AUTH_TOKEN)
+  capability.allow_client_outgoing(APP_SID)
+  token = capability.generate()
+  params = {
+    'token':token
+  }
+  return render_template('firstpage.html', params=params)
 
 @app.route('/testClient', methods=['GET','POST'])
 def testClient():
-  application_sid = "AP256035c642dcf6ad2f82119f86e4ea35"
+  application_sid = 'AP256035c642dcf6ad2f82119f86e4ea35'
 
-  capability = TwilioCapability()
+  capability = TwilioCapability(ACCOUNT_SID, AUTH_TOKEN)
   capability.allow_client_outgoing(application_sid)
   token = capability.generate()
 
