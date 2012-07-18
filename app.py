@@ -90,11 +90,12 @@ def requestTwiml():
       return str(r)
     elif request.values["DemoType"] == "Play":
       #sys.stderr.write("Play type reached\n")
-      r.play("http://tw.spurint.org/thx/banana-phone.mp3")
+      r.say("You are about to hear the one and only banana phone")
+      r.play(url="http://tw.spurint.org/thx/banana-phone.mp3")
       return str(r)
     elif request.values["DemoType"] == "Gather":
       r.say("Enter 1 to hear the previous say message, press 2 to hear banana phone again")
-      r.gather(action='/callback')
+      r.gather(action='http://trytwilio.herokuapp.com/demo/callback')
       return str(r)
     else:
       #sys.stderr.write("Nothing reached\n")
@@ -109,6 +110,15 @@ def requestTwimlForGather():
   s = request.values['twimlBody' + request.values['Digits']]
   sys.stderr.write(s + '\n')
   return s
+
+@app.route('/demo/requestDemoCall', methods=['GET', 'POST'])
+def requestDemoCall():
+  try:
+    url = 'http://trytwilio.herokuapp.com/client/getTwiml?' + urlencode({'DemoType':"Gather"})
+    call = client.calls.create(to="+17033891424", from_="+17862458451", url=url, method='GET')
+    return call.sid
+  except:
+    return "Shit failed"
 
 @app.route('/requestCall', methods=['GET', 'POST'])
 def requestCall():
