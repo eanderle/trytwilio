@@ -1,0 +1,64 @@
+{% extends "skeleton.html" %}
+
+{% block title %}Say{% endblock %}
+
+{% block topmenu %}
+  <li class="active"><a href="/">&lt;Home&gt;</a></li>
+  <li class="active"><a href="/say">&lt;Say&gt;</a></li>
+  <li><a href="#">&lt;Play&gt;</a></li>
+  <li><a href="#">&lt;Record&gt;</a></li>
+  <li><a href="#">&lt;Gather&gt;</a></li>
+  <li><a href="#">&lt;Sms&gt;</a></li>
+{% endblock %}
+
+{% block lesson %}
+  <h2>&lt;Say&gt;</h2><br/>
+  <p>The &lt;Say&gt; verb converts text into speech that will be played in your call. Try it out!</p>
+  <table class="table table-condensed table-striped">
+    <thead>
+      <tr>
+        <th>Attribute Name</th>
+        <th>Allowed Values</th>
+        <th>Default Values</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>voice</td>
+        <td>man, woman</td>
+        <td>man</td>
+      </tr>
+      <tr>
+        <td>language</td>
+        <td>en, en-gb, es, fr, de</td>
+        <td>en</td>
+      </tr>
+      <tr>
+        <td>loop</td>
+        <td>integer &gt;=0</td>
+        <td>1</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3>Voice:</h3>
+  <p>The voice attribute controls whether the text is read with a male voice or a female voice.</p>
+  <br>
+  <h3>Language:</h3>
+  <p>The language attribute controls what language’s accent and pronunciations will be used to read the text.</p>
+  <br>
+  <h3>Loop:</h3>
+  <p>The loop attribute controls how many times the text is repeated. A value of 0 will cause the text to loop until the call is hung up.</p>
+{% endblock %}
+
+{% block staticdemo %}
+  <h2>Demo Time</h2>
+  <input type="hidden" id="token" value="{{params['token']}}">
+  <button class="btn btn-primary" id="callButton">Call</button>
+  <button class="btn btn-error" id="hangupButton">Hangup</button>
+{% endblock %}
+
+{% block twimlbox %}
+  <h2>Your Turn</h2>
+  <textarea id="twiml-box"> Type your TwiML HERE: </textarea><br>
+  <button id="submitTwiml">SUBMIT</button>
+{% endblock %}

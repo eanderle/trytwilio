@@ -1,114 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Try Twilio</title>
-    <link href="../static/css/bootstrap.css" rel="stylesheet">
-    <style type="text/css">
-      body {
-        padding-top: 60px;
-        padding-bottom: 40px;
-      }
-    </style>
-    <link href="/static/css/style.css" rel="stylesheet">
+{% extends "skeleton.html" %}
 
-    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-  </head>
+{% block title %}Welcome{% endblock %}
 
-  <body>
-    <div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <a class="brand" href="#">TryTwilio</a>
-          <ul class="nav">
-            <li class="active"><a href="#">&lt;Response&gt;</a></li>
-            <li><a href="#">&lt;Dial&gt;</a></li>
-            <li><a href="#">&lt;Say&gt;</a></li>
-            <li><a href="#">&lt;Play&gt;</a></li>
-            <li><a href="#">&lt;Record&gt;</a></li>
-            <li><a href="#">&lt;Gather&gt;</a></li>
-            <li><a href="#">&lt;Sms&gt;</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class="span6 well border-box">
-          <h2>&lt;Say&gt;</h2>
-          <br />
-          <table class="table table-condensed table-striped">
-			<thead>
-				<tr>
-					<th>Attribute Name</th>
-					<th>Allowed Values</th>
-					<th>Default Values</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>voice</td>
-					<td>man, woman</td>
-					<td>man</td>
-				</tr>
-				<tr>
-					<td>language</td>
-					<td>en, en-gb, es, fr, de</td>
-					<td>en</td>
-				</tr>
-				<tr>
-					<td>loop</td>
-					<td>integer &gt;=0</td>
-					<td>1</td>
-				</tr>
-			</tbody>
-		  </table>
-		<h3>Voice:</h3>
-		<p>The voice attribute controls whether the text is read with a male voice or a female voice.</p>
-		<br>
-		<h3>Language:</h3>
-		<p>The language attribute controls what language’s accent and pronunciations will be used to read the text.</p>
-		<br>
-		<h3>Loop:</h3>
-		<p>The loop attribute controls how many times the text is repeated. A value of 0 will cause the text to loop until the call is hung up.</p>
-        </div>
-        <div class="span6">
-          <div class="row">
-            <div class="span6 well border-box">
-              <h2>Demo Time</h2>
-			  <input type="hidden" id="token" value="{{params['token']}}">
-              <br />
-              The &lt;Say&gt; verb converts text into speech that will be played in your call. Try it out!<br/>
-			  <button class="btn btn-primary" id="callButton">Call</button>
-			  <button class="btn btn-error" id="hangupButton">Hangup</button>
-            </div>
-            <div class="span6 well border-box">
-              <h2>Your Turn</h2>
-              <br />
-			  <textarea id="twiml-box"> Type your TwiML HERE: </textarea><br>
-			  <button id="submitTwiml">SUBMIT</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="navbar navbar-fixed-bottom">
-      <div class="navbar-inner">
-        <div class="container">
-          <ul class="nav">
-            <li><a href="#">Powered by Twilio</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-	<script>window.jQuery || document.write('<script src="http://syssgx.github.com/xml.js/js/libs/jquery-1.7.1.min.js"><\/script>')</script>
-	<script src="http://syssgx.github.com/xml.js/js/libs/bootstrap.min.js"></script>
-	<script src="http://syssgx.github.com/xml.js/js/libs/prettify.js"></script>
-	<script type="text/javascript" src="//static.twilio.com/libs/twiliojs/1.0/twilio.min.js"></script>
-	<script src="/static/js/xmllint.js"></script>
-	<script src="/static/js/script.js"></script>
-  </body>
-</html>
+{% block topmenu %}
+  <li class="active"><a href="/">&lt;Home&gt;</a></li>
+  <li><a href="/say">&lt;Say&gt;</a></li>
+  <li><a href="#">&lt;Play&gt;</a></li>
+  <li><a href="#">&lt;Record&gt;</a></li>
+  <li><a href="#">&lt;Gather&gt;</a></li>
+  <li><a href="#">&lt;Sms&gt;</a></li>
+{% endblock %}
+
+{% block lesson %}
+  <h1>What is TwiML?</h1>
+  <p>TwiML is a set of instructions you can use to tell Twilio what to do when you receive an incoming call or SMS.</p>
+  <p>When someone makes a call or sends an SMS to one of your Twilio numbers, Twilio will look up the URL associated with that phone number and make a request to that URL. Twilio will read TwiML instructions at that URL to determine what to do: record the call, play a message for the caller, prompt the caller to press digits on their keypad, etc.</p>
+  <h2>&lt;Response&gt;</h2><br/>
+  <p>The &lt;Response&gt; verb lets us start a twilio response</p>
+  <p>It pretty much allows for you to make any type of app on twilio. However, it can't really do anything on its own, so why not begin the TryTwilio tutorial and we'll walk you through the steps of creating one yourself?</p>
+{% endblock %}
+
+{% block staticdemo %}
+  <h2>Demo Time</h2>
+  <p>Throughout TryTwilio, there will be a demo in this area which will give you an example of what the particular TwiML verb does.</p>
+{% endblock %}
+
+{% block twimlbox %}
+  <h2>Your Turn</h2>
+  <p>This is where you'll try out the waters of telecommunication. You'll write out TwiML responses in this area throughout the tutorial and actually RUN it. You thought the demo was cool? Nothing's cooler than running your OWN version!</p>
+  <a href="/say"><button class="btn btn-primary">Start</button></a>
+{% endblock %}
