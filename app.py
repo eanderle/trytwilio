@@ -18,7 +18,7 @@ class OutboundCall(Document):
   required_fields = ['number', 'ip', 'timestamp']
   default_values = { 'timestamp': datetime.datetime.utcnow()}
 
-MAX_CALLS_PER_DAY = 10
+MAX_CALLS_PER_DAY = 100
 FROM_NUMBER = os.environ.get('FROM_NUMBER')
 app = Flask(__name__)
 
@@ -77,12 +77,15 @@ def requestCall():
     if request.method == 'POST':
       # Clean up numbers
       # Delete any non-numeric character
+      sys.stderr.write('Phone Number: ' + request.values['To'] + '\n')
+      sys.stderr.write('Cleaning up phone number...\n')
       toNumber = re.sub('[^0-9]', '', request.values['To'])
 
       # If the number is 10 digits, it's US/Canada, so do a +1
       # Else it's some other country (we assume) so just add a plus
       toNumber = ('+1' if len(toNumber) == 10 else '+') + toNumber
 
+      sys.stderr.write('TwimlBody: ' + request.values['twimlBody'] + '\n')
       ip = request.remote_addr
       twimlBody = request.values['twimlBody']
 
@@ -90,14 +93,18 @@ def requestCall():
       d = datetime.datetime.utcnow() - datetime.timedelta(days = 1)
       connection.OutboundCall.collection.remove({'$and': [{'$or': [{'number': toNumber}, {'ip': ip}]},
                                                           {'timestamp': {'$lt': d}}]})
-      if connection.OutboundCall.find({'$and': [{'$or': [{'number': toNumber}, {'ip': ip}]},
-                                                         {'timestamp': {'$lt': d}}]}).count() >= MAX_CALLS_PER_DAY:
+      count = connection.OutboundCall.find({'$and': [{'$or': [{'number': toNumber}, {'ip': ip}]},
+                                                         {'timestamp': {'$lt': d}}]}).count()
+      if count >= MAX_CALLS_PER_DAY:
+        sys.stderr.write('Error: too many calls\n')
         raise Exception()
 
+      sys.stderr.write('Making Twilio Rest Request...\n')
       client.calls.create(to=toNumber, from_=FROM_NUMBER, 
         url='http://trytwilio.herokuapp.com/requestCall?' + urlencode({'twimlBody':twimlBody}),
         method='GET')
 
+      sys.stderr.write('Creating call in db...\n')
       call = connection.OutboundCall()
       call['number'] = toNumber
       call['ip'] = ip
