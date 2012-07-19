@@ -32,75 +32,38 @@ connection = Connection(os.environ.get('MONGOLAB_URI'))
 connection.register([OutboundCall])
 db = connection['heroku_app5944498']
 
-@app.route('/', methods=['GET', 'POST'])
-def hello():
+def getPage(page):
   capability = TwilioCapability(ACCOUNT_SID, AUTH_TOKEN)
   capability.allow_client_outgoing(APP_SID)
   token = capability.generate()
   params = {
     'token':token
   }
-  return render_template('index.html', params=params)
+  return render_template(page, params=params)
+
+@app.route('/', methods=['GET', 'POST'])
+def hello():
+  return getPage('index.html')
 
 @app.route('/say', methods=['GET', 'POST'])
 def say():
-  capability = TwilioCapability(ACCOUNT_SID, AUTH_TOKEN)
-  capability.allow_client_outgoing(APP_SID)
-  token = capability.generate()
-  params = {
-    'token':token
-  }
-  return render_template('say.html', params=params)
+  return getPage('say.html')
 
 @app.route('/play', methods=['GET', 'POST']) # Added route to test the HTML, feel free to change method
 def play():
-  capability = TwilioCapability(ACCOUNT_SID, AUTH_TOKEN)
-  capability.allow_client_outgoing(APP_SID)
-  token = capability.generate()
-  params = {
-    'token':token
-  }
-  return render_template('play.html', params=params)
+  return getPage('play.html')
 
 @app.route('/gather', methods=['GET', 'POST']) # Added route to test the HTML, feel free to change method
 def gather():
-  capability = TwilioCapability(ACCOUNT_SID, AUTH_TOKEN)
-  capability.allow_client_outgoing(APP_SID)
-  token = capability.generate()
-  params = {
-    'token':token
-  }
-  return render_template('gather.html', params=params)
+  return getPage('gather.html')
 
 @app.route('/record', methods=['GET', 'POST']) # Added route to test the HTML, feel free to change method
 def record():
-  capability = TwilioCapability(ACCOUNT_SID, AUTH_TOKEN)
-  capability.allow_client_outgoing(APP_SID)
-  token = capability.generate()
-  params = {
-    'token':token
-  }
-  return render_template('record.html', params=params)
+  return getPage('record.html')
 
 @app.route('/sms', methods=['GET', 'POST']) # Added route to test the HTML, feel free to change method
 def sms():
-  capability = TwilioCapability(ACCOUNT_SID, AUTH_TOKEN)
-  capability.allow_client_outgoing(APP_SID)
-  token = capability.generate()
-  params = {
-    'token':token
-  }
-  return render_template('sms.html', params=params)
-
-@app.route('/testClient', methods=['GET','POST'])
-def testClient():
-  application_sid = 'AP256035c642dcf6ad2f82119f86e4ea35'
-
-  capability = TwilioCapability(ACCOUNT_SID, AUTH_TOKEN)
-  capability.allow_client_outgoing(application_sid)
-  token = capability.generate()
-
-  return render_template("client.html", token=token)
+  return getPage('sms.html')
 
 @app.route('/demo/callback', methods=['GET','POST'])
 def callback():
@@ -116,7 +79,7 @@ def callback():
       with r.gather(action="http://trytwilio.herokuapp.com/demo/callback", numDigits=1, timeout=10, method='GET') as g:
         g.say("You suck, lets try this again. Press 1 to hear the previous say message, press 2 to hear banana phone again")
       return str(r)
-  except Exception as e:
+  except Exception:
       r.say("Something went wrong")
       return str(r)
 
@@ -155,7 +118,7 @@ def requestTwiml():
     else:
       #sys.stderr.write("Nothing reached\n")
       return "Nope"
-  except Exception as e:
+  except Exception:
     #sys.stderr.write(e)
       r.say("Something went wrong")
       return str(r)
@@ -234,7 +197,7 @@ def requestCall():
       call.save()
 
       return 'success'
-  except Exception as e:
+  except Exception:
     return 'failure'
 
 if __name__ == '__main__':
