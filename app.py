@@ -29,9 +29,9 @@ app = Flask(__name__)
 
 client = TwilioRestClient()
 
-connection = Connection(os.environ.get('MONGOLAB_URI'))
-connection.register([OutboundCall])
-db = connection['heroku_app5944498']
+#connection = Connection(os.environ.get('MONGOLAB_URI'))
+#connection.register([OutboundCall])
+#db = connection['heroku_app5944498']
 
 lessons = ['say', 'play', 'gather', 'record', 'dial']
 
@@ -94,6 +94,9 @@ def getDemoTwiml(verb):
   elif verb == 'record':
     r.say('After the beep, make your recording')
     r.record(action='http://trytwilio.herokuapp.com/demo/recordingCallback', method='GET')
+  elif verb == 'sms':
+    r.say("You are about to get sent an sms")
+    r.sms("This is a test sms", to="+17033891424")
   else:
     return 'failure'
   return str(r)
