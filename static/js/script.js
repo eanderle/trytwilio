@@ -26,7 +26,7 @@ $(function(){
     }
 
 	/* Connect to Twilio when we call this function. */
-	/*
+	
 	var call = function() {
 	    var toNum = '+17033891424';
 	    Twilio.Device.connect({
@@ -34,8 +34,8 @@ $(function(){
        		DemoType: "Say"
         });
 	}
-	*/
-	/*
+	
+	
 	var callPhone = function(){
 		var makeCall = $.post('/demo/requestDemoCall', 
 				{DemoType: "Gather"},
@@ -44,19 +44,19 @@ $(function(){
 				}
 			);
 	}
-	*/
+	
 
 	/* Connect to Twilio when we call this function. */
-    function callDemoClient() {
-	params = {"DemoType": "Say"};
-        Twilio.Device.connect(params)
+  var callDemoClient = function() {
+	    params = {"DemoType": "Say"};
+      Twilio.Device.connect(params)
     }
 
 	var hangup = function() {
 	    Twilio.Device.disconnectAll();
 	}
 
-	$('#callButton').on('click', callDemoClient);
+	$('#callButton').on('click', callPhone);
 	$('#hangupButton').on('click', hangup);
 	
 	/*
@@ -113,6 +113,7 @@ $(function(){
     //save it locally
     if (!supportsLocalStorage()) { return; }
     localStorage["phoneNumber"] = phone;
+    
     
   }
   
