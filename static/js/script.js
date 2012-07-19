@@ -32,6 +32,7 @@ $(function(){
         });
 	}
 	*/
+	/*
 	var callPhone = function(){
 		var makeCall = $.post('/demo/requestDemoCall', 
 				{DemoType: "Gather"},
@@ -40,17 +41,25 @@ $(function(){
 				}
 			);
 	}
+	*/
+
+	/* Connect to Twilio when we call this function. */
+    function callDemoClient() {
+	params = {"DemoType": "Say"};
+        Twilio.Device.connect(params)
+    }
 
 	var hangup = function() {
 	    Twilio.Device.disconnectAll();
 	}
 
-	$('#callButton').on('click', callPhone);
+	//$('#callButton').on('click', callDemoClient);
 	$('#hangupButton').on('click', hangup);
 	
 	/*
 		Validating TwiML stuff
 	*/
+
 	var validateTwml = function() {
 		var submittedTwiml = editor.getValue();
 		alert(submittedTwiml);
