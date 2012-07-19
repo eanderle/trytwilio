@@ -28,9 +28,9 @@ app = Flask(__name__)
 
 client = TwilioRestClient()
 
-connection = Connection(os.environ.get('MONGOLAB_URI'))
-connection.register([OutboundCall])
-db = connection['heroku_app5944498']
+#connection = Connection(os.environ.get('MONGOLAB_URI'))
+#connection.register([OutboundCall])
+#b = connection['heroku_app5944498']
 
 def getPage(page):
   capability = TwilioCapability(ACCOUNT_SID, AUTH_TOKEN)

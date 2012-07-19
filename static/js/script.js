@@ -2,25 +2,28 @@ $(function(){
   /*
 		Twilio Client stuff
 	*/
-	Twilio.Device.setup($('#token').val());
-	/* Let us know when the client is ready. */
-	Twilio.Device.ready(function (device) {
-
-	});
-
-	/* Report any errors on the screen */
-	Twilio.Device.error(function (error) {
-
-	});
-
-	Twilio.Device.disconnect(function (conn) {
-
-	});
-	Twilio.Device.incoming(function (conn) {
-
-	    // accept the incoming connection and start two-way audio
-	    conn.accept();
-	});
+	/* Create the Client with a Capability Token */
+    Twilio.Device.setup("{{ token }}");
+ 
+    /* Let us know when the client is ready. */
+    Twilio.Device.ready(function (device) {
+        alert("Ready");
+    });
+ 
+    /* Report any errors on the screen */
+    Twilio.Device.error(function (error) {
+    	alert("Error: "+ error.message)
+    });
+ 
+    Twilio.Device.connect(function (conn) {
+    	alert("Successfully established call")
+    });
+ 
+    /* Connect to Twilio when we call this function. */
+    function call() {
+	params = {"DemoType": "Play"};
+        Twilio.Device.connect(params)
+    }
 
 	/* Connect to Twilio when we call this function. */
 	/*
@@ -53,7 +56,7 @@ $(function(){
 	    Twilio.Device.disconnectAll();
 	}
 
-	//$('#callButton').on('click', callDemoClient);
+	$('#callButton').on('click', callDemoClient);
 	$('#hangupButton').on('click', hangup);
 	
 	/*
