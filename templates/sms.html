@@ -1,0 +1,88 @@
+{% extends "skeleton.html" %}
+
+{% block title %}Sms{% endblock %}
+
+{% block topmenu %}
+  <li><a href="/">&lt;Response&gt;</a></li>
+  <li><a href="#">&lt;Say&gt;</a></li>
+  <li><a href="#">&lt;Play&gt;</a></li>
+  <li><a href="#">&lt;Record&gt;</a></li>
+  <li><a href="#">&lt;Gather&gt;</a></li>
+  <li class="active"><a href="/sms">&lt;Sms&gt;</a></li>
+{% endblock %}
+
+{% block lesson %}
+  <h2>Lesson 6: &lt;Sms&gt;</h2><br/>
+  <p>The &lt;Sms&gt; verb sends a text to a phone number during a call. Go for it!</p>
+  <table class="table table-condensed table-striped">
+    <thead>
+      <tr>
+        <th>Attribute Name</th>
+        <th>Allowed Values</th>
+        <th>Default Values</th>
+      </tr>
+    </thead> 
+    <tbody>
+      <tr>
+        <td>to</td>
+        <td>phone number</td>
+        <td>see note</td>
+      </tr>     
+      <tr>
+        <td>from</td>
+        <td>phone number</td>
+        <td>see note</td>
+      </tr> 
+      <tr>
+        <td>action</td>
+        <td>relative or absolute URL</td>
+        <td>none</td>
+      </tr> 
+      <tr>
+        <td>method</td>
+        <td>GET, POST</td>
+        <td>POST</td>
+      </tr> 
+      <tr>
+        <td>statusCallback</td>
+        <td>relative or absolute URL</td>
+        <td>none</td>
+      </tr> 
+  </table>
+  <h3>to:</h3>
+  <p>The "to" attribute specifies what phone number to send the text to. Defaults to the called party.</p>
+  <br>   
+  <h3>from:</h3>
+  <p>The "from" attribute specifies which phone number the text will be sent from. This number must be a Twilio number, and it defaults to the calling party.</p>
+  <br>  
+  <h3>action:</h3>
+  <p>The "action" attribute is a URL that Twilio will make a request to when the text is sent (or fails). Twilio will pass the SmsStatus parameter, which can be ‘sent’ or ‘failed’. If this attribute is specified, TwiML will be fetched from this address and executed. Note: Any TwiML after an <Sms> verb specifying an action URL is unreachable.</p>
+  <br>  
+  <h3>method:</h3>
+  <p>How Twilio will notify your action URL, either GET or POST.</p>
+  <br>  
+  <h3>statusCallback:</h3>
+  <p>When the text is sent (or failed), Twilio will make a POST request to this URL to notify you. It will tell you if it worked in the <em>SmsStatus</em> parameter--either ‘sent’ or ‘failed’.</p>
+  <br>         
+{% endblock %}
+
+{% block staticdemo %}
+  <h2>Demo</h2>
+  <input type="hidden" id="token" value="{{params['token']}}">
+  <form class="form-inline">
+    <input type="text" placeholder="Your phone number" id="phoneNumber">
+    <button class="btn btn-primary" id="callButton">Call</button>
+    <button class="btn btn-error" id="hangupButton">Hangup</button>
+  </form>
+{% endblock %}
+
+{% block mission %}
+Write TwiML for a female voice to say "Howdy partner!" three times.
+{% endblock %}
+
+{% block progressbar %}
+  {{ super() }}
+  <style type="text/css">
+    .progress .bar { width: 20%; }
+  </style>
+{% endblock %}                    

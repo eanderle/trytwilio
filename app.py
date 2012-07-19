@@ -52,6 +52,46 @@ def say():
   }
   return render_template('say.html', params=params)
 
+@app.route('/play', methods=['GET', 'POST']) # Added route to test the HTML, feel free to change method
+def play():
+  capability = TwilioCapability(ACCOUNT_SID, AUTH_TOKEN)
+  capability.allow_client_outgoing(APP_SID)
+  token = capability.generate()
+  params = {
+    'token':token
+  }
+  return render_template('play.html', params=params)
+
+@app.route('/gather', methods=['GET', 'POST']) # Added route to test the HTML, feel free to change method
+def gather():
+  capability = TwilioCapability(ACCOUNT_SID, AUTH_TOKEN)
+  capability.allow_client_outgoing(APP_SID)
+  token = capability.generate()
+  params = {
+    'token':token
+  }
+  return render_template('gather.html', params=params)
+
+@app.route('/record', methods=['GET', 'POST']) # Added route to test the HTML, feel free to change method
+def record():
+  capability = TwilioCapability(ACCOUNT_SID, AUTH_TOKEN)
+  capability.allow_client_outgoing(APP_SID)
+  token = capability.generate()
+  params = {
+    'token':token
+  }
+  return render_template('record.html', params=params)
+
+@app.route('/sms', methods=['GET', 'POST']) # Added route to test the HTML, feel free to change method
+def sms():
+  capability = TwilioCapability(ACCOUNT_SID, AUTH_TOKEN)
+  capability.allow_client_outgoing(APP_SID)
+  token = capability.generate()
+  params = {
+    'token':token
+  }
+  return render_template('sms.html', params=params)
+
 @app.route('/testClient', methods=['GET','POST'])
 def testClient():
   application_sid = 'AP256035c642dcf6ad2f82119f86e4ea35'

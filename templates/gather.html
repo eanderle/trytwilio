@@ -1,0 +1,86 @@
+{% extends "skeleton.html" %}
+
+{% block title %}Gather{% endblock %}
+
+{% block topmenu %}
+  <li><a href="/">&lt;Response&gt;</a></li>
+  <li><a href="#">&lt;Say&gt;</a></li>
+  <li><a href="#">&lt;Play&gt;</a></li>
+  <li><a href="#">&lt;Record&gt;</a></li>
+  <li class="active"><a href="/gather">&lt;Gather&gt;</a></li>
+  <li><a href="#">&lt;Sms&gt;</a></li>
+{% endblock %}
+
+{% block lesson %}
+  <h2>Lesson 4: &lt;Gather&gt;</h2><br/>
+  <p>The &lt;Gather&gt;> verb receives input from the user’s dialpad. The input is sent to the url pointed to by the action attribute. Give it a go!</p>
+  <table class="table table-condensed table-striped">
+    <thead>
+      <tr>
+        <th>Attribute Name</th>
+        <th>Allowed Values</th>
+        <th>Default Values</th>
+      </tr>
+    </thead>
+   <tbody>
+      <tr>
+        <td>action</td>
+        <td>relative or absolute URL</td>
+        <td>current document URL</td>
+      </tr>
+      <tr>
+        <td>method</td>
+        <td>GET, POST</td>
+        <td>POST</td>
+      </tr>         
+      <tr>
+        <td>timeout</td>
+        <td>positive integer</td>
+        <td>5 seconds</td>
+      </tr>
+      <tr>
+        <td>finishOnKey</td>
+        <td>any digit, #, *</td>
+        <td>#</td>
+      </tr>
+      <tr>
+        <td>numDigits</td>
+        <td>integer &gt;= 1</td>
+        <td>unlimited</td>
+      </tr>   
+     </tbody> 
+ </table>
+ <h3>action:</h3>
+  <p>The action attribute is a URL that will handle the results of the &lt;Gather&gt; verb. This URL can be hit with either a GET or a POST request. &lt;Gather&gt; will pass this URL the digits recorded in the Digits parameter. The TwiML at this URL will then be fetched and executed. <strong>Note: In general, any TwiML after a &lt;Gather&gt; verb is unreachable. The only exception to this is if you have received no input after the amount of time specified in the timeout attribute (described below). In this case, execution will continue to the next verb.</strong></p>
+  <br>
+  <h3>method:</h3>
+  <p>The method attribute controls whether Twilio sends a GET or a POST to the action URL.</p>
+  <br>
+  <h3>timeout:</h3>
+  <p>The &lt;Gather&gt; verb will exit after this many seconds have elapsed.</p>
+  <h3>finishOnKey:</h3>
+  <p>The <Gather> verb will exit after this key has been pushed. This key is not included in the Digits parameter to the Action URL.</p>
+  <h3>numdigits:</h3>
+  <p>The <Gather> verb will exit after this many digits have been entered.</p>
+{% endblock %}
+
+{% block staticdemo %}
+  <h2>Demo</h2>
+  <input type="hidden" id="token" value="{{params['token']}}">
+  <form class="form-inline">
+    <input type="text" placeholder="Your phone number" id="phoneNumber">
+    <button class="btn btn-primary" id="callButton">Call</button>
+    <button class="btn btn-error" id="hangupButton">Hangup</button>
+  </form>
+{% endblock %}
+
+{% block mission %}
+Write a menu for people to hear 1) a cow moo, 2) a sheep baa, or 3) a horse neigh
+{% endblock %}
+
+{% block progressbar %}
+  {{ super() }}
+  <style type="text/css">
+    .progress .bar { width: 20%; }
+  </style>
+{% endblock %}

@@ -1,0 +1,107 @@
+{% extends "skeleton.html" %}
+
+{% block title %}Play{% endblock %}
+
+{% block topmenu %}
+  <li><a href="/">&lt;Response&gt;</a></li>
+  <li><a href="#">&lt;Say&gt;</a></li>
+  <li class="active"><a href="/play">&lt;Play&gt;</a></li>
+  <li><a href="#">&lt;Record&gt;</a></li>
+  <li><a href="#">&lt;Gather&gt;</a></li>
+  <li><a href="#">&lt;Sms&gt;</a></li>
+{% endblock %}
+
+{% block lesson %}
+<h2>Lesson 3: &lt;Play&gt;</h2></br>
+<p>The &lt;Play&gt; verb plays the file at the given url. Many different audio formats are supported--give it a shot!</p>
+<table class="table table-condensed table-striped">
+    <thead>
+      <tr>
+        <th>Attribute Name</th>
+        <th>Allowed Values</th>
+        <th>Default Values</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>loop</td>
+        <td>integer &gt;= 0</td>
+        <td>1</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3>Loop:</h3>
+  <p>The “loop” attribute controls how many times the audio is played. A value of 0 will cause the audio to loop until the call is hung up.</p>
+
+  <table class="table table-condensed table-striped">
+    <thead>
+      <tr>
+        <th>MIME type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>audio/mpeg</td>
+		<td>mp3 audio</td>
+      </tr>
+      <tr>
+        <td>audio/wav</td>
+		<td>wav format audio</td>
+      </tr>
+      <tr>
+        <td>audio/wave</td>
+		<td>wav format audio</td>
+      </tr>
+      <tr>
+        <td>audio/x-wav</td>
+		<td>wav format audio</td>
+      </tr>    
+      <tr>
+        <td>audio/aiff</td>
+		<td>audio interchange file format</td>
+      </tr>
+      <tr>
+        <td>audio/x-aifc</td>
+		<td>audio interchange file format</td>
+      </tr>
+      <tr>
+        <td>audio/x-aiff</td>
+		<td>audio interchange file format</td>
+      </tr>
+      <tr>
+        <td>audio/x-gsm</td>
+		<td>GSM audio format</td>
+      </tr>
+      <tr>
+        <td>audio/gsm</td>
+		<td>GSM audio format</td>
+      </tr>
+      <tr>
+        <td>audio/ulaw</td>
+		<td>μ-law audio format</td>
+      </tr> 
+    </tbody>
+  </table>
+{% endblock %}
+
+{% block staticdemo %}
+  <h2>Demo</h2>
+  <input type="hidden" id="token" value="{{params['token']}}">
+  <form class="form-inline">
+    <input type="text" placeholder="Your phone number" id="phoneNumber">
+    <button class="btn btn-primary" id="callButton">Call</button>
+    <button class="btn btn-error" id="hangupButton">Hangup</button>
+  </form>
+{% endblock %}
+
+{% block mission %}
+Upload an mp3 file from your computer to a publicly accessible link. Write TwiML to play this audio over the phone.
+{% endblock %}
+
+{% block progressbar %}
+  {{ super() }}
+  <style type="text/css">
+    .progress .bar { width: 20%; }
+  </style>
+{% endblock %}
