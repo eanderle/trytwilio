@@ -80,27 +80,26 @@ def recordingCallback():
     r.say('Something went wrong')
     return str(r)
 
+def getDemoTwiml(verb):
+  r = twiml.Response()
+  if verb == 'say':
+    r.say('Welcome to Twilio. This is an example of the Say verb.')
+  elif verb == 'play':
+    r.say('You are about to hear Banana Phone.')
+    r.play(url='http://tw.spurint.org/thx/banana-phone.mp3')
+  elif verb == 'gather':
+    with r.gather(action='http://trytwilio.herokuapp.com/demo/callback', numDigits=1, timeout=10, method='GET') as g:
+      g.say('Press 1 to hear an example of the Say verb. Press 2 to hear Banana Phone.')
+  elif verb == 'record':
+    r.say('After the beep, make your recording')
+    r.record(action='http://trytwilio.herokuapp.com/demo/recordingCallback', method='GET')
+  else:
+    return 'failure'
+  return str(r)
+  
 @app.route('/client/getTwiml', methods=['GET','POST'])
 def requestTwiml():
-  try:
-    r = twiml.Response()
-    if request.values['verb'].lower() == 'say':
-      r.say('Welcome to Twilio. This is an example of the Say verb.')
-    elif request.values['verb'].lower() == 'play':
-      r.say('You are about to hear Banana Phone.')
-      r.play(url='http://tw.spurint.org/thx/banana-phone.mp3')
-    elif request.values['verb'].lower() == 'gather':
-      with r.gather(action='http://trytwilio.herokuapp.com/demo/callback', numDigits=1, timeout=10, method='GET') as g:
-        g.say('Press 1 to hear an example of the Say verb. Press 2 to hear Banana Phone.')
-    elif request.values['verb'].lower() == 'record':
-      r.say('After the beep, make your recording')
-      r.record(action='http://trytwilio.herokuapp.com/demo/recordingCallback', method='GET')
-    else:
-      return 'failure'
-    return str(r)
-  except Exception:
-    r.say('Something went wrong')
-    return str(r)
+  return getDemoTwiml(request.values['verb'].toLower())
 
 @app.route('/handleInput')
 def requestTwimlForGather():
@@ -127,7 +126,10 @@ def requestCall():
 
       sys.stderr.write('TwimlBody: ' + request.values['twimlBody'] + '\n')
       ip = request.remote_addr
-      twimlBody = request.values['twimlBody']
+      if request.values['demo'] == 'true':
+        twimlBody = getDemoTwiml(request.values['verb'].toLower())
+      else:
+        twimlBody = request.values['twimlBody']
 
       url = 'http://trytwilio.herokuapp.com/requestCall?' + urlencode({'twimlBody':twimlBody})
 
