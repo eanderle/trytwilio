@@ -32,6 +32,11 @@ connection = Connection(os.environ.get('MONGOLAB_URI'))
 connection.register([OutboundCall])
 db = connection['heroku_app5944498']
 
+@app.route('/', methods=['GET', 'POST'])
+def hello():
+  return render_template('index.html')
+
+@app.route('/lesson/<page>', methods=['GET', 'POST'])
 def getPage(page):
   capability = TwilioCapability(ACCOUNT_SID, AUTH_TOKEN)
   capability.allow_client_outgoing(APP_SID)
@@ -39,31 +44,7 @@ def getPage(page):
   params = {
     'token':token
   }
-  return render_template(page, params=params)
-
-@app.route('/', methods=['GET', 'POST'])
-def hello():
-  return getPage('index.html')
-
-@app.route('/say', methods=['GET', 'POST'])
-def say():
-  return getPage('say.html')
-
-@app.route('/play', methods=['GET', 'POST']) # Added route to test the HTML, feel free to change method
-def play():
-  return getPage('play.html')
-
-@app.route('/gather', methods=['GET', 'POST']) # Added route to test the HTML, feel free to change method
-def gather():
-  return getPage('gather.html')
-
-@app.route('/record', methods=['GET', 'POST']) # Added route to test the HTML, feel free to change method
-def record():
-  return getPage('record.html')
-
-@app.route('/sms', methods=['GET', 'POST']) # Added route to test the HTML, feel free to change method
-def sms():
-  return getPage('sms.html')
+  return render_template(page + '.html', params=params)
 
 @app.route('/demo/callback', methods=['GET','POST'])
 def callback():
