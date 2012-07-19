@@ -2,6 +2,7 @@ import os
 import sys
 import re
 import datetime
+import traceback
 from flask import Flask, request, render_template
 from urllib import urlencode
 from twilio.rest import TwilioRestClient
@@ -55,75 +56,69 @@ def getPage(page):
 def callback():
   try:
     r = twiml.Response()
-    if request.values["Digits"] == "1":
-      r.say("Welcome to Twilio, this is an example of the say verb")
+    if request.values['Digits'] == '1':
+      r.say('Welcome to Twilio. This is an example of the Say verb.')
       return str(r)
-    elif request.values["Digits"] == "2":
-      r.play(url="http://tw.spurint.org/thx/banana-phone.mp3")
+    elif request.values['Digits'] == '2':
+      r.play(url='http://tw.spurint.org/thx/banana-phone.mp3')
       return str(r)
     else:
-      with r.gather(action="http://trytwilio.herokuapp.com/demo/callback", numDigits=1, timeout=10, method='GET') as g:
-        g.say("You suck, lets try this again. Press 1 to hear the previous say message, press 2 to hear banana phone again")
+      with r.gather(action='http://trytwilio.herokuapp.com/demo/callback', numDigits=1, timeout=10, method='GET') as g:
+        g.say("Let's try this again. Press 1 to hear an example of the Say verb. Press 2 to hear Banana Phone.")
       return str(r)
   except Exception:
-      r.say("Something went wrong")
+      r.say('Something went wrong')
       return str(r)
 
 @app.route('/demo/recordingCallback', methods=['GET','POST'])
 def recordingCallback():
   try:
     r = twiml.Response()
-    r.say("Here is your recording")
-    r.play(url=request.values["RecordingUrl"])
+    r.say('Here is your recording.')
+    r.play(url=request.values['RecordingUrl'])
     return str(r)
   except:
-    r.say("Something went wrong")
+    r.say('Something went wrong')
     return str(r)
 
-@app.route('/client/getTwiml', methods=['GET','POST'])
-def requestTwiml():
-  try:
-    r = twiml.Response()
-    if request.values["DemoType"] == "Say":
-      #sys.stderr.write("Say demo type reached\n")
-      r.say("Welcome to Twilio, this is an example of the say verb")
-      return str(r)
-    elif request.values["DemoType"] == "Play":
-      #sys.stderr.write("Play type reached\n")
-      r.say("You are about to hear the one and only banana phone")
-      r.play(url="http://tw.spurint.org/thx/banana-phone.mp3")
-      return str(r)
-    elif request.values["DemoType"] == "Gather":
-      with r.gather(action="http://trytwilio.herokuapp.com/demo/callback", numDigits=1, timeout=10, method='GET') as g:
-        g.say("Press 1 to hear the previous say message, press 2 to hear banana phone again")
-      return str(r)
-    elif request.values["DemoType"] == "Record":
-      r.say("After the beep, make your recording")
-      r.record(action="http://trytwilio.herokuapp.com/demo/recordingCallback", method='GET')
-      return str(r)
-    else:
-      #sys.stderr.write("Nothing reached\n")
-      return "Nope"
-  except Exception:
-    #sys.stderr.write(e)
-      r.say("Something went wrong")
-      return str(r)
+def getDemoTwiml(verb):
+  r = twiml.Response()
+  if verb == 'say':
+    r.say('Welcome to Twilio. This is an example of the Say verb.')
+  elif verb == 'play':
+    r.say('You are about to hear Banana Phone.')
+    r.play(url='http://tw.spurint.org/thx/banana-phone.mp3')
+  elif verb == 'gather':
+    with r.gather(action='http://trytwilio.herokuapp.com/demo/callback', numDigits=1, timeout=10, method='GET') as g:
+      g.say('Press 1 to hear an example of the Say verb. Press 2 to hear Banana Phone.')
+  elif verb == 'record':
+    r.say('After the beep, make your recording')
+    r.record(action='http://trytwilio.herokuapp.com/demo/recordingCallback', method='GET')
+  elif verb == 'sms':
+    r.say('You are about to get sent an sms')
+    r.sms('This is a test sms', to='+17033891424', from_='+17862458451')
+  else:
+    return 'failure'
+  return str(r)
 
+# Voice URL for our client app
+@app.route('/client/getTwiml', methods=['GET','POST'])
+def getClientTwiml():
+  twiml = ''
+  if request.values['demo'].lower() == 'true':
+    twiml = getDemoTwiml(request.values['verb'].lower())
+  else:
+    twiml = request.values['twimlBody']
+  return twiml
+
+# Endpoint for different options in the <Gather> tutorial
 @app.route('/handleInput')
 def requestTwimlForGather():
   s = request.values['twimlBody' + request.values['Digits']]
   sys.stderr.write(s + '\n')
   return s
 
-@app.route('/demo/requestDemoCall', methods=['GET', 'POST'])
-def requestDemoCall():
-  try:
-    url = 'http://trytwilio.herokuapp.com/client/getTwiml?' + urlencode({'DemoType':request.values["DemoType"]})
-    call = client.calls.create(to="+17033891424", from_=FROM_NUMBER, url=url, method='GET')
-    return call.sid
-  except:
-    return "Shit failed"
-
+# Endpoint to make an outbound call (Demo or User TwiML)
 @app.route('/requestCall', methods=['GET', 'POST'])
 def requestCall():
   try:
@@ -141,9 +136,12 @@ def requestCall():
       # Else it's some other country (we assume) so just add a plus
       toNumber = ('+1' if len(toNumber) == 10 else '+') + toNumber
 
-      sys.stderr.write('TwimlBody: ' + request.values['twimlBody'] + '\n')
       ip = request.remote_addr
-      twimlBody = request.values['twimlBody']
+      if request.values['demo'].lower() == 'true':
+        twimlBody = getDemoTwiml(request.values['verb'].lower())
+      else:
+        sys.stderr.write('TwimlBody: ' + request.values['twimlBody'] + '\n')
+        twimlBody = request.values['twimlBody']
 
       url = 'http://trytwilio.herokuapp.com/requestCall?' + urlencode({'twimlBody':twimlBody})
 
@@ -184,10 +182,11 @@ def requestCall():
 
       return 'success'
   except Exception:
+    traceback.print_exc()
     return 'failure'
 
 if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 5000))
+    port = int(os.environ.get('PORT', 5000))
     if port == 5000:
         app.debug = True
     app.run(host='0.0.0.0', port=port)
