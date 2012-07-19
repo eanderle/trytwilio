@@ -15,38 +15,31 @@
 {% block verb %}say{% endblock %}
 
 {% block lesson %}
-
-        <div class="span9 columns">
-          <h2>Example accordion</h2>
-          <p>Using the collapse plugin, we built a simple accordion style widget:</p>
-
-          <table class="table table-condensed table-striped">
-            <thead>
-              <tr>
-                <th>Attribute Name</th>
-                <th>Allowed Values</th>
-                <th>Default Values</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <a class="attribute-names" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-                    voice</a>
-                </td>
-                <td>man, woman</td>
-                <td>man</td>
-              </tr>
-              <tr id="collapseOne" class="attribute-description collapse">
-                 The voice attribute controls whether the text is read with a male voice or a female voice.
-              </tr>
+  <h2>Lesson 1: &lt;Say&gt;</h2><br/>
+  <p>The &lt;Say&gt; verb converts text into speech that will be played in your call. Try it out!</p>
+          <div class="accordion" id="accordion2">
+            <div class="accordion-heading">
+                <a data-parent="#accordion2">
+                  <table><tr><td>Attribute Name</td><td>Allowed Values</td><td>Default Vaues</td></tr></table>
+                </a>
+            </div>
             <div class="accordion-group">
               <div class="accordion-heading">
                 <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-                voice
+                  voice
                 </a>
               </div>
-
+              <div id="collapseOne" class="accordion-body collapse in">
+                <div class="accordion-inner">
+                  The voice attribute controls whether the text is read with a male voice or a female voice.<br/>
+                  <table class="table table-condensed table-striped">
+                    <thead>
+                      <tr><th>Attribute Name</th><th>Allowed Values</th><th>Default Values</th></tr>
+                    </thead>
+                    <tr><td>voice</td><td>man, woman</td><td>man</td></tr>
+                  </table>
+                </div>
+              </div>
             </div>
             <div class="accordion-group">
               <div class="accordion-heading">
@@ -54,63 +47,48 @@
                   language
                 </a>
               </div>
-              <div id="collapseTwo" class="accordion-body collapse">
+              <div id="collapseOne" class="accordion-body collapse in">
+                <div class="accordion-inner">
+                  The language attribute controls what language’s accent and pronunciations will be used to read the text.<br/>
+                  <table class="table table-condensed table-striped">
+                    <thead>
+                      <tr><th>Attribute Name</th><th>Allowed Values</th><th>Default Values</th></tr>
+                    </thead>
+                    <tr><td>language</td><td>en, en-gb, es, fr, de</td><td>en</td>
+                  </table>
+                </div>
+              </div>
+              <div id="collapseTwo" class="accordion-body collapse in">
                 <div class="accordion-inner">
                   The language attribute controls what language’s accent and pronunciations will be used to read the text.
+                  <table class="table table-condensed table-striped">
+                    <thead>
+                      <tr><th>Attribute Name</th><th>Allowed Values</th><th>Default Values</th></tr>
+                    </thead>
+                    <tr><td>language</td><td>en, en-gb, es, fr, de</td><td>en</td>
+                  </table>                  
                 </div>
               </div>
             </div>
             <div class="accordion-group">
               <div class="accordion-heading">
                 <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
-                  loop
+                 loop
                 </a>
               </div>
-              <div id="collapseThree" class="accordion-body collapse">
+              <div id="collapseThree" class="accordion-body collapse in">
                 <div class="accordion-inner">
-                  The "loop" attribute controls how many times the text is repeated. A value of 0 will cause the text to loop until the call is hung up.
+                  The loop attribute controls how many times the text is repeated. A value of 0 will cause the text to loop until the call is hung up. </br>
+                  <table class="table table-condensed table-striped">
+                    <thead>
+                      <tr><th>Attribute Name</th><th>Allowed Values</th><th>Default Values</th></tr>
+                    </thead>
+                    <tr><td>loop</td><td>integer &gt;=0</td><td>1</td>
+                  </table>
                 </div>
               </div>
             </div>
-            </tbody>
-          </table>
-
-  <h2>Lesson 1: &lt;Say&gt;</h2><br/>
-  <p>The &lt;Say&gt; verb converts text into speech that will be played in your call. Try it out!</p>
-  <table class="table table-condensed table-striped">
-      <thead>
-      <tr>
-        <th>Attribute Name</th>
-        <th>Allowed Values</th>
-        <th>Default Values</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>voice</td>
-        <td>man, woman</td>
-        <td>man</td>
-      </tr>
-      <tr>
-        <td>language</td>
-        <td>en, en-gb, es, fr, de</td>
-        <td>en</td>
-      </tr>
-      <tr>
-        <td>loop</td>
-        <td>integer &gt;=0</td>
-        <td>1</td>
-      </tr>
-    </tbody>
-  </table>
-  <h3>voice:</h3>
-  <p>The voice attribute controls whether the text is read with a male voice or a female voice.</p>
-  <br>
-  <h3>language:</h3>
-  <p>The language attribute controls what language’s accent and pronunciations will be used to read the text.</p>
-  <br>
-  <h3>loop:</h3>
-  <p>The loop attribute controls how many times the text is repeated. A value of 0 will cause the text to loop until the call is hung up.</p>
+          </div>
 {% endblock %}
 
 {% block staticdemo %}
