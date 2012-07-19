@@ -3,7 +3,8 @@ $(function(){
 		Twilio Client stuff
 	*/
 	/* Create the Client with a Capability Token */
-    Twilio.Device.setup("{{ token }}");
+	  var clientToken = $("#token").val();
+    Twilio.Device.setup(clientToken);
  
     /* Let us know when the client is ready. */
     Twilio.Device.ready(function (device) {
@@ -20,18 +21,22 @@ $(function(){
     });
  
     /* Connect to Twilio when we call this function. */
-    function call() {
-	params = {"DemoType": "Play"};
+    var call = function() {
+	      params = {
+	        "verb": "play",
+	        "demo": "true"
+	      };
         Twilio.Device.connect(params)
     }
 
 	/* Connect to Twilio when we call this function. */	
 	
 	var callPhone = function(){
+    var verbType = $("#verb").val();
 		var makeCall = $.post('/requestCall', 
 				{
 				  To: '+17863029603',
-				  verb: "say",
+				  verb: verbType,
 				  demo: 'true'
 				  },
 				function(data) {
@@ -44,7 +49,7 @@ $(function(){
 	    Twilio.Device.disconnectAll();
 	}
 
-	$('#callButton').on('click', callPhone);
+	$('#callButton').on('click', call);
 	$('#hangupButton').on('click', hangup);
 	
 	/*
