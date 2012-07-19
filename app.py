@@ -99,7 +99,7 @@ def getDemoTwiml(verb):
   
 @app.route('/client/getTwiml', methods=['GET','POST'])
 def requestTwiml():
-  return getDemoTwiml(request.values['verb'].toLower())
+  return getDemoTwiml(request.values['verb'].lower())
 
 @app.route('/handleInput')
 def requestTwimlForGather():
@@ -126,7 +126,7 @@ def requestCall():
 
       ip = request.remote_addr
       if request.values['demo'] == 'true':
-        twimlBody = getDemoTwiml(request.values['verb'].toLower())
+        twimlBody = getDemoTwiml(request.values['verb'].lower())
       else:
         sys.stderr.write('TwimlBody: ' + request.values['twimlBody'] + '\n')
         twimlBody = request.values['twimlBody']
