@@ -48,7 +48,8 @@ def say():
   capability.allow_client_outgoing(APP_SID)
   token = capability.generate()
   params = {
-    'token':token
+    'token': token,
+    'verb': 'say'
   }
   return render_template('say.html', params=params)
 
@@ -58,7 +59,8 @@ def play():
   capability.allow_client_outgoing(APP_SID)
   token = capability.generate()
   params = {
-    'token':token
+    'token': token,
+    'verb': 'play'
   }
   return render_template('play.html', params=params)
 
@@ -68,7 +70,8 @@ def gather():
   capability.allow_client_outgoing(APP_SID)
   token = capability.generate()
   params = {
-    'token':token
+    'token': token,
+    'verb': 'gather'
   }
   return render_template('gather.html', params=params)
 
@@ -78,7 +81,8 @@ def record():
   capability.allow_client_outgoing(APP_SID)
   token = capability.generate()
   params = {
-    'token':token
+    'token': token,
+    'verb': 'record'
   }
   return render_template('record.html', params=params)
 
@@ -88,7 +92,8 @@ def sms():
   capability.allow_client_outgoing(APP_SID)
   token = capability.generate()
   params = {
-    'token':token
+    'token': token,
+    'verb': 'sms'
   }
   return render_template('sms.html', params=params)
 
