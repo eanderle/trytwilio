@@ -63,7 +63,7 @@ def testClient():
   return render_template("client.html", token=token)
 
 @app.route('/demo/callback', methods=['GET','POST'])
-def playCallback():
+def callback():
   try:
     r = twiml.Response()
     if request.values["Digits"] == "1":
@@ -79,6 +79,17 @@ def playCallback():
   except Exception as e:
       r.say("Something went wrong")
       return str(r)
+
+@app.route('/demo/recordingCallback', methods=['GET','POST'])
+def callback():
+  try:
+    r = twiml.Response()
+    r.say("Here is your recording")
+    r.play(url=request.values["RecordingUrl"])
+    return str(r)
+  except:
+    r.say("Something went wrong")
+    return str(r)
 
 @app.route('/client/getTwiml', methods=['GET','POST'])
 def requestTwiml():
@@ -97,6 +108,10 @@ def requestTwiml():
       with r.gather(action="http://trytwilio.herokuapp.com/demo/callback", numDigits=1, timeout=10, method='GET') as g:
         g.say("Press 1 to hear the previous say message, press 2 to hear banana phone again")
       return str(r)
+    elif request.values["DemoType"] == "Record":
+      r.say("After the beep, make your recording")
+      r.record(action="http://trytwilio.herokuapp.com/demo/recordingCallback", method='GET')
+      return str(r)
     else:
       #sys.stderr.write("Nothing reached\n")
       return "Nope"
@@ -114,7 +129,7 @@ def requestTwimlForGather():
 @app.route('/demo/requestDemoCall', methods=['GET', 'POST'])
 def requestDemoCall():
   try:
-    url = 'http://trytwilio.herokuapp.com/client/getTwiml?' + urlencode({'DemoType':"Gather"})
+    url = 'http://trytwilio.herokuapp.com/client/getTwiml?' + urlencode({'DemoType':"Record"})
     call = client.calls.create(to="+17033891424", from_="+17862458451", url=url, method='GET')
     return call.sid
   except:
