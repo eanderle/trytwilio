@@ -2,39 +2,43 @@ $(function(){
   /*
 		Twilio Client stuff
 	*/
-	Twilio.Device.setup($('#token').val());
-	/* Let us know when the client is ready. */
-	Twilio.Device.ready(function (device) {
+	/* Create the Client with a Capability Token */
+	  var clientToken = $("#token").val();
+    Twilio.Device.setup(clientToken);
+ 
+    /* Let us know when the client is ready. */
+    Twilio.Device.ready(function (device) {
+        alert("Ready");
+    });
+ 
+    /* Report any errors on the screen */
+    Twilio.Device.error(function (error) {
+    	alert("Error: "+ error.message)
+    });
+ 
+    Twilio.Device.connect(function (conn) {
+    	alert("Successfully established call")
+    });
+ 
+    /* Connect to Twilio when we call this function. */
+    var call = function() {
+	      params = {
+	        "verb": "play",
+	        "demo": "true"
+	      };
+        Twilio.Device.connect(params)
+    }
 
-	});
-
-	/* Report any errors on the screen */
-	Twilio.Device.error(function (error) {
-
-	});
-
-	Twilio.Device.disconnect(function (conn) {
-
-	});
-	Twilio.Device.incoming(function (conn) {
-
-	    // accept the incoming connection and start two-way audio
-	    conn.accept();
-	});
-
-	/* Connect to Twilio when we call this function. */
-	/*
-	var call = function() {
-	    var toNum = '+17033891424';
-	    Twilio.Device.connect({
-            To: toNum,
-       		DemoType: "Say"
-        });
-	}
-	*/
+	/* Connect to Twilio when we call this function. */	
+	
 	var callPhone = function(){
-		var makeCall = $.post('/demo/requestDemoCall', 
-				{DemoType: "Gather"},
+    var verbType = $("#verb").val();
+		var makeCall = $.post('/requestCall', 
+				{
+				  To: '+17863029603',
+				  verb: verbType,
+				  demo: 'true'
+				  },
 				function(data) {
 					alert("Made call:" + data);
 				}
@@ -45,12 +49,13 @@ $(function(){
 	    Twilio.Device.disconnectAll();
 	}
 
-	$('#callButton').on('click', callPhone);
+	$('#callButton').on('click', call);
 	$('#hangupButton').on('click', hangup);
 	
 	/*
 		Validating TwiML stuff
 	*/
+
 	var validateTwml = function() {
 		var submittedTwiml = editor.getValue();
 		var Module = {
@@ -65,7 +70,8 @@ $(function(){
 			var makeCall = $.post('/requestCall', {
 			    To: "+17863029603",
 				  twimlBody: submittedTwiml,
-				  verb: verbType
+				  verb: verbType,
+				  demo: 'false'
 			  },
 				function(data) {
 					alert("Made call:" + data);
@@ -100,7 +106,8 @@ $(function(){
     }
     //save it locally
     if (!supportsLocalStorage()) { return; }
-    localStorage["phoneNumber"] = phone;
+    localStorage['phoneNumber'] = phone;
+    localStorage['lesson'] = 'say';
     
   }
   

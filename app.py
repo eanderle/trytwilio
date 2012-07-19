@@ -2,6 +2,7 @@ import os
 import sys
 import re
 import datetime
+import traceback
 from flask import Flask, request, render_template
 from urllib import urlencode
 from twilio.rest import TwilioRestClient
@@ -178,6 +179,7 @@ def requestCall():
 
       return 'success'
   except Exception:
+    traceback.print_exc()
     return 'failure'
 
 if __name__ == '__main__':
