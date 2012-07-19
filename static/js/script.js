@@ -1,29 +1,30 @@
+
 $(function(){
   /*
 		Twilio Client stuff
 	*/
-	/* Create the Client with a Capability Token */
-    Twilio.Device.setup("{{ token }}");
- 
-    /* Let us know when the client is ready. */
-    Twilio.Device.ready(function (device) {
-        alert("Ready");
-    });
- 
-    /* Report any errors on the screen */
-    Twilio.Device.error(function (error) {
-    	alert("Error: "+ error.message)
-    });
- 
-    Twilio.Device.connect(function (conn) {
-    	alert("Successfully established call")
-    });
- 
-    /* Connect to Twilio when we call this function. */
-    function call() {
-	params = {"DemoType": "Play"};
-        Twilio.Device.connect(params)
-    }
+	Twilio.Device.setup($('#token').val());
+    	alert("Setting up client")
+	//Twilio.Device.setup($('#token').val());
+	/* Let us know when the client is ready. */
+	Twilio.Device.ready(function (device) {
+			alert("Client is ready")
+	});
+
+	/* Report any errors on the screen */
+	Twilio.Device.error(function (error) {
+			alert("Client error!")
+	});
+
+	Twilio.Device.disconnect(function (conn) {
+			alert("Disconnected")
+
+	});
+	Twilio.Device.incoming(function (conn) {
+
+	    // accept the incoming connection and start two-way audio
+	    conn.accept();
+	});
 
 	/* Connect to Twilio when we call this function. */
 	/*
@@ -45,18 +46,23 @@ $(function(){
 			);
 	}
 	*/
-
-	/* Connect to Twilio when we call this function. */
-    function callDemoClient() {
-	params = {"DemoType": "Say"};
+	function callDemoClient(){
+		params = {"DemoType": "Say"};
         Twilio.Device.connect(params)
-    }
+	} 
+	/* Connect to Twilio when we call this function. */
+	/*
+	var callDemoClient = function(){
+		params = {"DemoType": "Say"};
+        Twilio.Device.connect(params)
+	}
+	*/
 
 	var hangup = function() {
 	    Twilio.Device.disconnectAll();
 	}
 
-	$('#callButton').on('click', callDemoClient);
+	//$('#callButton').on('click', callDemoClient);
 	$('#hangupButton').on('click', hangup);
 	
 	/*
