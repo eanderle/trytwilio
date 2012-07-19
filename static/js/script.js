@@ -1,7 +1,9 @@
+
 $(function(){
   /*
 		Twilio Client stuff
 	*/
+
 	/* Create the Client with a Capability Token */
 	  var clientToken = $("#token").val();
     Twilio.Device.setup(clientToken);
