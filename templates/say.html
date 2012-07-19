@@ -9,12 +9,73 @@
   <li><a href="/lesson/record">&lt;Record&gt;</a></li>
   <li><a href="/lesson/gather">&lt;Gather&gt;</a></li>
   <li><a href="/lesson/sms">&lt;Sms&gt;</a></li>
+
 {% endblock %}
 
 {% block verb %}say{% endblock %}
 
 {% block lesson %}
-  <h2>Lesson 2: &lt;Say&gt;</h2><br/>
+
+        <div class="span9 columns">
+          <h2>Example accordion</h2>
+          <p>Using the collapse plugin, we built a simple accordion style widget:</p>
+
+          <table class="table table-condensed table-striped">
+            <thead>
+              <tr>
+                <th>Attribute Name</th>
+                <th>Allowed Values</th>
+                <th>Default Values</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <a class="attribute-names" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+                    voice</a>
+                </td>
+                <td>man, woman</td>
+                <td>man</td>
+              </tr>
+              <tr id="collapseOne" class="attribute-description collapse">
+                 The voice attribute controls whether the text is read with a male voice or a female voice.
+              </tr>
+            <div class="accordion-group">
+              <div class="accordion-heading">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+                voice
+                </a>
+              </div>
+
+            </div>
+            <div class="accordion-group">
+              <div class="accordion-heading">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+                  language
+                </a>
+              </div>
+              <div id="collapseTwo" class="accordion-body collapse">
+                <div class="accordion-inner">
+                  The language attribute controls what language’s accent and pronunciations will be used to read the text.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-group">
+              <div class="accordion-heading">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
+                  loop
+                </a>
+              </div>
+              <div id="collapseThree" class="accordion-body collapse">
+                <div class="accordion-inner">
+                  The "loop" attribute controls how many times the text is repeated. A value of 0 will cause the text to loop until the call is hung up.
+                </div>
+              </div>
+            </div>
+            </tbody>
+          </table>
+
+  <h2>Lesson 1: &lt;Say&gt;</h2><br/>
   <p>The &lt;Say&gt; verb converts text into speech that will be played in your call. Try it out!</p>
   <table class="table table-condensed table-striped">
       <thead>
