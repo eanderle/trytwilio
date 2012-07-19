@@ -4,11 +4,11 @@
 
 {% block topmenu %}
   <li class="active"><a href="/">&lt;Response&gt;</a></li>
-  <li><a href="/say">&lt;Say&gt;</a></li>
-  <li><a href="#">&lt;Play&gt;</a></li>
-  <li><a href="#">&lt;Record&gt;</a></li>
-  <li><a href="#">&lt;Gather&gt;</a></li>
-  <li><a href="#">&lt;Sms&gt;</a></li>
+  <li><a href="/lesson/say">&lt;Say&gt;</a></li>
+  <li><a href="/lesson/play">&lt;Play&gt;</a></li>
+  <li><a href="/lesson/record">&lt;Record&gt;</a></li>
+  <li><a href="/lesson/gather">&lt;Gather&gt;</a></li>
+  <li><a href="/lesson/sms">&lt;Sms&gt;</a></li>
 {% endblock %}
 
 {% block lesson %}
@@ -23,6 +23,10 @@
 {% block staticdemo %}
   <h2>Demo Time</h2>
   <p>Throughout TryTwilio, there will be a demo in this area which will give you an example of what the particular TwiML verb does.</p>
+  <h3>How should we test?</h3>
+  <p>This wouldn't be cool unless you could test out code, right? Well, because twilio focuses on telecommunication, we can <em>call</em> your phone when you want to try out the demos or hear your own creations. If you'd like to fully experience TryTwilio, then this is recommended. Why not enter your 10-digit phone number here?</p>
+  <input class="input-xlarge" id="phoneNumber" placeholder="(555)555-5555" type="tel"/>
+  <button class="btn btn-info" id="phone-number-register">
 {% endblock %}
 
 {% block twimlbox %}
