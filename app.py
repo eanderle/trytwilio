@@ -2,6 +2,7 @@ import os
 import sys
 import re
 import datetime
+import traceback
 from flask import Flask, request, render_template
 from urllib import urlencode
 from twilio.rest import TwilioRestClient
@@ -28,9 +29,9 @@ app = Flask(__name__)
 
 client = TwilioRestClient()
 
-#connection = Connection(os.environ.get('MONGOLAB_URI'))
-#connection.register([OutboundCall])
-#b = connection['heroku_app5944498']
+connection = Connection(os.environ.get('MONGOLAB_URI'))
+connection.register([OutboundCall])
+db = connection['heroku_app5944498']
 
 @app.route('/', methods=['GET', 'POST'])
 def hello():
@@ -179,6 +180,7 @@ def requestCall():
 
       return 'success'
   except Exception:
+    traceback.print_exc()
     return 'failure'
 
 if __name__ == '__main__':
