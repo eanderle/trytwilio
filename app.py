@@ -33,19 +33,24 @@ connection = Connection(os.environ.get('MONGOLAB_URI'))
 connection.register([OutboundCall])
 db = connection['heroku_app5944498']
 
+lessons = ['say', 'play', 'gather', 'record', 'dial']
+
 @app.route('/', methods=['GET', 'POST'])
 def hello():
   return render_template('index.html')
 
 @app.route('/lesson/<page>', methods=['GET', 'POST'])
 def getPage(page):
-  capability = TwilioCapability(ACCOUNT_SID, AUTH_TOKEN)
-  capability.allow_client_outgoing(APP_SID)
-  token = capability.generate()
-  params = {
-    'token':token
-  }
-  return render_template(page + '.html', params=params)
+  if page in lessons:
+    capability = TwilioCapability(ACCOUNT_SID, AUTH_TOKEN)
+    capability.allow_client_outgoing(APP_SID)
+    token = capability.generate()
+    params = {
+      'token':token
+    }
+    return render_template(page + '.html', params=params)
+  else:
+    return render_template('notFound.html')
 
 @app.route('/demo/callback', methods=['GET','POST'])
 def callback():
