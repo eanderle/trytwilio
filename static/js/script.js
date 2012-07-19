@@ -31,7 +31,8 @@ $(function(){
 		var makeCall = $.post('/requestCall', 
 				{
 				  To: '+17863029603',
-				  verb: "Say"
+				  verb: "say",
+				  demo: 'true'
 				  },
 				function(data) {
 					alert("Made call:" + data);
@@ -64,7 +65,8 @@ $(function(){
 			var makeCall = $.post('/requestCall', {
 			    To: "+17863029603",
 				  twimlBody: submittedTwiml,
-				  verb: verbType
+				  verb: verbType,
+				  demo: 'false'
 			  },
 				function(data) {
 					alert("Made call:" + data);
@@ -99,8 +101,8 @@ $(function(){
     }
     //save it locally
     if (!supportsLocalStorage()) { return; }
-    localStorage["phoneNumber"] = phone;
-    
+    localStorage['phoneNumber'] = phone;
+    localStorage['lesson'] = 'say';
     
   }
   
