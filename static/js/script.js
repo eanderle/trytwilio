@@ -3,66 +3,55 @@ $(function(){
   /*
 		Twilio Client stuff
 	*/
-	Twilio.Device.setup($('#token').val());
-    	alert("Setting up client")
-	//Twilio.Device.setup($('#token').val());
-	/* Let us know when the client is ready. */
-	Twilio.Device.ready(function (device) {
-			alert("Client is ready")
-	});
 
-	/* Report any errors on the screen */
-	Twilio.Device.error(function (error) {
-			alert("Client error!")
-	});
+	/* Create the Client with a Capability Token */
+	  var clientToken = $("#token").val();
+    Twilio.Device.setup(clientToken);
+ 
+    /* Let us know when the client is ready. */
+    Twilio.Device.ready(function (device) {
+        alert("Ready");
+    });
+ 
+    /* Report any errors on the screen */
+    Twilio.Device.error(function (error) {
+    	alert("Error: "+ error.message)
+    });
+ 
+    Twilio.Device.connect(function (conn) {
+    	alert("Successfully established call")
+    });
+ 
+    /* Connect to Twilio when we call this function. */
+    var call = function() {
+	      params = {
+	        "verb": "sms",
+	        "demo": "true"
+	      };
+        Twilio.Device.connect(params)
+    }
 
-	Twilio.Device.disconnect(function (conn) {
-			alert("Disconnected")
-
-	});
-	Twilio.Device.incoming(function (conn) {
-
-	    // accept the incoming connection and start two-way audio
-	    conn.accept();
-	});
-
-	/* Connect to Twilio when we call this function. */
-	/*
-	var call = function() {
-	    var toNum = '+17033891424';
-	    Twilio.Device.connect({
-            To: toNum,
-       		DemoType: "Say"
-        });
-	}
-	*/
-	/*
+	/* Connect to Twilio when we call this function. */	
+	
 	var callPhone = function(){
-		var makeCall = $.post('/demo/requestDemoCall', 
-				{DemoType: "Gather"},
+    var verbType = $("#verb").val();
+		var makeCall = $.post('/requestCall', 
+				{
+				  To: '+17863029603',
+				  verb: verbType,
+				  demo: 'true'
+				  },
 				function(data) {
 					alert("Made call:" + data);
 				}
 			);
 	}
-	*/
-	function callDemoClient(){
-		params = {"DemoType": "Say"};
-        Twilio.Device.connect(params)
-	} 
-	/* Connect to Twilio when we call this function. */
-	/*
-	var callDemoClient = function(){
-		params = {"DemoType": "Say"};
-        Twilio.Device.connect(params)
-	}
-	*/
 
 	var hangup = function() {
 	    Twilio.Device.disconnectAll();
 	}
 
-	//$('#callButton').on('click', callDemoClient);
+	$('#callButton').on('click', call);
 	$('#hangupButton').on('click', hangup);
 	
 	/*
@@ -83,7 +72,8 @@ $(function(){
 			var makeCall = $.post('/requestCall', {
 			    To: "+17863029603",
 				  twimlBody: submittedTwiml,
-				  verb: verbType
+				  verb: verbType,
+				  demo: 'false'
 			  },
 				function(data) {
 					alert("Made call:" + data);
@@ -118,7 +108,8 @@ $(function(){
     }
     //save it locally
     if (!supportsLocalStorage()) { return; }
-    localStorage["phoneNumber"] = phone;
+    localStorage['phoneNumber'] = phone;
+    localStorage['lesson'] = 'say';
     
   }
   

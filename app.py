@@ -2,6 +2,7 @@ import os
 import sys
 import re
 import datetime
+import traceback
 from flask import Flask, request, render_template
 from urllib import urlencode
 from twilio.rest import TwilioRestClient
@@ -28,9 +29,9 @@ app = Flask(__name__)
 
 client = TwilioRestClient()
 
-#connection = Connection(os.environ.get('MONGOLAB_URI'))
-#connection.register([OutboundCall])
-#b = connection['heroku_app5944498']
+connection = Connection(os.environ.get('MONGOLAB_URI'))
+connection.register([OutboundCall])
+db = connection['heroku_app5944498']
 
 lessons = ['say', 'play', 'gather', 'record', 'dial']
 
@@ -93,6 +94,9 @@ def getDemoTwiml(verb):
   elif verb == 'record':
     r.say('After the beep, make your recording')
     r.record(action='http://trytwilio.herokuapp.com/demo/recordingCallback', method='GET')
+  elif verb == 'sms':
+    r.say('You are about to be sent an sms')
+    r.sms("Hello! This is an example of sending an SMS")
   else:
     return 'failure'
   return str(r)
@@ -178,6 +182,7 @@ def requestCall():
 
       return 'success'
   except Exception:
+    traceback.print_exc()
     return 'failure'
 
 if __name__ == '__main__':

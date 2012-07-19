@@ -1,6 +1,6 @@
 {% extends "skeleton.html" %}
 
-{% block title %}Say{% endblock %}
+{% block title %}say{% endblock %}
 
 {% block topmenu %}
   <li><a href="/">&lt;Response&gt;</a></li>
@@ -55,11 +55,9 @@
 {% block staticdemo %}
   <h2>Demo</h2>
   <input type="hidden" id="token" value="{{params['token']}}">
-  <form class="form-inline">
-    <input type="text" placeholder="Your phone number" id="phoneNumber">
-    <button class="btn btn-primary" id="callButton" onclick="callDemoClient();">Call</button>
-    <button class="btn btn-error" id="hangupButton">Hangup</button>
-  </form>
+  <input type="text" placeholder="Your phone number" id="phoneNumber">
+  <button class="btn btn-primary" id="callButton">Call</button>
+  <button class="btn btn-error" id="hangupButton">Hangup</button>
 {% endblock %}
 
 {% block mission %}
