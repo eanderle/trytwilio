@@ -23,7 +23,7 @@ $(function(){
     /* Connect to Twilio when we call this function. */
     var call = function() {
 	      params = {
-	        "verb": "play",
+	        "verb": "sms",
 	        "demo": "true"
 	      };
         Twilio.Device.connect(params)
