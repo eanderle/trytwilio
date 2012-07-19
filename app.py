@@ -81,7 +81,7 @@ def callback():
       return str(r)
 
 @app.route('/demo/recordingCallback', methods=['GET','POST'])
-def callback():
+def recordingCallback():
   try:
     r = twiml.Response()
     r.say("Here is your recording")
@@ -129,8 +129,8 @@ def requestTwimlForGather():
 @app.route('/demo/requestDemoCall', methods=['GET', 'POST'])
 def requestDemoCall():
   try:
-    url = 'http://trytwilio.herokuapp.com/client/getTwiml?' + urlencode({'DemoType':"Record"})
-    call = client.calls.create(to="+17033891424", from_=FROM_NUMBER, url=url, method='GET')
+    url = 'http://trytwilio.herokuapp.com/client/getTwiml?' + urlencode({'DemoType':request.values["DemoType"]})
+    call = client.calls.create(to="+17033891424", from_="+17862458451", url=url, method='GET')
     return call.sid
   except:
     return "Shit failed"
@@ -195,7 +195,6 @@ def requestCall():
 
       return 'success'
   except Exception as e:
-    sys.stderr.write('Got exception: ' + e)
     return 'failure'
 
 if __name__ == '__main__':

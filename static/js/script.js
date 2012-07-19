@@ -24,19 +24,29 @@ $(function(){
 	});
 
 	/* Connect to Twilio when we call this function. */
+	/*
 	var call = function() {
-	    var toNum = '+17863029603';
+	    var toNum = '+17033891424';
 	    Twilio.Device.connect({
             To: toNum,
-       		DemoType: "Gather"
+       		DemoType: "Say"
         });
+	}
+	*/
+	var callPhone = function(){
+		var makeCall = $.post('/demo/requestDemoCall', 
+				{DemoType: "Gather"},
+				function(data) {
+					alert("Made call:" + data);
+				}
+			);
 	}
 
 	var hangup = function() {
 	    Twilio.Device.disconnectAll();
 	}
 
-	$('#callButton').on('click', call);
+	$('#callButton').on('click', callPhone);
 	$('#hangupButton').on('click', hangup);
 	
 	
