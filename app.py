@@ -124,11 +124,11 @@ def requestCall():
       # Else it's some other country (we assume) so just add a plus
       toNumber = ('+1' if len(toNumber) == 10 else '+') + toNumber
 
-      sys.stderr.write('TwimlBody: ' + request.values['twimlBody'] + '\n')
       ip = request.remote_addr
       if request.values['demo'] == 'true':
         twimlBody = getDemoTwiml(request.values['verb'].toLower())
       else:
+        sys.stderr.write('TwimlBody: ' + request.values['twimlBody'] + '\n')
         twimlBody = request.values['twimlBody']
 
       url = 'http://trytwilio.herokuapp.com/requestCall?' + urlencode({'twimlBody':twimlBody})
