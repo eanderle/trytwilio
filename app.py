@@ -97,17 +97,25 @@ def getDemoTwiml(verb):
   else:
     return 'failure'
   return str(r)
-  
-@app.route('/client/getTwiml', methods=['GET','POST'])
-def requestTwiml():
-  return getDemoTwiml(request.values['verb'].toLower())
 
+# Voice URL for our client app
+@app.route('/client/getTwiml', methods=['GET','POST'])
+def getClientTwiml():
+  twiml = ''
+  if request.values['demo'].lower() == 'true':
+    twiml = getDemoTwiml(request.values['verb'].lower())
+  else:
+    twiml = request.values['twimlBody']
+  return twiml
+
+# Endpoint for different options in the <Gather> tutorial
 @app.route('/handleInput')
 def requestTwimlForGather():
   s = request.values['twimlBody' + request.values['Digits']]
   sys.stderr.write(s + '\n')
   return s
 
+# Endpoint to make an outbound call (Demo or User TwiML)
 @app.route('/requestCall', methods=['GET', 'POST'])
 def requestCall():
   try:
@@ -126,8 +134,8 @@ def requestCall():
       toNumber = ('+1' if len(toNumber) == 10 else '+') + toNumber
 
       ip = request.remote_addr
-      if request.values['demo'] == 'true':
-        twimlBody = getDemoTwiml(request.values['verb'].toLower())
+      if request.values['demo'].lower() == 'true':
+        twimlBody = getDemoTwiml(request.values['verb'].lower())
       else:
         sys.stderr.write('TwimlBody: ' + request.values['twimlBody'] + '\n')
         twimlBody = request.values['twimlBody']
