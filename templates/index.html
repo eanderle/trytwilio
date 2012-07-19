@@ -12,20 +12,34 @@
 {% endblock %}
 
 {% block lesson %}
-  <h1>What is TwiML?</h1>
-  <p>TwiML is the set of instructions that Twilio uses.</p>
-  <p>When someone makes a call or sends an SMS to a Twilio number, Twilio will look up TwiML associated with that number and use it to determine what to do. For example, the TwiML could tell Twilio to record the call, play a message, or prompt the caller to press digits on their keypad.</p>
-  <h2>&lt;Response&gt;</h2><br/>
-  <p>The &lt;Response&gt; verb lets us start a TwiML response.</p>
-  <p>It can't really do anything on its own, so why not begin the TryTwilio tutorial and learn to do more?</p>
+  <h2>Welcome!</h2>
+  <br />
+  <p>With TryTwilio, you'll learn how to harness the power of your telephone by
+  writing code in a language called TwiML. Never written code or worked with
+  TwiML before? Don't worry; we'll take you step-by-step.</p>
+  <h3>What is Twilio?</h3>
+  <p>Twilio is a service that empowers you to include voice and messaging
+  functionality into your web and mobile applications.</p>
+  <h3>What is TwiML?</h3>
+  <p>TwiML is a set of verbs created by Twilio that allows you to control what
+  happens when you receive an incoming call or text message (SMS).  Using
+  TwiML, you can do really neat things such as record a call, play a message
+  for your caller, prompt your caller to press digits on their keypad, and
+  much, much more.</p>
+  <h2>Lesson 1: &lt;Response&gt;</h2>
+  <br/>
+  <p>Everything starts with the &lt;Response&gt; verb. It tells Twilio that
+  we're sending back TwiML that will tell Twilio what to do with our incoming
+  call or message.</p>
 {% endblock %}
 
 {% block staticdemo %}
-  <h2>Demo Time</h2>
-  <p>Throughout TryTwilio, there will be example TwiML in this area, demonstrating what each verb does.</p>
-  <h3>Your Number</h3>
-  <p>We can call your phone when you want to try out the demos or hear your own creations. Why not enter your 10-digit phone number here?</p>
-  <input class="input-xlarge" id="phoneNumber" placeholder="(555) 555-5555" type="tel"/>
+  <h2>Demo</h2>
+  <p>Throughout TryTwilio, a demo will be in this area which will give you an
+  example of what the particular TwiML verb can do.</p>
+  <h3>How should we test?</h3>
+  <p>This wouldn't be cool unless you could test out code, right? Well, because twilio focuses on telecommunication, we can <em>call</em> your phone when you want to try out the demos or hear your own creations. If you'd like to fully experience TryTwilio, then this is recommended. Why not enter your 10-digit phone number here?</p>
+  <input class="input-xlarge" id="phoneNumber" placeholder="(555)555-5555" type="tel"/>
   <button class="btn btn-info" id="phone-number-register">
 {% endblock %}
 
