@@ -14,75 +14,26 @@
 {% block lesson %}
 <h2>Lesson 2: &lt;Play&gt;</h2></br>
 <p>The &lt;Play&gt; verb plays the file at the given url. Many different audio formats are supported--give it a shot!</p>
-<table class="table table-condensed table-striped">
-    <thead>
-      <tr>
-        <th>Attribute Name</th>
-        <th>Allowed Values</th>
-        <th>Default Values</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>loop</td>
-        <td>integer &gt;= 0</td>
-        <td>1</td>
-      </tr>
-    </tbody>
-  </table>
-  <h3>Loop:</h3>
-  <p>The “loop” attribute controls how many times the audio is played. A value of 0 will cause the audio to loop until the call is hung up.</p>
-
-  <table class="table table-condensed table-striped">
-    <thead>
-      <tr>
-        <th>MIME type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>audio/mpeg</td>
-		<td>mp3 audio</td>
-      </tr>
-      <tr>
-        <td>audio/wav</td>
-		<td>wav format audio</td>
-      </tr>
-      <tr>
-        <td>audio/wave</td>
-		<td>wav format audio</td>
-      </tr>
-      <tr>
-        <td>audio/x-wav</td>
-		<td>wav format audio</td>
-      </tr>    
-      <tr>
-        <td>audio/aiff</td>
-		<td>audio interchange file format</td>
-      </tr>
-      <tr>
-        <td>audio/x-aifc</td>
-		<td>audio interchange file format</td>
-      </tr>
-      <tr>
-        <td>audio/x-aiff</td>
-		<td>audio interchange file format</td>
-      </tr>
-      <tr>
-        <td>audio/x-gsm</td>
-		<td>GSM audio format</td>
-      </tr>
-      <tr>
-        <td>audio/gsm</td>
-		<td>GSM audio format</td>
-      </tr>
-      <tr>
-        <td>audio/ulaw</td>
-		<td>μ-law audio format</td>
-      </tr> 
-    </tbody>
-  </table>
+    <div class="accordion" id="accordion2">
+      <div class="accordion-group">
+        <div class="accordion-heading">
+          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+            loop
+          </a>
+        </div>
+        <div id="collapseOne" class="collapse in">
+          <div class="accordion-inner">
+            The loop attribute controls how many times the text is repeated. A value of 0 will cause the text to loop until the call is hung up.<br/>
+            <table class="table table-condensed table-striped">
+              <thead>
+                <tr><th>Attribute Name</th><th>Allowed Values</th><th>Default Values</th></tr>
+              </thead>
+              <tr><td>loop</td><td>integer &gt;= 0</td><td>1</td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
 {% endblock %}
 
 {% block staticdemo %}
