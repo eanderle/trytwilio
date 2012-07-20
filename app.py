@@ -110,7 +110,7 @@ def getClientTwiml():
   twiml = ''
   if request.values['demo'].lower() == 'true':
     twiml = getDemoTwiml(request.values['verb'].lower(),
-                         request.values['toNumber'].lower(),
+                         request.values['To'].lower(),
                          request.values['client'].lower())
   else:
     twiml = request.values['twimlBody']
@@ -143,7 +143,9 @@ def requestCall():
 
       ip = request.remote_addr
       if request.values['demo'].lower() == 'true':
-        twimlBody = getDemoTwiml(request.values['verb'].lower())
+        twimlBody = getDemoTwiml(request.values['verb'].lower(),
+                             request.values['To'].lower(),
+                             request.values['client'].lower())
       else:
         sys.stderr.write('TwimlBody: ' + request.values['twimlBody'] + '\n')
         twimlBody = request.values['twimlBody']
