@@ -120,7 +120,7 @@ def getClientTwiml():
   return twiml
 
 # Endpoint for different options in the <Gather> tutorial
-@app.route('/handleInput')
+@app.route('/handleInput', methods=['GET', 'POST'])
 def requestTwimlForGather():
   if request.values['initial'] == 'true':
     return request.values['twimlBody']
