@@ -1,7 +1,9 @@
+
 $(function(){
   /*
 		Twilio Client stuff
 	*/
+
 	/* Create the Client with a Capability Token */
 	  var clientToken = $("#token").val();
     Twilio.Device.setup(clientToken);
@@ -23,7 +25,7 @@ $(function(){
     /* Connect to Twilio when we call this function. */
     var call = function() {
 	      params = {
-	        "verb": "play",
+	        "verb": "sms",
 	        "demo": "true"
 	      };
         Twilio.Device.connect(params)
