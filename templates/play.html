@@ -50,6 +50,10 @@
 Write TwiML to play "You Crazy, Robot" (<a href="http://trytwilio.herokuapp.com/static/sounds/crazy-robot.mp3">http://trytwilio.herokuapp.com/static/sounds/crazy-robot.mp3</a>).
 {% endblock %}
 
+{% block twimlInput %}
+<textarea id="twiml-box" placeholder="Type your TwiML here..." rows="1" style="display:none;"></textarea>
+{% endblock %}
+
 {% block progressbar %}
   {{ super() }}
   <style type="text/css">

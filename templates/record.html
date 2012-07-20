@@ -178,6 +178,21 @@
 Make a recording of you saying "I am a DOer" and play it back.
 {% endblock %}
 
+{% block twimlInput %}
+<ul class="nav nav-tabs" id="twiml-tabs">
+  <li class="active"><a href="#twiml-div1" data-toggle="tab">TwiML 1</a></li>
+  <li><a href="#twiml-div2" data-toggle="tab">TwiML 2</a></li>
+</ul>
+<div class="tab-content">
+  <div class="tab-pane active" id="twiml-div1">
+    <textarea id="twiml-box" placeholder="Type your TwiML here..." rows="1" style="display:none;"></textarea>
+  </div>
+  <div class="tab-pane" id="twiml-div2">
+    <textarea id="twiml-box2" placeholder="Type your TwiML here..." rows="1" style="display:none;"></textarea>
+  </div>
+</div>
+{% endblock %}
+
 {% block progressbar %}
   {{ super() }}
   <style type="text/css">
