@@ -35,3 +35,7 @@ body {
   background-color: #eee;
   color: #222;
 }
+
+.full-button {
+  width: 100%;
+}
