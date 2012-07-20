@@ -3,12 +3,23 @@ $(function(){
     var phoneOn = false;
     try {
         var phoneNumberLabel = localStorage["phoneNumber"].replace(/(\d{3})(\d{3})(\d{4})/, "($1) $2-$3");
-        $('#phoneNumberDiv').html(phoneNumberLabel);
-        $('#phoneToggleButton').button("toggle");
-        phoneOn = true;
+        if (phoneNumberLabel.length==14) {
+          $('#phoneNumberDiv').html(phoneNumberLabel);
+          $('#phoneToggleButton').button("toggle");
+          phoneOn = true;
+        }
     } catch(err) {
         $('#browserToggleButton').button("toggle");
     }
+    
+    
+    var setToBrowser = function() {
+      phoneOn = !phoneOn;
+      $('#browserToggleButton').button("toggle");
+    };
+    
+    $("#browserToggleButton").on("click", setToBrowser);
+    alert(phoneOn);
   /*
 		Twilio Client stuff
 	*/
@@ -19,7 +30,7 @@ $(function(){
  
     /* Let us know when the client is ready. */
     Twilio.Device.ready(function (device) {
-        //alert("Ready");
+        alert("Ready");
     });
  
     /* Report any errors on the screen */
@@ -35,8 +46,9 @@ $(function(){
     var call = function() {
       var verbType = $("#verb").val();
       var params;
-      if (phoneOn) {
-        params = params = {
+      if (phoneOn == true) {
+        alert("I'm in phone mode");
+        params = {
           "verb": verbType,
           "demo": "true",
           "To": localStorage['phoneNumber'],
@@ -49,7 +61,8 @@ $(function(){
     				}
     			);
       } else {
-        params = params = {
+        alert("I'm in browser mode");
+        params = {
           "verb": verbType,
           "To": "",
           "demo": "true",
@@ -59,23 +72,6 @@ $(function(){
       }
       
     }
-
-	/* Connect to Twilio when we call this function. */	
-	
-	var callPhone = function(){
-    var verbType = $("#verb").val();
-    
-		var makeCall = $.post('/requestCall', 
-				{
-				  To: '+17863029603',
-				  verb: verbType,
-				  demo: 'true'
-				  },
-				function(data) {
-					alert("Made call:" + data);
-				}
-			);
-	}
 
 	var hangup = function() {
 	    Twilio.Device.disconnectAll();
