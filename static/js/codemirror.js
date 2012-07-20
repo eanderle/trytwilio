@@ -3976,7 +3976,15 @@ var editor2 = CodeMirror.fromTextArea(document.getElementById("twiml-box2"), {
     // LOL DON'T CARE
 }
 
-var demoBox = CodeMirror.fromTextArea(document.getElementById("demobox"), {
+var demoBoxTwiml = CodeMirror.fromTextArea(document.getElementById("demo-box-twiml"), {
+      value: '',
+      mode: 'text/html',
+      lineNumbers: true,
+      theme: "ambiance",
+      readOnly: "nocursor"
+  });
+
+var demoBoxPython = CodeMirror.fromTextArea(document.getElementById("demo-box-python"), {
       value: '',
       mode: 'text/html',
       lineNumbers: true,
