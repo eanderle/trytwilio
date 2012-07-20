@@ -56,7 +56,7 @@ $(function(){
       $.post('/requestCall', 
              params,
              function(data) {
-               alert("Made call:" + data);
+               alert("You should receive a call!");
              }
             );
     } else {
@@ -145,7 +145,7 @@ $(function(){
         }
         $.post('/requestCall', params,
                function(data) {
-                 alert("Made call:" + data);
+                 alert("You should receive a call!");
                }
               );
       } else {
