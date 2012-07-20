@@ -169,7 +169,12 @@
 {% block staticdemo %}
   <h2>Demo</h2>
   <input type="hidden" id="token" value="{{params['token']}}">
-  <textarea id="demobox" placeholder="lol" rows="1" style="display:none;"></textarea><br>
+  <textarea id="demobox" placeholder="lol" rows="1" style="display:none;">
+<Response>
+  <Say>After the beep, make your recording</Say>
+  <Record action="http://trytwilio.herokuapp.com/demo/recordingCallback" method="GET" />
+</Response>
+  </textarea><br>
   <center><button class="btn btn-info btn-large" id="callButton" style="width:100%;">Call</button></center>
 {% endblock %}
 
