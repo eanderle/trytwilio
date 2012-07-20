@@ -1,6 +1,6 @@
 {% extends "skeleton.html" %}
 
-{% block title %}say{% endblock %}
+{% block title %}Say{% endblock %}
 
 {% block topmenu %}
   <li><a href="/">&lt;Response&gt;</a></li>
@@ -18,18 +18,13 @@
   <h2>Lesson 1: &lt;Say&gt;</h2><br/>
   <p>The &lt;Say&gt; verb converts text into speech that will be played in your call. Try it out!</p>
           <div class="accordion" id="accordion2">
-            <div class="accordion-heading">
-                <a data-parent="#accordion2">
-                  <table><tr><td>Attribute Name</td><td>Allowed Values</td><td>Default Vaues</td></tr></table>
-                </a>
-            </div>
             <div class="accordion-group">
               <div class="accordion-heading">
                 <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
                   voice
                 </a>
               </div>
-              <div id="collapseOne" class="accordion-body collapse in">
+              <div id="collapseOne" class="collapse in">
                 <div class="accordion-inner">
                   The voice attribute controls whether the text is read with a male voice or a female voice.<br/>
                   <table class="table table-condensed table-striped">
@@ -47,7 +42,7 @@
                   language
                 </a>
               </div>
-              <div id="collapseOne" class="accordion-body collapse in">
+              <div id="collapseOne" class="collapse in">
                 <div class="accordion-inner">
                   The language attribute controls what language’s accent and pronunciations will be used to read the text.<br/>
                   <table class="table table-condensed table-striped">
@@ -58,7 +53,7 @@
                   </table>
                 </div>
               </div>
-              <div id="collapseTwo" class="accordion-body collapse in">
+              <div id="collapseTwo" class="collapse in">
                 <div class="accordion-inner">
                   The language attribute controls what language’s accent and pronunciations will be used to read the text.
                   <table class="table table-condensed table-striped">
@@ -76,7 +71,7 @@
                  loop
                 </a>
               </div>
-              <div id="collapseThree" class="accordion-body collapse in">
+              <div id="collapseThree" class="collapse in">
                 <div class="accordion-inner">
                   The loop attribute controls how many times the text is repeated. A value of 0 will cause the text to loop until the call is hung up. </br>
                   <table class="table table-condensed table-striped">
@@ -94,13 +89,15 @@
 {% block staticdemo %}
   <h2>Demo</h2>
   <input type="hidden" id="token" value="{{params['token']}}">
-  <input type="text" placeholder="Your phone number" id="phoneNumber">
-  <button class="btn btn-primary" id="callButton">Call</button>
-  <button class="btn btn-error" id="hangupButton">Hangup</button>
+  <form class="form-inline">
+    <input type="text" placeholder="Your phone number" id="phoneNumber">
+    <button class="btn btn-primary" id="callButton">Call</button>
+    <button class="btn btn-error" id="hangupButton">Hangup</button>
+  </form>
 {% endblock %}
 
 {% block mission %}
-Write TwiML to make a female voice say "Howdy partner!" three times.
+Write TwiML for a female voice to say "Howdy partner!" three times.
 {% endblock %}
 
 {% block progressbar %}
