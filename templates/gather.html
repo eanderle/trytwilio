@@ -15,7 +15,7 @@
 
 {% block lesson %}
   <h2>Lesson 4: &lt;Gather&gt;</h2><br/>
-  <p>The &lt;Gather&gt; verb receives input from the user’s dialpad. The input is sent to the url pointed to by the action attribute. Give it a go!</p>
+  <p>The <strong>&lt;Gather&gt;</strong> verb receives input from the user’s dialpad. The input is sent to the url pointed to by the action attribute. Give it a go!</p>
 
   <div class="accordion" id="accordion2">
     <div class="accordion-group">
@@ -150,21 +150,31 @@ g.say("Press 1 to hear an example of the Say verb. Press 2 to hear Banana Phone.
 
 {% block twimlInput %}
 <ul class="nav nav-tabs" id="twiml-tabs">
-  <li class="active"><a href="#twiml-div1" data-toggle="tab">TwiML 1</a></li>
-  <li><a href="#twiml-div2" data-toggle="tab">TwiML 2</a></li>
+  <li class="active"><a href="#twiml-div1" data-toggle="tab">Main</a></li>
+  <li><a href="#twiml-div2" id="gather2" data-toggle="tab">Push 1</a></li>
+  <li><a href="#twiml-div2" id="gather3" data-toggle="tab">Push 2</a></li>
+  <li><a href="#twiml-div2" id="gather4" data-toggle="tab">Push 3</a></li>
 </ul>
 <div class="tab-content">
   <div class="tab-pane active" id="twiml-div1">
-    <textarea id="twiml-box" placeholder="Type your TwiML here..." rows="1" style="display:none;"><Response></Response></textarea>
+    <textarea id="twiml-box" placeholder="Type your TwiML here..." rows="1" style="display:none;"><Response>
+
+</Response></textarea>
   </div>
   <div class="tab-pane" id="twiml-div2">
-    <textarea id="twiml-box2" placeholder="Type your TwiML here..." rows="1" style="display:none;"><Response></Response></textarea>
+    <textarea id="twiml-box2" placeholder="Type your TwiML here..." rows="1" style="display:none;"><Response>
+
+</Response></textarea>
   </div>
   <div class="tab-pane" id="twiml-div3">
-    <textarea id="twiml-box2" placeholder="Type your TwiML here..." rows="1" style="display:none;"><Response></Response></textarea>
+    <textarea id="twiml-box3" placeholder="Type your TwiML here..." rows="1" style="display:none;"><Response>
+
+</Response></textarea>
   </div>
   <div class="tab-pane" id="twiml-div4">
-    <textarea id="twiml-box2" placeholder="Type your TwiML here..." rows="1" style="display:none;"><Response></Response></textarea>
+    <textarea id="twiml-box4" placeholder="Type your TwiML here..." rows="1" style="display:none;"><Response>
+
+</Response></textarea>
   </div>
 </div>
 {% endblock %}

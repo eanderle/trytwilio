@@ -16,7 +16,7 @@
 
 {% block lesson %}
   <h2>Lesson 1: &lt;Say&gt;</h2><br/>
-  <p>The &lt;Say&gt; verb converts text into speech that will be played in your call. Try it out!</p>
+  <p>The <strong>&lt;Say&gt;</strong> verb converts text into speech that will be played in your call. Try it out!</p>
     <div class="accordion" id="accordion2">
       <div class="accordion-group">
         <div class="accordion-heading">
@@ -117,7 +117,9 @@ Write TwiML for a female voice to say "Howdy partner!" three times.
 {% endblock %}
 
 {% block twimlInput %}
-<textarea id="twiml-box" placeholder="Type your TwiML here..." rows="1" style="display:none;"><Response></Response></textarea>
+<textarea id="twiml-box" placeholder="Type your TwiML here..." rows="1" style="display:none;"><Response>
+
+</Response></textarea>
 {% endblock %}
 
 {% block progressbar %}

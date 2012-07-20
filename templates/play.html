@@ -15,7 +15,7 @@
 
 {% block lesson %}
 <h2>Lesson 2: &lt;Play&gt;</h2></br>
-<p>The &lt;Play&gt; verb plays the file at the given url. Many different audio formats are supported--give it a shot!</p>
+<p>The <strong>&lt;Play&gt;</strong> verb plays the file at the given url. Many different audio formats are supported--give it a shot!</p>
     <div class="accordion" id="accordion2">
       <div class="accordion-group">
         <div class="accordion-heading">
@@ -68,7 +68,9 @@ Write TwiML to play "You Crazy, Robot" (<a href="http://trytwilio.herokuapp.com/
 {% endblock %}
 
 {% block twimlInput %}
-<textarea id="twiml-box" placeholder="Type your TwiML here..." rows="1" style="display:none;"><Response></Response></textarea>
+<textarea id="twiml-box" placeholder="Type your TwiML here..." rows="1" style="display:none;"><Response>
+
+</Response></textarea>
 {% endblock %}
 
 {% block progressbar %}

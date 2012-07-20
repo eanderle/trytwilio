@@ -3974,6 +3974,36 @@ var editor2 = CodeMirror.fromTextArea(document.getElementById("twiml-box2"), {
           "Ctrl-Space": function(cm) { CodeMirror.xmlHint(cm, ''); }
       }
   });
+  
+var editor3 = CodeMirror.fromTextArea(document.getElementById("twiml-box3"), {
+    value: '',
+    mode: 'text/html',
+    lineNumbers: true,
+    lineWrapping: 'true',
+    theme: "ambiance",
+    extraKeys: {
+        "'>'": function(cm) { cm.closeTag(cm, '>'); },
+        "'/'": function(cm) { cm.closeTag(cm, '/'); },
+        "' '": function(cm) { CodeMirror.xmlHint(cm, ' '); },
+        "'<'": function(cm) { CodeMirror.xmlHint(cm, '<'); },
+        "Ctrl-Space": function(cm) { CodeMirror.xmlHint(cm, ''); }
+    }
+  });
+    
+var editor4 = CodeMirror.fromTextArea(document.getElementById("twiml-box4"), {
+      value: '',
+      mode: 'text/html',
+      lineNumbers: true,
+      lineWrapping: 'true',
+      theme: "ambiance",
+      extraKeys: {
+          "'>'": function(cm) { cm.closeTag(cm, '>'); },
+          "'/'": function(cm) { cm.closeTag(cm, '/'); },
+          "' '": function(cm) { CodeMirror.xmlHint(cm, ' '); },
+          "'<'": function(cm) { CodeMirror.xmlHint(cm, '<'); },
+          "Ctrl-Space": function(cm) { CodeMirror.xmlHint(cm, ''); }
+      }
+  });
 } catch(err) {
     // LOL DON'T CARE
 }
