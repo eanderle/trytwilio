@@ -1,5 +1,11 @@
-
 $(function(){
+    /* Fill in phone number at top of screen */
+    try {
+        var phoneNumberLabel = localStorage["phoneNumber"].replace(/(\d{3})(\d{3})(\d{4})/, "($1) $2-$3");
+        $('#phoneNumberDiv').html(phoneNumberLabel);
+    } catch(err) {
+        // Do Nothing
+    }
   /*
 		Twilio Client stuff
 	*/
