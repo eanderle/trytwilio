@@ -122,9 +122,12 @@ def getClientTwiml():
 # Endpoint for different options in the <Gather> tutorial
 @app.route('/handleInput')
 def requestTwimlForGather():
-  s = request.values['twimlBody' + request.values['Digits']]
-  sys.stderr.write(s + '\n')
-  return s
+  if request.values['initial'] == 'true':
+    return request.values['twimlBody']
+  else:
+	  s = request.values['twimlBody' + request.values['Digits']]
+	  sys.stderr.write(s + '\n')
+	  return s
 
 # Endpoint to make an outbound call (Demo or User TwiML)
 @app.route('/requestCall', methods=['GET', 'POST'])
@@ -160,7 +163,7 @@ def requestCall():
       if 'verb' in request.values:
         if request.values['verb'].lower() == 'gather' and request.values['demo'].lower() != 'true':
           url = 'http://trytwilio.herokuapp.com/handleInput?'
-          twimlBodies = {}
+          twimlBodies = {'twimlBody':twimlBody, 'initial':'true'}
           # Go through each digit, and if it was provided, add it to the url
           for c in '0123456789#*':
             s = 'twimlBody' + c
