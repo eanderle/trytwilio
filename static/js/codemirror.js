@@ -3948,6 +3948,7 @@ var editor = CodeMirror.fromTextArea(document.getElementById("twiml-box"), {
       value: '',
       mode: 'text/html',
       lineNumbers: true,
+      lineWrapping: 'true',
       theme: "ambiance",
       extraKeys: {
           "'>'": function(cm) { cm.closeTag(cm, '>'); },
@@ -3963,6 +3964,7 @@ var editor2 = CodeMirror.fromTextArea(document.getElementById("twiml-box2"), {
       value: '',
       mode: 'text/html',
       lineNumbers: true,
+      lineWrapping: 'true',
       theme: "ambiance",
       extraKeys: {
           "'>'": function(cm) { cm.closeTag(cm, '>'); },
@@ -3979,6 +3981,7 @@ var editor2 = CodeMirror.fromTextArea(document.getElementById("twiml-box2"), {
 var demoBox = CodeMirror.fromTextArea(document.getElementById("demobox"), {
       value: '',
       mode: 'text/html',
+      lineWrapping: 'true',
       lineNumbers: true,
       theme: "ambiance",
       readOnly: "nocursor"
