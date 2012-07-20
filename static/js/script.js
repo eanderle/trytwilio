@@ -76,7 +76,6 @@ $(function(){
 	}
 
 	$('#callButton').on('click', call);
-	$('#hangupButton').on('click', hangup);
 	
 	/*
 		Validating TwiML stuff
