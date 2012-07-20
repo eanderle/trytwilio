@@ -21,30 +21,42 @@
             {% block topmenu %}{% endblock %}
           </ul>
           <div class="pull-right btn-group" data-toggle="buttons-radio">
-            <button class="btn" style="float:left;">Phone</button>
-            <button class="btn">Browser</button>
+            <button class="btn" id="phoneToggleButton" style="float:left;">Phone</button>
+            <button class="btn" id="browserToggleButton">Browser</button>
           </div>
+          <h3 style="padding-top: 5px;"><div id="phoneNumberDiv" style="padding-right: 10px;" class="pull-right"></div></h3>
         </div>
       </div>
     </div>
     <input type="hidden" id="verb" value="{% block verb %}{% endblock %}">
     <div class="container" style="height:100%;">
       <div class="row" style="height:100%;">
-        <div class="span6 well border-box" style="height:100%;">
+        <div class="span6 well border-box">
           {% block lesson %}{% endblock %}
         </div>
         <div class="span6" style="height:100%;">
           <div class="row" style="height:100%;">
-            <div class="span6 well border-box" style="height:38%;">
+            <div class="span6 well border-box">
               {% block staticdemo %}{% endblock %}
             </div>
-            <div class="span6 well border-box" style="height:59%;">
+            <div class="span6 well border-box">
               {% block twimlbox %}
                 <h2>Your Mission</h2>
                 <div class="well mission">
                 {% block mission %}{% endblock %}
                 </div>
-                <textarea id="twiml-box" placeholder="Type your TwiML here..." rows="1" style="display:none;"></textarea>
+                <ul class="nav nav-tabs" id="twiml-tabs">
+                  <li class="active"><a href="#twiml-div1" data-toggle="tab">TwiML 1</a></li>
+                  <li><a href="#twiml-div2" data-toggle="tab">TwiML 2</a></li>
+                </ul>
+                <div class="tab-content">
+                  <div class="tab-pane active" id="twiml-div1">
+                    <textarea id="twiml-box" placeholder="Type your TwiML here..." rows="1" style="display:none;"></textarea>
+                  </div>
+                  <div class="tab-pane" id="twiml-div2">
+                    <textarea id="twiml-box2" placeholder="Type your TwiML here..." rows="1" style="display:none;"></textarea>
+                  </div>
+                </div>
                 <br />
                 <button class="btn-large btn-success" id="submitTwiml">Submit TwiML</button>
               {% endblock %}

@@ -1,6 +1,6 @@
 {% extends "skeleton.html" %}
 
-{% block title %}Sms{% endblock %}
+{% block title %}sms{% endblock %}
 
 {% block topmenu %}
   <li><a href="/">&lt;Response&gt;</a></li>
@@ -13,6 +13,29 @@
 {% endblock %}
 
 {% block lesson %}
+
+{% block verb %}sms{% endblock %}
+
+{% block lesson %}
+  <table class="table table-condensed table-striped">
+    <thead>
+      <tr>
+        <th>Attribute Name</th>
+        <th>Allowed Values</th>
+        <th>Default Values</th>
+      </tr>
+    </thead> 
+    <tr>
+    <td class="question" data-toggle="collapse" data-target="#answer1" data-parent="#faq-table">
+        <table><tr><td>to</td><td>phone number</td><td>see note</td></table>
+      <div id="answer1" class="answer collapse">
+        <p>Mark</p>
+      </div>
+    </td>
+  </tr>
+  <tr>
+
+</table>
 
   <h2>Lesson 5: &lt;Sms&gt;</h2><br/>
   <p>The &lt;Sms&gt; verb sends a text to a phone number during a call. Go for it!</p>
