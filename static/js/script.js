@@ -207,6 +207,13 @@ $(function(){
     }, 1);
   });
 
+  $("#php-link").click(function(){
+    setTimeout( function(){
+      demoBoxPhp.refresh();
+      //console.log('editor1 refreshed');
+    }, 1);
+  });
+
   $("#gather2").click(function(){
      setTimeout( function(){
        editor2.refresh();
@@ -214,19 +221,19 @@ $(function(){
      }, 1);
    });
    
-   $("#gather3").click(function(){
-      setTimeout( function(){
-        editor3.refresh();
-        //console.log('editor1 refreshed');
-      }, 1);
-    });
-    
-    $("#gather4").click(function(){
-       setTimeout( function(){
-         editor4.refresh();
-         //console.log('editor1 refreshed');
-       }, 1);
-     });
+  $("#gather3").click(function(){
+    setTimeout( function(){
+      editor3.refresh();
+      //console.log('editor1 refreshed');
+    }, 1);
+  });
+  
+  $("#gather4").click(function(){
+     setTimeout( function(){
+       editor4.refresh();
+       //console.log('editor1 refreshed');
+     }, 1);
+   });
 
 
 
