@@ -33,7 +33,7 @@ connection = Connection(os.environ.get('MONGOLAB_URI'))
 connection.register([OutboundCall])
 db = connection['heroku_app5944498']
 
-lessons = ['say', 'play', 'gather', 'record', 'dial']
+lessons = ['say', 'play', 'gather', 'record', 'dial', 'sms']
 
 @app.route('/', methods=['GET', 'POST'])
 def hello():
