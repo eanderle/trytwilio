@@ -95,8 +95,8 @@ def getDemoTwiml(verb, toNumber, client):
       with r.gather(action='http://trytwilio.herokuapp.com/demo/callback', numDigits=1, timeout=10, method='GET') as g:
         g.say('Press 1 to hear an example of the Say verb. Press 2 to hear Banana Phone.')
   elif verb == 'record':
-    r.say('After the beep, make your recording')
-    r.record(action='http://trytwilio.herokuapp.com/demo/recordingCallback', method='GET')
+    r.say('After the beep, you will have 10 seconds to record something.')
+    r.record(action='http://trytwilio.herokuapp.com/demo/recordingCallback', method='GET', maxLength="10")
   elif verb == 'sms':
     if client == 'true':
       r.say('Sorry, you need a phone number to be sent an sms.')
