@@ -9,34 +9,11 @@
   <li><a href="/lesson/record">&lt;Record&gt;</a></li>
   <li><a href="/lesson/gather">&lt;Gather&gt;</a></li>
   <li class="active"><a href="/lesson/sms">&lt;Sms&gt;</a></li>
-
 {% endblock %}
-
-{% block lesson %}
 
 {% block verb %}sms{% endblock %}
 
 {% block lesson %}
-  <table class="table table-condensed table-striped">
-    <thead>
-      <tr>
-        <th>Attribute Name</th>
-        <th>Allowed Values</th>
-        <th>Default Values</th>
-      </tr>
-    </thead> 
-    <tr>
-    <td class="question" data-toggle="collapse" data-target="#answer1" data-parent="#faq-table">
-        <table><tr><td>to</td><td>phone number</td><td>see note</td></table>
-      <div id="answer1" class="answer collapse">
-        <p>Mark</p>
-      </div>
-    </td>
-  </tr>
-  <tr>
-
-</table>
-
   <h2>Lesson 5: &lt;Sms&gt;</h2><br/>
   <p>The &lt;Sms&gt; verb sends a text to a phone number during a call. Go for it!</p>
   <div class="accordion" id="accordion2">
@@ -136,11 +113,9 @@
 {% block staticdemo %}
   <h2>Demo</h2>
   <input type="hidden" id="token" value="{{params['token']}}">
-  <form class="form-inline">
-    <input type="text" placeholder="Your phone number" id="phoneNumber">
-    <button class="btn btn-primary" id="callButton">Call</button>
-    <button class="btn btn-error" id="hangupButton">Hangup</button>
-  </form>
+  <input type="text" placeholder="Your phone number" id="phoneNumber">
+  <button class="btn btn-primary" id="callButton">Call</button>
+  <button class="btn btn-error" id="hangupButton">Hangup</button>
 {% endblock %}
 
 {% block mission %}
