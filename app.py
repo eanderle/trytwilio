@@ -148,7 +148,7 @@ def requestCall():
       # If this is a gather, re-write the url to contain all of the twiml
       # of each digit provided and give it to handleInput
       if 'verb' in request.values:
-        if request.values['verb'].lower() == 'gather':
+        if request.values['verb'].lower() == 'gather' and request.values['demo'].lower() != 'true':
           url = 'http://trytwilio.herokuapp.com/handleInput?'
           twimlBodies = {}
           # Go through each digit, and if it was provided, add it to the url
