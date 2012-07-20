@@ -125,9 +125,9 @@ def requestTwimlForGather():
   if request.values['initial'] == 'true':
     return request.values['twimlBody']
   else:
-	  s = request.values['twimlBody' + request.values['Digits']]
-	  sys.stderr.write(s + '\n')
-	  return s
+    s = request.values['twimlBody' + request.values['Digits']]
+    sys.stderr.write(s + '\n')
+    return s
 
 # Endpoint to make an outbound call (Demo or User TwiML)
 @app.route('/requestCall', methods=['GET', 'POST'])
@@ -163,14 +163,15 @@ def requestCall():
       if 'verb' in request.values:
         if request.values['verb'].lower() == 'gather' and request.values['demo'].lower() != 'true':
           url = 'http://trytwilio.herokuapp.com/handleInput?'
-          twimlBodies = {'twimlBody':twimlBody, 'initial':'true'}
+          twimlBodies = {}
           # Go through each digit, and if it was provided, add it to the url
           for c in '0123456789#*':
             s = 'twimlBody' + c
             if s in request.values:
               twimlBodies.update({s:request.values[s]})
+          twimlBody.replace('handleInput', 'handleInput?' + urlencode(twimlBodies))
 
-          url += urlencode(twimlBodies)
+          url += urlencode({'twimlBody':twimlBody, 'initial':'true'})
 
       # Clean up old entries and make sure this number hasn't been called too much
       d = datetime.datetime.utcnow() - datetime.timedelta(days = 1)
