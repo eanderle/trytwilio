@@ -3,10 +3,11 @@ $(function(){
     try {
         var phoneNumberLabel = localStorage["phoneNumber"].replace(/(\d{3})(\d{3})(\d{4})/, "($1) $2-$3");
         $('#phoneNumberDiv').html(phoneNumberLabel);
+        $('#twiml-tabs a:first').tab('show');
     } catch(err) {
         // Do Nothing
     }
-  /*
+    /*
 		Twilio Client stuff
 	*/
 
