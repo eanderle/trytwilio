@@ -131,6 +131,18 @@ $(function(){
           'twimlBody': submittedTwiml,
           "client": "false"
         };
+        if(verbType=="gather") {
+          params = {
+            "verb": verbType,
+            "demo": "false",
+            "To": localStorage['phoneNumber'],
+            'twimlBody': submittedTwiml,
+            "twimlBody1": editor2.getValue(),
+            "twimlBody2": editor3.getValue(),
+            "twimlBody3": editor4.getValue(),
+            "client": "false"
+          }
+        }
         $.post('/requestCall', params,
                function(data) {
                  alert("Made call:" + data);
@@ -144,6 +156,14 @@ $(function(){
           'twimlBody': submittedTwiml,
           "client": "true"
         };
+        if(verbType=="gather") {
+          params = {
+            "verb": verbType,
+            "To": "",
+            "demo": "true",
+            "client": "true"
+          };
+        }
         Twilio.Device.connect(params);
       }
     } else {
@@ -156,8 +176,8 @@ $(function(){
   $('.nav-tabs').button();
 
   /*
-     Registering a new user locally
-     */
+    Registering a new user locally
+  */
   function checkDigits(num) {
     num = num.replace(/[^0-9]/g,'');
     return num.length==10;
