@@ -3958,6 +3958,7 @@ var editor = CodeMirror.fromTextArea(document.getElementById("twiml-box"), {
       }
   });
 
+try {
 var editor2 = CodeMirror.fromTextArea(document.getElementById("twiml-box2"), {
       value: '',
       mode: 'text/html',
@@ -3970,4 +3971,15 @@ var editor2 = CodeMirror.fromTextArea(document.getElementById("twiml-box2"), {
           "'<'": function(cm) { CodeMirror.xmlHint(cm, '<'); },
           "Ctrl-Space": function(cm) { CodeMirror.xmlHint(cm, ''); }
       }
+  });
+} catch(err) {
+    // LOL DON'T CARE
+}
+
+var demoBox = CodeMirror.fromTextArea(document.getElementById("demobox"), {
+      value: '',
+      mode: 'text/html',
+      lineNumbers: true,
+      theme: "ambiance",
+      readOnly: "nocursor"
   });
