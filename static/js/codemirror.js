@@ -4019,7 +4019,14 @@ var demoBoxTwiml = CodeMirror.fromTextArea(document.getElementById("demo-box-twi
 var demoBoxPython = CodeMirror.fromTextArea(document.getElementById("demo-box-python"), {
       value: '<Response></Response>',
       mode: 'python',
-      lineWrapping: 'true',
+      lineNumbers: true,
+      theme: "ambiance",
+      readOnly: "nocursor"
+  });
+
+var demoBoxPhp = CodeMirror.fromTextArea(document.getElementById("demo-box-php"), {
+      value: '<Response></Response>',
+      mode: 'php',
       lineNumbers: true,
       theme: "ambiance",
       readOnly: "nocursor"

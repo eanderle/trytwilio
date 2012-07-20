@@ -172,6 +172,7 @@
   <ul class="nav nav-tabs" id="demo-tabs">
     <li class="active"><a href="#demo-twiml" data-toggle="tab">TwiML</a></li>
     <li><a href="#demo-python" id="python-link" data-toggle="tab">Python</a></li>
+    <li><a href="#demo-php" id="php-link" data-toggle="tab">PHP</a></li>
   </ul>
   <div class="tab-content">
     <div class="tab-pane active" id="demo-twiml">
@@ -186,6 +187,16 @@
 record_demo = twiml.Response()
 record_demo.say("After the beep, make your recording")
 record_demo.record(action="http://trytwilio.herokuapp.com/demo/recordingCallback", method="GET")</textarea>
+    </div>
+    <div class="tab-pane" id="demo-php">
+      <textarea id="demo-box-php" rows="1" style="display:none;">
+$record_demo = new Services_Twilio_Twiml();
+$record_demo->say('After the beep, make your recording');
+$record_demo->record(array(
+	'action' => 'http://trytwilio.herokuapp.com/demo/recordingCallback',
+	'method' => 'GET'
+	));
+echo $record_demo;</textarea>
     </div>
   </div><br>
   <center><button class="btn btn-info btn-large" id="callButton" style="width:100%;">Call</button></center>

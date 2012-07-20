@@ -116,6 +116,7 @@
   <ul class="nav nav-tabs" id="demo-tabs">
     <li class="active"><a href="#demo-twiml" data-toggle="tab">TwiML</a></li>
     <li><a href="#demo-python" id="python-link" data-toggle="tab">Python</a></li>
+    <li><a href="#demo-php" id="php-link" data-toggle="tab">PHP</a></li>
   </ul>
   <div class="tab-content">
     <div class="tab-pane active" id="demo-twiml">
@@ -130,6 +131,13 @@
 sms_not_client = twiml.Response()
 sms_not_client.say("You are about to receive an sms")
 sms_not_client.sms("Here it is!")</textarea>
+    </div>
+    <div class="tab-pane" id="demo-php">
+      <textarea id="demo-box-php" rows="1" style="display:none;">
+$sms_demo = new Services_Twilio_Twiml();
+$sms_demo->say('You are about to receive an SMS');
+$sms_demo->sms('Here it is!');
+echo $sms_demo;</textarea>
     </div>
   </div><br>
   <center><button class="btn btn-info btn-large" id="callButton" style="width:100%;">Call</button></center>

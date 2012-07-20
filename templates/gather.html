@@ -117,6 +117,7 @@
   <ul class="nav nav-tabs" id="demo-tabs">
     <li class="active"><a href="#demo-twiml" data-toggle="tab">TwiML</a></li>
     <li><a href="#demo-python" id="python-link" data-toggle="tab">Python</a></li>
+    <li><a href="#demo-php" id="php-link" data-toggle="tab">PHP</a></li>
   </ul>
   <div class="tab-content">
     <div class="tab-pane active" id="demo-twiml">
@@ -135,6 +136,18 @@
 gather_demo_not_client = twiml.Response()
 with gather_demo_not_client.gather(action="http://trytwilio.herokuapp.com/demo/callback", method="GET", numDigits="1", timeout="10") as g:
 g.say("Press 1 to hear an example of the Say verb. Press 2 to hear Banana Phone.")</textarea>
+    </div>
+    <div class="tab-pane" id="demo-php">
+      <textarea id="demo-box-php" rows="1" style="display:none;">
+$gather_demo = new Services_Twilio_Twiml();
+$nested = $gather_demo->gather(array(
+	'action'=>'http://trytwilio.herokuapp.com/demo/callback', 
+	'method'=>'GET', 
+	'numDigits'=>'1', 
+	'timeout'=>'10'
+));
+$nested->say('Press 1 to hear an example of the Say verb. Press 2 to hear Banana phone');
+echo $gather_demo;</textarea>
     </div>
   </div><br>
   <center><button class="btn btn-info btn-large" id="callButton" style="width:100%;">Call</button></center>
