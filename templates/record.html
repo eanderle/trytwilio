@@ -16,81 +16,173 @@
 {% block lesson %}
   <h2>Lesson 3: &lt;Record&gt;</h2><br/>
   <p>The &lt;Record&gt; verb records the caller’s voice and returns the URL of a file containing the recording. Take it for a spin!</p>
-  <table class="table table-condensed table-striped">
-      <thead>
-      <tr>
-        <th>Attribute Name</th>
-        <th>Allowed Values</th>
-        <th>Default Values</th>
-      </tr>
-	  </thead>
-	  <tbody>
-        <tr>
-	      <td>action</td>
-	      <td>relative or absolute URL</td>
-	      <td>current document URL</td>
-	    </tr>
-        <tr>
-	      <td>method</td>
-	      <td>GET, POST</td>
-	      <td>POST</td>
-	    </tr>
-        <tr>
-	      <td>timeout</td>
-	      <td>positive integer</td>
-	      <td>5</td>
-	    </tr>
-        <tr>
-	      <td>finishOnKey</td>
-	      <td>any digit, #, *</td>
-	      <td>1234567890*#</td>
-	    </tr>
-        <tr>
-	      <td>maxLength</td>
-	      <td>integer greater than 1</td>
-	      <td>3600 (1 hour)</td>
-	    </tr>
-        <tr>
-	      <td>transcribe</td>
-	      <td>true, false</td>
-	      <td>false</td>
-	    </tr>
-        <tr>
-	      <td>transcribeCallback</td>
-	      <td>relative or absolute URL</td>
-	      <td>none</td>
-	    </tr>
-        <tr>
-	      <td>playBeep</td>
-	      <td>true, false</td>
-	      <td>true</td>
-	    </tr>
-	  </tbody>
-    </table>	
 
-  <h3>action:</h3>
-  <p>The action attribute is a URL that will handle the results of the &lt;Record&gt; verb. This URL can be hit with either a GET or a POST request. &lt;Record&gt; will give this URL another URL that contains the audio file in the RecordingUrl parameter. TwiML will then be fetched from this address and executed. <strong>Note: In general, any TwiML after a &lt;Record&gt; verb is unreachable. The only exception to this is if your recording is silent, the action URL will not be fetched and execution will continue to the next verb.</strong></p>
-  <br>
-  <h3>method:</h3>
-  <p>The method attribute controls whether Twilio sends a GET or a POST to the action URL.</p>
-  <br>
-  <h3>timeout:</h3>
-  <p>The &lt;Record&gt; verb will exit after this many seconds have elapsed.</p>    
-  <h3>finishOnKey:</h3>
-  <p>The &lt;Record&gt; verb will exit after this key has been pushed.</p>
-  <h3>numDigits:</h3>
-  <p>The &lt;Record&gt; verb will exit after this many digits have been entered.</p>
-  <h3>maxLength:</h3>
-  <p>The &lt;Record&gt; verb will exit after this many seconds have elapsed.</p>
-  <h3>transcribe:</h3>
-  <p>If this attribute is true, Twilio will attempt to convert your recording to text. Note that this feature costs extra.</p>
-  <h3>transcribeCallback:</h3>
-  <p>The transcribeCallback attribute is used in conjunction with the transcribe attribute. When Twilio has finished transcribing your recording, it will make a POST request to this URL along with some parameters, the most interesting of which is TranscriptionText, which contains the actual transcription.</p>
-  <h3>playBeep:</h3>
-  <p>If this attribute is set to true, a beep will play to indicate the start of recording.</p>
-
+  <div class="accordion" id="accordion2">
+    <div class="accordion-group">
+      <div class="accordion-heading">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+          action
+        </a>
+      </div>
+      <div id="collapseOne" class="collapse in">
+        <div class="accordion-inner">
+          The action attribute is a URL that will handle the results of the &lt;Record&gt; verb. Twilio will give this URL another URL that contains the audio file in the RecordingUrl parameter.<br/>
+          <table class="table table-condensed table-striped">
+            <thead>
+              <tr><th>Attribute Name</th><th>Allowed Values</th><th>Default Values</th></tr>
+            </thead>
+            <tr><td>action</td><td>relative or absolute URL</td><td>current document URL</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="accordion-group">
+      <div class="accordion-heading">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+          method
+        </a>
+      </div>
+      <div id="collapseTwo" class="collapse in">
+        <div class="accordion-inner">
+          The method attribute controls whether Twilio sends a GET or a POST to the action URL.<br/>
+          <table class="table table-condensed table-striped">
+            <thead>
+              <tr><th>Attribute Name</th><th>Allowed Values</th><th>Default Values</th></tr>
+            </thead>
+            <tr><td>method</td><td>GET, POST</td><td>POST</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="accordion-group">
+      <div class="accordion-heading">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
+          timeout
+        </a>
+      </div>
+      <div id="collapseThree" class="collapse in">
+        <div class="accordion-inner">
+          The &lt;Record&gt; verb will exit after this many seconds have elapsed.<br/>
+          <table class="table table-condensed table-striped">
+            <thead>
+              <tr><th>Attribute Name</th><th>Allowed Values</th><th>Default Values</th></tr> 
+            </thead>
+              <tr><th>timeout</th><th>positive integer</th><th>5</th></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="accordion-group">
+      <div class="accordion-heading">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseFour">
+          finishOnKey
+        </a>
+      </div>
+      <div id="collapseFour" class="collapse in">
+        <div class="accordion-inner">
+          The &lt;Record&gt; verb will exit after this key has been pushed.<br/>
+          <table class="table table-condensed table-striped">
+            <thead>
+              <tr><th>Attribute Name</th><th>Allowed Values</th><th>Default Values</th></tr> 
+            </thead>
+            <tr><td>finishOnKey</td><td>any digit, #, *</td><td>1234567890*#</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="accordion-group">
+      <div class="accordion-heading">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseFive">
+          maxLength
+        </a>
+      </div>
+      <div id="collapseFive" class="collapse in">
+        <div class="accordion-inner">
+          The &lt;Record&gt; verb will exit after this many seconds have elapsed.<br/>
+          <table class="table table-condensed table-striped">
+            <thead>
+              <tr><th>Attribute Name</th><th>Allowed Values</th><th>Default Values</th></tr> 
+            </thead>
+            <tr><td>maxLength</td><td>integer greater than 1</td><td>3600 (1 hour)</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="accordion-group">
+      <div class="accordion-heading">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseSix">
+          transcribe
+        </a>
+      </div>
+      <div id="collapseSix" class="collapse in">
+        <div class="accordion-inner">
+          If this attribute is true, Twilio will attempt to convert your recording to text. Note that this feature costs extra.<br/>
+          <table class="table table-condensed table-striped">
+            <thead>
+              <tr><th>Attribute Name</th><th>Allowed Values</th><th>Default Values</th></tr> 
+            </thead>
+            <tr><td>transcribe</td><td>true, false</td><td>false</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="accordion-group">
+      <div class="accordion-heading">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseSeven">
+          transcribeCallback
+        </a>
+      </div>
+      <div id="collapseSeven" class="collapse in">
+        <div class="accordion-inner">
+          The "transcribeCallback" attribute is used in conjunction with the "transcribe" attribute. When Twilio has finished transcribing your recording, it will make a POST request to this URL along with some parameters, the most interesting of which is TranscriptionText, which contains the actual transcription.<br/>
+          <table class="table table-condensed table-striped">
+            <thead>
+              <tr><th>Attribute Name</th><th>Allowed Values</th><th>Default Values</th></tr> 
+            </thead>
+            <tr><td>transcribe</td><td>relative or absolute URL</td><td>none</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="accordion-group">
+      <div class="accordion-heading">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseEight">
+          playBeep
+        </a>
+      </div>
+      <div id="collapseEight" class="collapse in">
+        <div class="accordion-inner">
+          If this attribute is set to true, a beep will play to indicate the start of recording.<br/>
+          <table class="table table-condensed table-striped">
+            <thead>
+              <tr><th>Attribute Name</th><th>Allowed Values</th><th>Default Values</th></tr> 
+            </thead>
+            <tr><td>transcribe</td><td>true, false</td><td>true</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}        
+
+
+{% block staticdemo %}
+  <h2>Demo</h2>
+  <input type="hidden" id="token" value="{{params['token']}}">
+  <form class="form-inline">
+    <input type="text" placeholder="Your phone number" id="phoneNumber">
+    <button class="btn btn-primary" id="callButton">Call</button>
+    <button class="btn btn-error" id="hangupButton">Hangup</button>
+  </form>
+{% endblock %}
 
 {% block mission %}
 Make a recording of you saying "I am a DOer" and play it back.
+{% endblock %}
+
+{% block progressbar %}
+  {{ super() }}
+  <style type="text/css">
+    .progress .bar { width: 20%; }
+  </style>
 {% endblock %}

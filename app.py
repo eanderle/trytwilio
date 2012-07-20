@@ -81,7 +81,7 @@ def recordingCallback():
     r.say('Something went wrong')
     return str(r)
 
-def getDemoTwiml(verb):
+def getDemoTwiml(verb, toNumber, client):
   r = twiml.Response()
   if verb == 'say':
     r.say('Welcome to Twilio. This is an example of the Say verb.')
@@ -95,8 +95,11 @@ def getDemoTwiml(verb):
     r.say('After the beep, make your recording')
     r.record(action='http://trytwilio.herokuapp.com/demo/recordingCallback', method='GET')
   elif verb == 'sms':
-    r.say('You are about to get sent an sms')
-    r.sms('This is a test sms')
+    if client == 'true':
+      r.say('Sorry, you need a phone number to be sent an sms.')
+    else:
+      r.say('You are about to be sent an sms.')
+      r.sms('This is a test sms.', to=toNumber, from_='+17862458451')
   else:
     return 'failure'
   return str(r)
@@ -106,7 +109,9 @@ def getDemoTwiml(verb):
 def getClientTwiml():
   twiml = ''
   if request.values['demo'].lower() == 'true':
-    twiml = getDemoTwiml(request.values['verb'].lower())
+    twiml = getDemoTwiml(request.values['verb'].lower(),
+                         request.values['To'].lower(),
+                         request.values['client'].lower())
   else:
     twiml = request.values['twimlBody']
   return twiml
@@ -138,7 +143,9 @@ def requestCall():
 
       ip = request.remote_addr
       if request.values['demo'].lower() == 'true':
-        twimlBody = getDemoTwiml(request.values['verb'].lower())
+        twimlBody = getDemoTwiml(request.values['verb'].lower(),
+                             request.values['To'].lower(),
+                             request.values['client'].lower())
       else:
         sys.stderr.write('TwimlBody: ' + request.values['twimlBody'] + '\n')
         twimlBody = request.values['twimlBody']

@@ -3957,3 +3957,17 @@ var editor = CodeMirror.fromTextArea(document.getElementById("twiml-box"), {
           "Ctrl-Space": function(cm) { CodeMirror.xmlHint(cm, ''); }
       }
   });
+
+var editor2 = CodeMirror.fromTextArea(document.getElementById("twiml-box2"), {
+      value: '',
+      mode: 'text/html',
+      lineNumbers: true,
+      theme: "ambiance",
+      extraKeys: {
+          "'>'": function(cm) { cm.closeTag(cm, '>'); },
+          "'/'": function(cm) { cm.closeTag(cm, '/'); },
+          "' '": function(cm) { CodeMirror.xmlHint(cm, ' '); },
+          "'<'": function(cm) { CodeMirror.xmlHint(cm, '<'); },
+          "Ctrl-Space": function(cm) { CodeMirror.xmlHint(cm, ''); }
+      }
+  });

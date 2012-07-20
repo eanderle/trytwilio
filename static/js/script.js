@@ -39,7 +39,8 @@ $(function(){
         params = params = {
           "verb": verbType,
           "demo": "true",
-          "To": localStorage['phoneNumber']
+          "To": localStorage['phoneNumber'],
+          "client": "false"
         };
         $.post('/requestCall', 
     				params,
@@ -50,7 +51,9 @@ $(function(){
       } else {
         params = params = {
           "verb": verbType,
-          "demo": "true"
+          "To": "",
+          "demo": "true",
+          "client": "true"
         };
         Twilio.Device.connect(params);
       }
