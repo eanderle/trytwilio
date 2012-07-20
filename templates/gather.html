@@ -116,7 +116,7 @@
   <input type="hidden" id="token" value="{{params['token']}}">
   <ul class="nav nav-tabs" id="demo-tabs">
     <li class="active"><a href="#demo-twiml" data-toggle="tab">TwiML</a></li>
-    <li><a href="#demo-python" data-toggle="tab">Python</a></li>
+    <li><a href="#demo-python" id="python-link" data-toggle="tab">Python</a></li>
   </ul>
   <div class="tab-content">
     <div class="tab-pane active" id="demo-twiml">
@@ -131,7 +131,10 @@
 </Response></textarea>
     </div>
     <div class="tab-pane" id="demo-python">
-      <textarea id="demo-box-python" rows="1" style="display:none;"></textarea>
+      <textarea id="demo-box-python" rows="1" style="display:none;">
+gather_demo_not_client = twiml.Response()
+with gather_demo_not_client.gather(action="http://trytwilio.herokuapp.com/demo/callback", method="GET", numDigits="1", timeout="10") as g:
+g.say("Press 1 to hear an example of the Say verb. Press 2 to hear Banana Phone.")</textarea>
     </div>
   </div><br>
   <center><button class="btn btn-info btn-large" id="callButton" style="width:100%;">Call</button></center>
@@ -169,6 +172,6 @@
 {% block progressbar %}
   {{ super() }}
   <style type="text/css">
-    .progress .bar { width: 20%; }
+    .progress .bar { width: 80%; }
   </style>
 {% endblock %}

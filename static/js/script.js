@@ -180,4 +180,12 @@ $(function(){
   }
   
   $("#phone-number-register").on("click", registerPhone);
+  
+  $("#python-link").click(function(){
+  			setTimeout( function(){
+  				demoBoxPython.refresh();
+  				console.log('editor1 refreshed');
+  			}, 1);
+  		});
+  
 });

@@ -3987,8 +3987,8 @@ var demoBoxTwiml = CodeMirror.fromTextArea(document.getElementById("demo-box-twi
   });
 
 var demoBoxPython = CodeMirror.fromTextArea(document.getElementById("demo-box-python"), {
-      value: '',
-      mode: 'text/html',
+      value: '<Response></Response>',
+      mode: 'python',
       lineWrapping: 'true',
       lineNumbers: true,
       theme: "ambiance",
