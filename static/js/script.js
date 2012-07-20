@@ -1,11 +1,14 @@
 $(function(){
     /* Fill in phone number at top of screen */
+    var phoneOn = false;
     try {
         var phoneNumberLabel = localStorage["phoneNumber"].replace(/(\d{3})(\d{3})(\d{4})/, "($1) $2-$3");
         $('#phoneNumberDiv').html(phoneNumberLabel);
         $('#twiml-tabs a:first').tab('show');
+        $('#phoneToggleButton').button("toggle");
+        phoneOn = true;
     } catch(err) {
-        // Do Nothing
+        $('#browserToggleButton').button("toggle");
     }
     /*
 		Twilio Client stuff
@@ -31,11 +34,28 @@ $(function(){
  
     /* Connect to Twilio when we call this function. */
     var call = function() {
-	      params = {
-	        "verb": "sms",
-	        "demo": "true"
-	      };
-        Twilio.Device.connect(params)
+      var verbType = $("#verb").val();
+      var params;
+      if (phoneOn) {
+        params = params = {
+          "verb": verbType,
+          "demo": "true",
+          "To": localStorage['phoneNumber']
+        };
+        $.post('/requestCall', 
+    				params,
+    				function(data) {
+    					alert("Made call:" + data);
+    				}
+    			);
+      } else {
+        params = params = {
+          "verb": verbType,
+          "demo": "true"
+        };
+        Twilio.Device.connect(params);
+      }
+      
     }
 
 	/* Connect to Twilio when we call this function. */	
