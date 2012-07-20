@@ -3971,3 +3971,11 @@ var editor2 = CodeMirror.fromTextArea(document.getElementById("twiml-box2"), {
           "Ctrl-Space": function(cm) { CodeMirror.xmlHint(cm, ''); }
       }
   });
+
+var demoBox = CodeMirror.fromTextArea(document.getElementById("demo-box"), {
+      value: '',
+      mode: 'text/html',
+      lineNumbers: true,
+      theme: "ambiance",
+      readOnly: "nocursor"
+  });

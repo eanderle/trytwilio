@@ -89,7 +89,7 @@
 {% block staticdemo %}
   <h2>Demo</h2>
   <input type="hidden" id="token" value="{{params['token']}}">
-  <input type="text" placeholder="Your phone number" id="phoneNumber">
+  <textarea id="demo-box" placeholder="lol" rows="1" style="display:none;"></textarea>
   <button class="btn btn-primary" id="callButton">Call</button>
   <button class="btn btn-error" id="hangupButton">Hangup</button>
 {% endblock %}
