@@ -147,28 +147,8 @@ $(function(){
         };
         Twilio.Device.connect(params);
       }
-		  
-		  
-		  
-		  params = {
-		    "verb": "play",
-        "demo": "false",
-        "twimlBody": submittedTwiml
-		  }
-		  Twilio.Device.connect(params)
-		  /*
-			var makeCall = $.post('/requestCall', {
-			    To: "+17863029603",
-				  twimlBody: submittedTwiml,
-				  verb: verbType,
-				  demo: 'false'
-			  },
-				function(data) {
-					alert("Made call:" + data);
-				}
-			); */
   	} else {
-  			alert("We're sorry. You can't make a call until your TwiML is valid. We have this error: \n" + result);
+  			alert("We're sorry. You can't make a call until your TwiML is valid. We have this error: \n\n" + result);
   	}
 	};
 	
