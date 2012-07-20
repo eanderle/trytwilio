@@ -5,9 +5,8 @@ html {
 
 body {
   min-height: 600px;
-  height: 80%;
   padding-top: 60px;
-  padding-bottom: 250px;
+  padding-bottom: 30px;
 }
 
 .border-box {
