@@ -39,3 +39,7 @@ body {
 .full-button {
   width: 100%;
 }
+
+#phone-number-form {
+  margin: 0;
+}
