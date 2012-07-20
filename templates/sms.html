@@ -113,7 +113,22 @@
 {% block staticdemo %}
   <h2>Demo</h2>
   <input type="hidden" id="token" value="{{params['token']}}">
-  <textarea id="demobox" placeholder="lol" rows="1" style="display:none;"></textarea><br>
+  <ul class="nav nav-tabs" id="demo-tabs">
+    <li class="active"><a href="#demo-twiml" data-toggle="tab">TwiML</a></li>
+    <li><a href="#demo-python" data-toggle="tab">Python</a></li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane active" id="demo-twiml">
+      <textarea id="demo-box-twiml" rows="1" style="display:none;">
+<Response>
+  <Say>You are about to be sent an sms.</Say>
+  <Sms from="+17862458451">This is a test sms.</Sms>
+</Response></textarea>
+    </div>
+    <div class="tab-pane" id="demo-python">
+      <textarea id="demo-box-python" rows="1" style="display:none;"></textarea>
+    </div>
+  </div><br>
   <center><button class="btn btn-info btn-large" id="callButton" style="width:100%;">Call</button></center>
 {% endblock %}
 
