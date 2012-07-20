@@ -9,6 +9,7 @@ from twilio.rest import TwilioRestClient
 from twilio.util import TwilioCapability
 from twilio import twiml
 from mongokit import Document, Connection
+from xml.sax.saxutils import escape as xmlEscape
 
 class OutboundCall(Document):
   __collection__ = 'outboundCalls'
@@ -163,15 +164,17 @@ def requestCall():
       if 'verb' in request.values:
         if request.values['verb'].lower() == 'gather' and request.values['demo'].lower() != 'true':
           url = 'http://trytwilio.herokuapp.com/handleInput?'
-          twimlBodies = {}
+          twimlBodies = {'initial':'false'}
           # Go through each digit, and if it was provided, add it to the url
           for c in '0123456789#*':
             s = 'twimlBody' + c
             if s in request.values:
               twimlBodies.update({s:request.values[s]})
-          twimlBody.replace('handleInput', 'handleInput?' + urlencode(twimlBodies))
+          twimlBody = twimlBody.replace('handleInput', 'handleInput?' + xmlEscape(urlencode(twimlBodies)))
+          sys.stderr.write('shiiiiit ' + twimlBody + '\n')
 
           url += urlencode({'twimlBody':twimlBody, 'initial':'true'})
+          sys.stderr.write('fuuuuck ' + url + '\n')
 
       # Clean up old entries and make sure this number hasn't been called too much
       d = datetime.datetime.utcnow() - datetime.timedelta(days = 1)
