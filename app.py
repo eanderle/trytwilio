@@ -96,7 +96,7 @@ def getDemoTwiml(verb):
     r.record(action='http://trytwilio.herokuapp.com/demo/recordingCallback', method='GET')
   elif verb == 'sms':
     r.say('You are about to get sent an sms')
-    r.sms('This is a test sms', to='+17033891424')
+    r.sms('This is a test sms', to='+17033891424', From='+17862458451')
   else:
     return 'failure'
   return str(r)
