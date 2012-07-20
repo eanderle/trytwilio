@@ -74,7 +74,7 @@ def callback():
 def recordingCallback():
   try:
     r = twiml.Response()
-    r.say('Here is your recording.')
+    r.say('This is what you said. Is this not cool?')
     r.play(url=request.values['RecordingUrl'])
     return str(r)
   except:
