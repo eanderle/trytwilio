@@ -181,5 +181,3 @@ $(function(){
   
   $("#phone-number-register").on("click", registerPhone);
 });
-
-//<Response><Say>Hello! You work. </Say></Response>
